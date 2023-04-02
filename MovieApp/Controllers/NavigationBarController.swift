@@ -21,7 +21,6 @@ class NavigationBarController: UINavigationController {
             .foregroundColor: UIColor(named: "MainTextColor") ?? UIColor(),
             .font: UIFont.systemFont(ofSize: 18, weight: .bold)
         ]
-//        navigationBar.addBottomBorder(with: Resourses.Colors.separator, height: 1)
     }
     
 

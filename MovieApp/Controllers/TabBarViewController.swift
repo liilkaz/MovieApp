@@ -24,11 +24,13 @@ final class TabBarViewController: UITabBarController {
     
     private func configure(){
         tabBar.backgroundColor = UIColor(named: "TabBarColor")
-        tabBar.tintColor = K.Colors.active
-
+        
         let controllers: [NavigationBarController] = Tabs.allCases.map { tab in
             let controller = NavigationBarController(rootViewController: getController(for: tab))
-            controller.tabBarItem = UITabBarItem(title: K.Titles.TabBar.title(for: tab), image: K.Icons.TabBar.inactiveIcon(for: tab), selectedImage: K.Icons.TabBar.activeIcon(for: tab))
+            
+            controller.tabBarItem = UITabBarItem(title: K.Titles.TabBar.title(for: tab),
+                                       image: K.Icons.TabBar.inactiveIcon(for: tab)?.withRenderingMode(.alwaysOriginal),
+                                       selectedImage: K.Icons.TabBar.activeIcon(for: tab)?.withRenderingMode(.alwaysOriginal))
             
             return controller
                                                      

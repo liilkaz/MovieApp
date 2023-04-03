@@ -36,6 +36,7 @@ final class LoginViewController: UIViewController {
 
     private lazy var emailButton: UIButton = {
         let button = UIButton(title: "Continue with Email", backgroundColor: UIColor(named: "Onboarding"), titleColor: .white, hasBorder: false, cornerRadius: 24)
+        button.addTarget(self, action: #selector(didTapEmailButton), for: .touchUpInside)
         return button
     }()
 
@@ -70,6 +71,7 @@ final class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setLayout()
+        hideKeyboardWhenTappedAround()
     }
 
     // MARK: - Private Methods
@@ -125,5 +127,13 @@ final class LoginViewController: UIViewController {
                     bottomStackView.heightAnchor.constraint(equalToConstant: 22)
 
                 ]}
+    }
+
+    // MARK: - @OBJC Methods
+
+    @objc
+    private func didTapEmailButton() {
+        let signInVC = SignInViewController()
+        navigationController?.pushViewController(signInVC, animated: true)
     }
 }

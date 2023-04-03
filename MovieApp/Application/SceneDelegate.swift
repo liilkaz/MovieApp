@@ -34,8 +34,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = SplashViewController()
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0) { [weak self] in
-
-            self?.window?.rootViewController = LoginViewController()
+            let navigationController = UINavigationController(rootViewController: LoginViewController())
+            self?.window?.rootViewController = navigationController
         }
     }
 

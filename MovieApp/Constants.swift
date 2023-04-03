@@ -11,6 +11,7 @@ enum K{
     enum Colors{
         static var active = UIColor(hexString: "#514EB6")
         static var inactive = UIColor(hexString: "#BFC6CC")
+        static var splashBackground = UIColor(named: "Onboarding")
     }
     
     enum Titles{

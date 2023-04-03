@@ -16,12 +16,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = TabBarViewController()
+        runMainFlow()
         window?.makeKeyAndVisible()
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+    }
+
+    private func runMainFlow() {
+        startApp()
+
+    }
+
+    private func startApp() {
+
+        window?.rootViewController = SplashViewController()
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+
+            self?.window?.rootViewController = TabBarViewController()
+        }
     }
 
 

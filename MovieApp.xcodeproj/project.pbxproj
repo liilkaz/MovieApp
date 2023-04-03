@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C83C11329DABAF600C4592E /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C83C11229DABAF600C4592E /* SplashViewController.swift */; };
+		0C83C11529DABF4400C4592E /* UILabel + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C83C11429DABF4400C4592E /* UILabel + Extension.swift */; };
+		0C83C11729DABFAD00C4592E /* UIFont + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C83C11629DABFAD00C4592E /* UIFont + Extension.swift */; };
+		0C83C11929DAC09300C4592E /* UIButton + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C83C11829DAC09300C4592E /* UIButton + Extension.swift */; };
+		0C83C11B29DAC1CE00C4592E /* UIImageView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C83C11A29DAC1CE00C4592E /* UIImageView + Extension.swift */; };
+		0C83C11D29DAD6EC00C4592E /* UIView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C83C11C29DAD6EC00C4592E /* UIView + Extension.swift */; };
+		0C83C11E29DADF3900C4592E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75986DFE29D8E07B00BDECB0 /* Assets.xcassets */; };
+		0C83C12129DAE1C600C4592E /* PlusJakartaSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0C83C12029DAE1C600C4592E /* PlusJakartaSans-Bold.ttf */; };
+		0C83C12629DAE23700C4592E /* PlusJakartaSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0C83C12229DAE23600C4592E /* PlusJakartaSans-Medium.ttf */; };
+		0C83C12729DAE23700C4592E /* PlusJakartaSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0C83C12329DAE23600C4592E /* PlusJakartaSans-Italic.ttf */; };
+		0C83C12829DAE23700C4592E /* PlusJakartaSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0C83C12429DAE23600C4592E /* PlusJakartaSans-Regular.ttf */; };
+		0C83C12929DAE23700C4592E /* PlusJakartaSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0C83C12529DAE23700C4592E /* PlusJakartaSans-Light.ttf */; };
 		75986DCF29D8B8CC00BDECB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75986DCE29D8B8CC00BDECB0 /* AppDelegate.swift */; };
 		75986DD129D8B8CC00BDECB0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75986DD029D8B8CC00BDECB0 /* SceneDelegate.swift */; };
 		75986DD329D8B8CC00BDECB0 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75986DD229D8B8CC00BDECB0 /* SearchViewController.swift */; };
@@ -20,10 +32,20 @@
 		75986DF829D8D13100BDECB0 /* FavorivesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75986DF729D8D13100BDECB0 /* FavorivesViewController.swift */; };
 		75986DFA29D8D15B00BDECB0 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75986DF929D8D15B00BDECB0 /* SettingViewController.swift */; };
 		75986DFD29D8DB2D00BDECB0 /* UIColor + ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75986DFC29D8DB2D00BDECB0 /* UIColor + ext.swift */; };
-		75986DFF29D8E07B00BDECB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75986DFE29D8E07B00BDECB0 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C83C11229DABAF600C4592E /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		0C83C11429DABF4400C4592E /* UILabel + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel + Extension.swift"; sourceTree = "<group>"; };
+		0C83C11629DABFAD00C4592E /* UIFont + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont + Extension.swift"; sourceTree = "<group>"; };
+		0C83C11829DAC09300C4592E /* UIButton + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + Extension.swift"; sourceTree = "<group>"; };
+		0C83C11A29DAC1CE00C4592E /* UIImageView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView + Extension.swift"; sourceTree = "<group>"; };
+		0C83C11C29DAD6EC00C4592E /* UIView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extension.swift"; sourceTree = "<group>"; };
+		0C83C12029DAE1C600C4592E /* PlusJakartaSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-Bold.ttf"; sourceTree = "<group>"; };
+		0C83C12229DAE23600C4592E /* PlusJakartaSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-Medium.ttf"; sourceTree = "<group>"; };
+		0C83C12329DAE23600C4592E /* PlusJakartaSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-Italic.ttf"; sourceTree = "<group>"; };
+		0C83C12429DAE23600C4592E /* PlusJakartaSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-Regular.ttf"; sourceTree = "<group>"; };
+		0C83C12529DAE23700C4592E /* PlusJakartaSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-Light.ttf"; sourceTree = "<group>"; };
 		75986DCB29D8B8CC00BDECB0 /* MovieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75986DCE29D8B8CC00BDECB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75986DD029D8B8CC00BDECB0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -53,6 +75,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C83C11129DABA1F00C4592E /* MainRegistration */ = {
+			isa = PBXGroup;
+			children = (
+				0C83C11229DABAF600C4592E /* SplashViewController.swift */,
+			);
+			path = MainRegistration;
+			sourceTree = "<group>";
+		};
+		0C83C11F29DAE1A900C4592E /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				0C83C12329DAE23600C4592E /* PlusJakartaSans-Italic.ttf */,
+				0C83C12529DAE23700C4592E /* PlusJakartaSans-Light.ttf */,
+				0C83C12229DAE23600C4592E /* PlusJakartaSans-Medium.ttf */,
+				0C83C12429DAE23600C4592E /* PlusJakartaSans-Regular.ttf */,
+				0C83C12029DAE1C600C4592E /* PlusJakartaSans-Bold.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		75986DC229D8B8CC00BDECB0 = {
 			isa = PBXGroup;
 			children = (
@@ -95,6 +137,7 @@
 		75986DE629D8B99400BDECB0 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				0C83C11F29DAE1A900C4592E /* Fonts */,
 				75986DFE29D8E07B00BDECB0 /* Assets.xcassets */,
 				75986DDC29D8B8CD00BDECB0 /* LaunchScreen.storyboard */,
 				75986DDF29D8B8CD00BDECB0 /* Info.plist */,
@@ -121,6 +164,7 @@
 		75986DE929D8BA0A00BDECB0 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0C83C11129DABA1F00C4592E /* MainRegistration */,
 				75986DD229D8B8CC00BDECB0 /* SearchViewController.swift */,
 				75986DEB29D8CA4E00BDECB0 /* TabBarViewController.swift */,
 				75986DEF29D8CBD900BDECB0 /* NavigationBarController.swift */,
@@ -143,6 +187,11 @@
 			isa = PBXGroup;
 			children = (
 				75986DFC29D8DB2D00BDECB0 /* UIColor + ext.swift */,
+				0C83C11429DABF4400C4592E /* UILabel + Extension.swift */,
+				0C83C11629DABFAD00C4592E /* UIFont + Extension.swift */,
+				0C83C11829DAC09300C4592E /* UIButton + Extension.swift */,
+				0C83C11A29DAC1CE00C4592E /* UIImageView + Extension.swift */,
+				0C83C11C29DAD6EC00C4592E /* UIView + Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -205,8 +254,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75986DFF29D8E07B00BDECB0 /* Assets.xcassets in Resources */,
+				0C83C12129DAE1C600C4592E /* PlusJakartaSans-Bold.ttf in Resources */,
+				0C83C12829DAE23700C4592E /* PlusJakartaSans-Regular.ttf in Resources */,
+				0C83C12929DAE23700C4592E /* PlusJakartaSans-Light.ttf in Resources */,
+				0C83C12729DAE23700C4592E /* PlusJakartaSans-Italic.ttf in Resources */,
+				0C83C11E29DADF3900C4592E /* Assets.xcassets in Resources */,
 				75986DDE29D8B8CD00BDECB0 /* LaunchScreen.storyboard in Resources */,
+				0C83C12629DAE23700C4592E /* PlusJakartaSans-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,15 +271,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C83C11729DABFAD00C4592E /* UIFont + Extension.swift in Sources */,
+				0C83C11B29DAC1CE00C4592E /* UIImageView + Extension.swift in Sources */,
 				75986DD329D8B8CC00BDECB0 /* SearchViewController.swift in Sources */,
 				75986DFA29D8D15B00BDECB0 /* SettingViewController.swift in Sources */,
 				75986DF029D8CBD900BDECB0 /* NavigationBarController.swift in Sources */,
 				75986DFD29D8DB2D00BDECB0 /* UIColor + ext.swift in Sources */,
 				75986DF829D8D13100BDECB0 /* FavorivesViewController.swift in Sources */,
 				75986DCF29D8B8CC00BDECB0 /* AppDelegate.swift in Sources */,
+				0C83C11D29DAD6EC00C4592E /* UIView + Extension.swift in Sources */,
+				0C83C11929DAC09300C4592E /* UIButton + Extension.swift in Sources */,
+				0C83C11329DABAF600C4592E /* SplashViewController.swift in Sources */,
 				75986DD929D8B8CC00BDECB0 /* MovieApp.xcdatamodeld in Sources */,
 				75986DF229D8CC2700BDECB0 /* Constants.swift in Sources */,
 				75986DF629D8D0F900BDECB0 /* HomeViewController.swift in Sources */,
+				0C83C11529DABF4400C4592E /* UILabel + Extension.swift in Sources */,
 				75986DF429D8D0E400BDECB0 /* RecentViewController.swift in Sources */,
 				75986DEC29D8CA4E00BDECB0 /* TabBarViewController.swift in Sources */,
 				75986DD129D8B8CC00BDECB0 /* SceneDelegate.swift in Sources */,

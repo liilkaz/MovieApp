@@ -33,9 +33,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window?.rootViewController = SplashViewController()
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0) { [weak self] in
 
-            self?.window?.rootViewController = TabBarViewController()
+            self?.window?.rootViewController = LoginViewController()
         }
     }
 

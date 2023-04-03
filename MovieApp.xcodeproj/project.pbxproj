@@ -19,6 +19,10 @@
 		0C83C12729DAE23700C4592E /* PlusJakartaSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0C83C12329DAE23600C4592E /* PlusJakartaSans-Italic.ttf */; };
 		0C83C12829DAE23700C4592E /* PlusJakartaSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0C83C12429DAE23600C4592E /* PlusJakartaSans-Regular.ttf */; };
 		0C83C12929DAE23700C4592E /* PlusJakartaSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0C83C12529DAE23700C4592E /* PlusJakartaSans-Light.ttf */; };
+		0C83C12B29DAEEB900C4592E /* UITextField + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C83C12A29DAEEB900C4592E /* UITextField + Extension.swift */; };
+		0C83C12F29DAF55500C4592E /* InputWithButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C83C12E29DAF55500C4592E /* InputWithButton.swift */; };
+		0C83C13129DAF82A00C4592E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C83C13029DAF82A00C4592E /* LoginViewController.swift */; };
+		0C83C13329DB1C1C00C4592E /* DividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C83C13229DB1C1C00C4592E /* DividerView.swift */; };
 		75986DCF29D8B8CC00BDECB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75986DCE29D8B8CC00BDECB0 /* AppDelegate.swift */; };
 		75986DD129D8B8CC00BDECB0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75986DD029D8B8CC00BDECB0 /* SceneDelegate.swift */; };
 		75986DD329D8B8CC00BDECB0 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75986DD229D8B8CC00BDECB0 /* SearchViewController.swift */; };
@@ -46,6 +50,10 @@
 		0C83C12329DAE23600C4592E /* PlusJakartaSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-Italic.ttf"; sourceTree = "<group>"; };
 		0C83C12429DAE23600C4592E /* PlusJakartaSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-Regular.ttf"; sourceTree = "<group>"; };
 		0C83C12529DAE23700C4592E /* PlusJakartaSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-Light.ttf"; sourceTree = "<group>"; };
+		0C83C12A29DAEEB900C4592E /* UITextField + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField + Extension.swift"; sourceTree = "<group>"; };
+		0C83C12E29DAF55500C4592E /* InputWithButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputWithButton.swift; sourceTree = "<group>"; };
+		0C83C13029DAF82A00C4592E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		0C83C13229DB1C1C00C4592E /* DividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerView.swift; sourceTree = "<group>"; };
 		75986DCB29D8B8CC00BDECB0 /* MovieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75986DCE29D8B8CC00BDECB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75986DD029D8B8CC00BDECB0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				0C83C11229DABAF600C4592E /* SplashViewController.swift */,
+				0C83C13029DAF82A00C4592E /* LoginViewController.swift */,
 			);
 			path = MainRegistration;
 			sourceTree = "<group>";
@@ -93,6 +102,15 @@
 				0C83C12029DAE1C600C4592E /* PlusJakartaSans-Bold.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		0C83C12D29DAF53400C4592E /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				0C83C12E29DAF55500C4592E /* InputWithButton.swift */,
+				0C83C13229DB1C1C00C4592E /* DividerView.swift */,
+			);
+			path = Elements;
 			sourceTree = "<group>";
 		};
 		75986DC229D8B8CC00BDECB0 = {
@@ -186,12 +204,14 @@
 		75986DFB29D8DB0D00BDECB0 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				0C83C12D29DAF53400C4592E /* Elements */,
 				75986DFC29D8DB2D00BDECB0 /* UIColor + ext.swift */,
 				0C83C11429DABF4400C4592E /* UILabel + Extension.swift */,
 				0C83C11629DABFAD00C4592E /* UIFont + Extension.swift */,
 				0C83C11829DAC09300C4592E /* UIButton + Extension.swift */,
 				0C83C11A29DAC1CE00C4592E /* UIImageView + Extension.swift */,
 				0C83C11C29DAD6EC00C4592E /* UIView + Extension.swift */,
+				0C83C12A29DAEEB900C4592E /* UITextField + Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -271,6 +291,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C83C13329DB1C1C00C4592E /* DividerView.swift in Sources */,
+				0C83C13129DAF82A00C4592E /* LoginViewController.swift in Sources */,
+				0C83C12F29DAF55500C4592E /* InputWithButton.swift in Sources */,
 				0C83C11729DABFAD00C4592E /* UIFont + Extension.swift in Sources */,
 				0C83C11B29DAC1CE00C4592E /* UIImageView + Extension.swift in Sources */,
 				75986DD329D8B8CC00BDECB0 /* SearchViewController.swift in Sources */,
@@ -280,6 +303,7 @@
 				75986DF829D8D13100BDECB0 /* FavorivesViewController.swift in Sources */,
 				75986DCF29D8B8CC00BDECB0 /* AppDelegate.swift in Sources */,
 				0C83C11D29DAD6EC00C4592E /* UIView + Extension.swift in Sources */,
+				0C83C12B29DAEEB900C4592E /* UITextField + Extension.swift in Sources */,
 				0C83C11929DAC09300C4592E /* UIButton + Extension.swift in Sources */,
 				0C83C11329DABAF600C4592E /* SplashViewController.swift in Sources */,
 				75986DD929D8B8CC00BDECB0 /* MovieApp.xcdatamodeld in Sources */,

@@ -8,29 +8,27 @@
 import UIKit
 
 extension UIButton {
+
     convenience init(
         title: String,
-        backgroundCollor: UIColor,
+        backgroundColor: UIColor?,
         titleColor: UIColor,
-        font: UIFont? = .jakarta16(),
-        isShadow: Bool,
+        font: UIFont? = K.Fonts.plusJacartaSansMedium(with: 16),
+        hasBorder: Bool,
         cornerRadius: CGFloat = 4)
     {
 
         self.init(type: .system)
         self.setTitle(title, for: .normal)
         self.setTitleColor(titleColor, for: .normal)
-        self.backgroundColor = backgroundCollor
+        self.backgroundColor = backgroundColor
         self.titleLabel?.font = font
 
         self.layer.cornerRadius = cornerRadius
 
-        if isShadow {
-            self.layer.shadowRadius = 4
-            self.layer.shadowOpacity = 0.2
-            self.layer.shadowColor = UIColor.black.cgColor
-            self.layer.shadowOffset = CGSize(width: 0, height: 8)
-
+        if hasBorder {
+            self.layer.borderWidth = 0.3
+            self.layer.borderColor = UIColor(named: "Onboarding")?.cgColor
         }
     }
 
@@ -41,7 +39,7 @@ extension UIButton {
         self.addSubview(image)
 
         NSLayoutConstraint.activate([
-            image.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 24),
+            image.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 48),
             image.centerYAnchor.constraint(equalTo: self.centerYAnchor)
         ])
 

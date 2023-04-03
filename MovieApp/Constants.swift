@@ -81,6 +81,20 @@ enum K{
     }
     
     enum Fonts{
-       
+        static func plusJacartaSansItalic(with size: CGFloat) -> UIFont{
+            UIFont(name: "PlusJakartaSans-Italic", size: size) ?? UIFont()
+        }
+        static func plusJacartaSansLight(with size: CGFloat) -> UIFont{
+            UIFont(name: "PlusJakartaSans-Light", size: size) ?? UIFont()
+        }
+        static func plusJacartaSansMedium(with size: CGFloat) -> UIFont{
+            UIFont(name: "PlusJakartaSans-Medium", size: size) ?? UIFont()
+        }
+        static func plusJacartaSansRegular(with size: CGFloat) -> UIFont{
+            UIFont(name: "PlusJakartaSans-Regular", size: size) ?? UIFont()
+        }
+        static func plusJacartaSansBold(with size: CGFloat) -> UIFont{
+            UIFont(name: "PlusJakartaSans-Bold", size: size) ?? UIFont()
+        }
     }
 }

@@ -42,7 +42,6 @@ final class LoginViewController: UIViewController {
 
     private lazy var dividerView: DividerView = {
         let view = DividerView(title: "Or continue with")
-        //view.backgroundColor = .black
         return view
     }()
 
@@ -63,6 +62,7 @@ final class LoginViewController: UIViewController {
         button.setTitle("Login", for: .normal)
         button.titleLabel?.font = K.Fonts.plusJacartaSansMedium(with: 16)
         button.setTitleColor(UIColor(named: "Onboarding"), for: .normal)
+        button.addTarget(self, action: #selector(didTapLoginButton), for: .touchUpInside)
         return button
     }()
 
@@ -135,5 +135,11 @@ final class LoginViewController: UIViewController {
     private func didTapEmailButton() {
         let signInVC = SignInViewController()
         navigationController?.pushViewController(signInVC, animated: true)
+    }
+
+    @objc
+    private func didTapLoginButton() {
+        let secondLoginVC = SecondLoginViewController()
+        present(secondLoginVC, animated: true)
     }
 }

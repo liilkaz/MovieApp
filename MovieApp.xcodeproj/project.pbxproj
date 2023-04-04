@@ -25,6 +25,7 @@
 		0C83C13329DB1C1C00C4592E /* DividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C83C13229DB1C1C00C4592E /* DividerView.swift */; };
 		0C83C13529DB3BC500C4592E /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C83C13429DB3BC500C4592E /* SignInViewController.swift */; };
 		0C83C13729DB3EED00C4592E /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C83C13629DB3EED00C4592E /* UIViewController + Extension.swift */; };
+		0C83C13B29DC6B1500C4592E /* SecondLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C83C13A29DC6B1500C4592E /* SecondLoginViewController.swift */; };
 		75986DCF29D8B8CC00BDECB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75986DCE29D8B8CC00BDECB0 /* AppDelegate.swift */; };
 		75986DD129D8B8CC00BDECB0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75986DD029D8B8CC00BDECB0 /* SceneDelegate.swift */; };
 		75986DD329D8B8CC00BDECB0 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75986DD229D8B8CC00BDECB0 /* SearchViewController.swift */; };
@@ -58,6 +59,7 @@
 		0C83C13229DB1C1C00C4592E /* DividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerView.swift; sourceTree = "<group>"; };
 		0C83C13429DB3BC500C4592E /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		0C83C13629DB3EED00C4592E /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
+		0C83C13A29DC6B1500C4592E /* SecondLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondLoginViewController.swift; sourceTree = "<group>"; };
 		75986DCB29D8B8CC00BDECB0 /* MovieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75986DCE29D8B8CC00BDECB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75986DD029D8B8CC00BDECB0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 				0C83C11229DABAF600C4592E /* SplashViewController.swift */,
 				0C83C13029DAF82A00C4592E /* LoginViewController.swift */,
 				0C83C13429DB3BC500C4592E /* SignInViewController.swift */,
+				0C83C13A29DC6B1500C4592E /* SecondLoginViewController.swift */,
 			);
 			path = MainRegistration;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 				75986DFA29D8D15B00BDECB0 /* SettingViewController.swift in Sources */,
 				75986DF029D8CBD900BDECB0 /* NavigationBarController.swift in Sources */,
 				75986DFD29D8DB2D00BDECB0 /* UIColor + ext.swift in Sources */,
+				0C83C13B29DC6B1500C4592E /* SecondLoginViewController.swift in Sources */,
 				75986DF829D8D13100BDECB0 /* FavorivesViewController.swift in Sources */,
 				0C83C13729DB3EED00C4592E /* UIViewController + Extension.swift in Sources */,
 				75986DCF29D8B8CC00BDECB0 /* AppDelegate.swift in Sources */,

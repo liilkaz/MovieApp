@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum Tabs: Int, CaseIterable{
+enum Tabs: Int, CaseIterable {
     case search
     case recent
     case home
@@ -22,15 +22,15 @@ final class TabBarViewController: UITabBarController {
         configure()
     }
     
-    private func configure(){
+    private func configure() {
         tabBar.backgroundColor = UIColor(named: "TabBarColor")
         
         let controllers: [NavigationBarController] = Tabs.allCases.map { tab in
             let controller = NavigationBarController(rootViewController: getController(for: tab))
             
-            controller.tabBarItem = UITabBarItem(title: K.Titles.TabBar.title(for: tab),
-                                       image: K.Icons.TabBar.inactiveIcon(for: tab)?.withRenderingMode(.alwaysOriginal),
-                                       selectedImage: K.Icons.TabBar.activeIcon(for: tab)?.withRenderingMode(.alwaysOriginal))
+            controller.tabBarItem = UITabBarItem(title: Constants.Titles.TabBar.title(for: tab),
+                                       image: Constants.Icons.TabBar.inactiveIcon(for: tab)?.withRenderingMode(.alwaysOriginal),
+                                       selectedImage: Constants.Icons.TabBar.activeIcon(for: tab)?.withRenderingMode(.alwaysOriginal))
             
             return controller
                                                      
@@ -38,8 +38,8 @@ final class TabBarViewController: UITabBarController {
         setViewControllers(controllers, animated: false)
     }
     
-    private func getController(for tab: Tabs) -> UIViewController{
-        switch tab{
+    private func getController(for tab: Tabs) -> UIViewController {
+        switch tab {
         case .search: return SearchViewController()
         case .recent: return RecentViewController()
         case .home: return HomeViewController()

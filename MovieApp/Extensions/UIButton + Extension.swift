@@ -8,41 +8,38 @@
 import UIKit
 
 extension UIButton {
-
+    
     convenience init(
         title: String,
         backgroundColor: UIColor?,
         titleColor: UIColor,
-        font: UIFont? = K.Fonts.plusJacartaSansMedium(with: 16),
+        font: UIFont? = Constants.Fonts.plusJacartaSansMedium(with: 16),
         hasBorder: Bool,
-        cornerRadius: CGFloat = 4)
-    {
-
+        cornerRadius: CGFloat = 4) {
         self.init(type: .system)
         self.setTitle(title, for: .normal)
         self.setTitleColor(titleColor, for: .normal)
         self.backgroundColor = backgroundColor
         self.titleLabel?.font = font
-
+        
         self.layer.cornerRadius = cornerRadius
-
+        
         if hasBorder {
             self.layer.borderWidth = 0.3
             self.layer.borderColor = UIColor(named: "Onboarding")?.cgColor
         }
     }
-
+    
     func setupGoogleImage() {
         let image = UIImageView(image: UIImage(named: "googleImage") ?? UIImage(), contentMode: .scaleAspectFit)
         image.translatesAutoresizingMaskIntoConstraints = false
-
+        
         self.addSubview(image)
-
+        
         NSLayoutConstraint.activate([
             image.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 48),
             image.centerYAnchor.constraint(equalTo: self.centerYAnchor)
         ])
-
+        
     }
 }
-

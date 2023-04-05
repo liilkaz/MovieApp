@@ -54,13 +54,18 @@ final class LoginViewController: UIViewController {
     }()
 
     private lazy var googleButton: UIButton = {
-        let button = UIButton(title: "Continue with Google", backgroundColor: .systemBackground, titleColor: .label, hasBorder: true, cornerRadius: 24)
+        let button = UIButton(title: "Continue with Google",
+                              backgroundColor: .systemBackground,
+                              titleColor: .label,
+                              hasBorder: true,
+                              cornerRadius: 24)
         button.setupGoogleImage()
         return button
     }()
 
     private lazy var bottomText: UILabel = {
-        let label = UILabel(name: "Already hav an account?", font: Constants.Fonts.plusJacartaSansMedium(with: 16))
+        let label = UILabel(name: "Already hav an account?",
+                            font: Constants.Fonts.plusJacartaSansMedium(with: 16))
         label.textColor = .systemGray
         return label
     }()

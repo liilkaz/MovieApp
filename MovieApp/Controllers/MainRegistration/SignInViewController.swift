@@ -115,6 +115,7 @@ class SignInViewController: UIViewController {
         button.setTitle("Login", for: .normal)
         button.titleLabel?.font = Constants.Fonts.plusJacartaSansMedium(with: 16)
         button.setTitleColor(UIColor(named: "Onboarding"), for: .normal)
+        button.addTarget(self, action: #selector(didTapLoginButton), for: .touchUpInside)
         return button
     }()
 
@@ -183,6 +184,12 @@ class SignInViewController: UIViewController {
     private func didTapBackButton() {
         navigationController?.popViewController(animated: true)
         print("didTapBackButton")
+    }
+
+    @objc
+    private func didTapLoginButton() {
+        let secondLoginVC = SecondLoginViewController()
+        present(secondLoginVC, animated: true)
     }
 
     @objc

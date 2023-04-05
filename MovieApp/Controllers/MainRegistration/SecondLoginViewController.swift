@@ -12,13 +12,13 @@ final class SecondLoginViewController: UIViewController {
 // MARK: - Private properties
 
     private lazy var titleLabel: UILabel = {
-        let label = UILabel(name: "Login", font:  K.Fonts.plusJacartaSansBold(with: 24))
+        let label = UILabel(name: "Login", font:  Constants.Fonts.plusJacartaSansBold(with: 24))
         label.textColor = .white
         return label
     }()
 
     private lazy var subTitleLabel: UILabel = {
-        let label = UILabel(name: "Loramer sendjuper Login", font: K.Fonts.plusJacartaSansMedium(with: 16))
+        let label = UILabel(name: "Loramer sendjuper Login", font: Constants.Fonts.plusJacartaSansMedium(with: 16))
         label.textColor = .white
         return label
     }()
@@ -58,7 +58,7 @@ final class SecondLoginViewController: UIViewController {
     }()
 
     private lazy var bottomText: UILabel = {
-        let label = UILabel(name: "Already hav an account?", font: K.Fonts.plusJacartaSansMedium(with: 16))
+        let label = UILabel(name: "Already hav an account?", font: Constants.Fonts.plusJacartaSansMedium(with: 16))
         label.textColor = .systemGray
         return label
     }()

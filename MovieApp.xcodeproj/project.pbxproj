@@ -256,8 +256,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 75986DE229D8B8CD00BDECB0 /* Build configuration list for PBXNativeTarget "MovieApp" */;
 			buildPhases = (
-				3AC22C5F29DCB37300F2C188 /* ShellScript */,
 				7546650A8476C2D66A4821C2 /* [CP] Check Pods Manifest.lock */,
+				3AC22C5F29DCB37300F2C188 /* ShellScript */,
 				75986DC729D8B8CC00BDECB0 /* Sources */,
 				75986DC829D8B8CC00BDECB0 /* Frameworks */,
 				75986DC929D8B8CC00BDECB0 /* Resources */,

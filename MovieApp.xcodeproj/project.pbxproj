@@ -197,6 +197,7 @@
 		75986DE929D8BA0A00BDECB0 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D02E7B7929DDACEF00AAF531 /* HomeScreen */,
 				0C83C11129DABA1F00C4592E /* MainRegistration */,
 				75986DD229D8B8CC00BDECB0 /* SearchViewController.swift */,
 				75986DEB29D8CA4E00BDECB0 /* TabBarViewController.swift */,
@@ -238,6 +239,13 @@
 				B02C4648F82F353955262396 /* Pods_MovieApp.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D02E7B7929DDACEF00AAF531 /* HomeScreen */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = HomeScreen;
 			sourceTree = "<group>";
 		};
 		D2DA2B623F439FE719053A09 /* Pods */ = {

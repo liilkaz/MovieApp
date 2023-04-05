@@ -14,7 +14,7 @@ class HomeViewController: UIViewController {
         view.backgroundColor = UIColor(named: "BgColor")
         title = Constants.Titles.NavBar.home
         navigationController?.tabBarItem.title = Constants.Titles.TabBar.title(for: .home)
-
+        
     }
 
 }

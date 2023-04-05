@@ -7,15 +7,15 @@
 
 import UIKit
 
-enum K{
-    enum Colors{
+enum Constants {
+    enum Colors {
         static var active = UIColor(hexString: "#514EB6")
         static var inactive = UIColor(hexString: "#BFC6CC")
         static var splashBackground = UIColor(named: "Onboarding")
     }
     
-    enum Titles{
-        enum TabBar{
+    enum Titles {
+        enum TabBar {
             static func title(for tab: Tabs) -> String? {
                 switch tab {
                 case .search: return ""
@@ -27,7 +27,7 @@ enum K{
             }
         }
         
-        enum NavBar{
+        enum NavBar {
             static var search = "Search"
             static var recent = "Recent Watch"
             static var home = ""
@@ -35,29 +35,29 @@ enum K{
             static var setting = "Setting"
         }
         
-        enum Search{
+        enum Search {
             
         }
         
-        enum Recent{
+        enum Recent {
            
         }
         
-        enum Home{
+        enum Home {
             
         }
         
-        enum Favorites{
+        enum Favorites {
             
         }
         
-        enum Setting{
+        enum Setting {
             
         }
     }
     
-    enum Icons{
-        enum TabBar{
+    enum Icons {
+        enum TabBar {
             static func inactiveIcon(for tab: Tabs) -> UIImage? {
                 switch tab {
                 case .search: return UIImage(named: "searchTab")
@@ -80,20 +80,20 @@ enum K{
         }
     }
     
-    enum Fonts{
-        static func plusJacartaSansItalic(with size: CGFloat) -> UIFont{
+    enum Fonts {
+        static func plusJacartaSansItalic(with size: CGFloat) -> UIFont {
             UIFont(name: "PlusJakartaSans-Italic", size: size) ?? UIFont()
         }
-        static func plusJacartaSansLight(with size: CGFloat) -> UIFont{
+        static func plusJacartaSansLight(with size: CGFloat) -> UIFont {
             UIFont(name: "PlusJakartaSans-Light", size: size) ?? UIFont()
         }
-        static func plusJacartaSansMedium(with size: CGFloat) -> UIFont{
+        static func plusJacartaSansMedium(with size: CGFloat) -> UIFont {
             UIFont(name: "PlusJakartaSans-Medium", size: size) ?? UIFont()
         }
-        static func plusJacartaSansRegular(with size: CGFloat) -> UIFont{
+        static func plusJacartaSansRegular(with size: CGFloat) -> UIFont {
             UIFont(name: "PlusJakartaSans-Regular", size: size) ?? UIFont()
         }
-        static func plusJacartaSansBold(with size: CGFloat) -> UIFont{
+        static func plusJacartaSansBold(with size: CGFloat) -> UIFont {
             UIFont(name: "PlusJakartaSans-Bold", size: size) ?? UIFont()
         }
     }

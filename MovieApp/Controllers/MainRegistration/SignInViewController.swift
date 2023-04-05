@@ -7,8 +7,6 @@
 
 import UIKit
 
-
-
 class SignInViewController: UIViewController {
 
 // MARK: - Private properties
@@ -22,29 +20,40 @@ class SignInViewController: UIViewController {
     }
 
     private lazy var titleLabel: UILabel = {
-        let label = UILabel(name: "Complet your account", font:  K.Fonts.plusJacartaSansBold(with: 24))
+        let label = UILabel(name: "Complet your account",
+                            font: Constants.Fonts.plusJacartaSansBold(with: 24))
         label.textColor = .label
         return label
     }()
 
     private lazy var subTitleLabel: UILabel = {
-        let label = UILabel(name: "Lorem ipsum dolor sit amet", font: K.Fonts.plusJacartaSansMedium(with: 16))
+        let label = UILabel(name: "Lorem ipsum dolor sit amet", font: Constants.Fonts.plusJacartaSansMedium(with: 16))
         label.textColor = .label
         return label
     }()
 
     private lazy var firstNameInput: InputPanel = {
-        let panel = InputPanel(inputField: UITextField(hasBorder: false, backgroundColor: UIColor(named: "BgColor"), cornerRadius: 24, placeholder: "Enter your first name"), title: "First Name")
+        let panel = InputPanel(inputField: UITextField(hasBorder: false,
+                                                       backgroundColor: UIColor(named: "BgColor"),
+                                                       cornerRadius: 24,
+                                                       placeholder: "Enter your first name"),
+                               title: "First Name")
         return panel
     }()
 
     private lazy var lastNameInput: InputPanel = {
-        let panel = InputPanel(inputField: UITextField(hasBorder: false, backgroundColor: UIColor(named: "BgColor"), cornerRadius: 24, placeholder: "Enter your last name"), title: "Last Name")
+        let panel = InputPanel(inputField: UITextField(hasBorder: false,
+                                                       backgroundColor: UIColor(named: "BgColor"),
+                                                       cornerRadius: 24,
+                                                       placeholder: "Enter your last name"), title: "Last Name")
         return panel
     }()
 
     private lazy var emailInput: InputPanel = {
-        let panel = InputPanel(inputField: UITextField(hasBorder: false, backgroundColor: UIColor(named: "BgColor"), cornerRadius: 24, placeholder: "Enter your email"), title: "E-mail")
+        let panel = InputPanel(inputField: UITextField(hasBorder: false,
+                                                       backgroundColor: UIColor(named: "BgColor"),
+                                                       cornerRadius: 24,
+                                                       placeholder: "Enter your email"), title: "E-mail")
         panel.inputTextField.keyboardType = .emailAddress
         return panel
     }()
@@ -68,7 +77,10 @@ class SignInViewController: UIViewController {
     }()
 
     private lazy var passwordInput: InputPanel = {
-        let panel = InputPanel(inputField: UITextField(hasBorder: false, backgroundColor: UIColor(named: "BgColor"), cornerRadius: 24, placeholder: "Enter your password"), title: "Password")
+        let panel = InputPanel(inputField: UITextField(hasBorder: false,
+                                                       backgroundColor: UIColor(named: "BgColor"),
+                                                       cornerRadius: 24,
+                                                       placeholder: "Enter your password"), title: "Password")
         panel.inputTextField.isSecureTextEntry = true
         panel.inputTextField.rightView = showHidePasswordButton
         panel.inputTextField.rightViewMode = .always
@@ -76,7 +88,10 @@ class SignInViewController: UIViewController {
     }()
 
     private lazy var confirmPasswordInput: InputPanel = {
-        let panel = InputPanel(inputField: UITextField(hasBorder: false, backgroundColor: UIColor(named: "BgColor"), cornerRadius: 24, placeholder: "Confirm your password"), title: "Confirm Password")
+        let panel = InputPanel(inputField: UITextField(hasBorder: false,
+                                                       backgroundColor: UIColor(named: "BgColor"),
+                                                       cornerRadius: 24,
+                                                       placeholder: "Confirm your password"), title: "Confirm Password")
         panel.inputTextField.isSecureTextEntry = true
         panel.inputTextField.rightView = showHideConfirmPasswordButton
         panel.inputTextField.rightViewMode = .always
@@ -90,7 +105,7 @@ class SignInViewController: UIViewController {
     }()
 
     private lazy var bottomText: UILabel = {
-        let label = UILabel(name: "Already hav an account?", font: K.Fonts.plusJacartaSansMedium(with: 16))
+        let label = UILabel(name: "Already hav an account?", font: Constants.Fonts.plusJacartaSansMedium(with: 16))
         label.textColor = .systemGray
         return label
     }()
@@ -98,7 +113,7 @@ class SignInViewController: UIViewController {
     private lazy var loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Login", for: .normal)
-        button.titleLabel?.font = K.Fonts.plusJacartaSansMedium(with: 16)
+        button.titleLabel?.font = Constants.Fonts.plusJacartaSansMedium(with: 16)
         button.setTitleColor(UIColor(named: "Onboarding"), for: .normal)
         return button
     }()
@@ -151,7 +166,9 @@ class SignInViewController: UIViewController {
     private func setNavBar() {
         title = "Sign Up"
         navigationItem.hidesBackButton = true
-        let backButton = UIBarButtonItem(image: UIImage(named: "arrowBack")?.withTintColor(.systemGray, renderingMode: .alwaysOriginal), style: .plain, target: self, action: #selector(didTapBackButton))
+        let backButton = UIBarButtonItem(
+            image: UIImage(named: "arrowBack")?.withTintColor(.systemGray,
+                                                              renderingMode: .alwaysOriginal), style: .plain, target: self, action: #selector(didTapBackButton))
         navigationItem.leftBarButtonItem = backButton
     }
 

@@ -12,13 +12,14 @@ final class LoginViewController: UIViewController {
 // MARK: - Private properties
 
     private lazy var titleLabel: UILabel = {
-        let label = UILabel(name: "Create account", font:  K.Fonts.plusJacartaSansBold(with: 24))
+        let label = UILabel(name: "Create account",
+                            font: Constants.Fonts.plusJacartaSansBold(with: 24))
         label.textColor = .white
         return label
     }()
 
     private lazy var subTitleLabel: UILabel = {
-        let label = UILabel(name: "Lorem ipsum dolor sit amet", font: K.Fonts.plusJacartaSansMedium(with: 16))
+        let label = UILabel(name: "Lorem ipsum dolor sit amet", font: Constants.Fonts.plusJacartaSansMedium(with: 16))
         label.textColor = .white
         return label
     }()
@@ -30,19 +31,25 @@ final class LoginViewController: UIViewController {
     }()
 
     private lazy var emailInput: InputPanel = {
-        let panel = InputPanel(inputField: UITextField(hasBorder: false, backgroundColor: UIColor(named: "BgColor"), cornerRadius: 24, placeholder: "Enter your email address"), title: "Email")
+        let panel = InputPanel(inputField: UITextField(hasBorder: false,
+                                                       backgroundColor: UIColor(named: "BgColor"), cornerRadius: 24,
+                                                       placeholder: "Enter your email address"), title: "Email")
         return panel
     }()
 
     private lazy var emailButton: UIButton = {
-        let button = UIButton(title: "Continue with Email", backgroundColor: UIColor(named: "Onboarding"), titleColor: .white, hasBorder: false, cornerRadius: 24)
+        let button = UIButton(title: "Continue with Email",
+                              backgroundColor: UIColor(named: "Onboarding"),
+                              titleColor: .white,
+                              hasBorder: false,
+                              cornerRadius: 24)
         button.addTarget(self, action: #selector(didTapEmailButton), for: .touchUpInside)
         return button
     }()
 
     private lazy var dividerView: DividerView = {
         let view = DividerView(title: "Or continue with")
-        //view.backgroundColor = .black
+        // view.backgroundColor = .black
         return view
     }()
 
@@ -53,7 +60,7 @@ final class LoginViewController: UIViewController {
     }()
 
     private lazy var bottomText: UILabel = {
-        let label = UILabel(name: "Already hav an account?", font: K.Fonts.plusJacartaSansMedium(with: 16))
+        let label = UILabel(name: "Already hav an account?", font: Constants.Fonts.plusJacartaSansMedium(with: 16))
         label.textColor = .systemGray
         return label
     }()
@@ -61,7 +68,7 @@ final class LoginViewController: UIViewController {
     private lazy var loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Login", for: .normal)
-        button.titleLabel?.font = K.Fonts.plusJacartaSansMedium(with: 16)
+        button.titleLabel?.font = Constants.Fonts.plusJacartaSansMedium(with: 16)
         button.setTitleColor(UIColor(named: "Onboarding"), for: .normal)
         return button
     }()

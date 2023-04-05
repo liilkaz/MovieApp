@@ -13,7 +13,7 @@ class InputPanel: UIView {
     let title: String
 
     private lazy var nameInput: UILabel = {
-        let label = UILabel(name: title, font: K.Fonts.plusJacartaSansRegular(with: 14))
+        let label = UILabel(name: title, font: Constants.Fonts.plusJacartaSansRegular(with: 14))
         label.textColor = .systemGray
         return label
     }()

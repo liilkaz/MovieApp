@@ -12,12 +12,7 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "BgColor")
-        navigationItem.title = K.Titles.NavBar.search
-        navigationController?.tabBarItem.title = K.Titles.TabBar.title(for: .search)
-        
-        
+        navigationItem.title = Constants.Titles.NavBar.search
+        navigationController?.tabBarItem.title = Constants.Titles.TabBar.title(for: .search)
     }
-
-
 }
-

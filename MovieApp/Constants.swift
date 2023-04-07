@@ -12,8 +12,6 @@ enum Constants {
         static var active = UIColor(hexString: "#514EB6")
         static var inactive = UIColor(hexString: "#BFC6CC")
         static var splashBackground = UIColor(named: "Onboarding")
-        static var mainTextColor = UIColor(named: "MainTextColor")
-        static var otherTextColor = UIColor(hexString: "#78828A")
     }
     
     enum Titles {
@@ -97,12 +95,6 @@ enum Constants {
         }
         static func plusJacartaSansBold(with size: CGFloat) -> UIFont {
             UIFont(name: "PlusJakartaSans-Bold", size: size) ?? UIFont()
-        }
-        static func plusJacartaSansSemiBold(with size: CGFloat) -> UIFont {
-            UIFont(name: "PlusJakartaSans-SemiBold", size: size) ?? UIFont()
-        }
-        static func montserratMedium(with size: CGFloat) -> UIFont {
-            UIFont(name: "Montserrat-Medium", size: size) ?? UIFont()
         }
     }
 }

@@ -174,6 +174,42 @@
 			path = Elements;
 			sourceTree = "<group>";
 		};
+		751715B229E0985900D95475 /* MovieDetailScreen */ = {
+			isa = PBXGroup;
+			children = (
+				751715B729E09BB700D95475 /* Cells */,
+				751715BA29E09C5C00D95475 /* MainInfoStackView.swift */,
+				751715C429E0A7E500D95475 /* InfoStack.swift */,
+			);
+			path = MovieDetailScreen;
+			sourceTree = "<group>";
+		};
+		751715B729E09BB700D95475 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				751715B529E09BAF00D95475 /* MainInfoCollectionViewCell.swift */,
+				751715B829E09BE000D95475 /* CastAndCrewCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		751715BC29E0A23F00D95475 /* MovieDetails */ = {
+			isa = PBXGroup;
+			children = (
+				751715BD29E0A2B400D95475 /* MainInfo.swift */,
+				751715BF29E0A2E900D95475 /* CastAndCrewInfo.swift */,
+			);
+			path = MovieDetails;
+			sourceTree = "<group>";
+		};
+		751715C129E0A4F900D95475 /* MovieDetail */ = {
+			isa = PBXGroup;
+			children = (
+				751715C229E0A53000D95475 /* MovieDetailViewController.swift */,
+			);
+			path = MovieDetail;
+			sourceTree = "<group>";
+		};
 		2C92CEA429DF55FB00B3B9A7 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -310,6 +346,7 @@
 		75986DE929D8BA0A00BDECB0 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				751715C129E0A4F900D95475 /* MovieDetail */,
 				D000C83D29DEC751009486B7 /* MainScreen */,
 				751715C129E0A4F900D95475 /* MovieDetail */,
 				0C83C11129DABA1F00C4592E /* MainRegistration */,
@@ -326,6 +363,7 @@
 		75986DEA29D8BA2400BDECB0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				751715B229E0985900D95475 /* MovieDetailScreen */,
 				2C92CEA429DF55FB00B3B9A7 /* Cells */,
 				D000C83E29DEC8B3009486B7 /* MainScreenViews */,
 				751715B229E0985900D95475 /* MovieDetailScreen */,
@@ -540,11 +578,13 @@
 				75986DCF29D8B8CC00BDECB0 /* AppDelegate.swift in Sources */,
 				0C83C11D29DAD6EC00C4592E /* UIView + Extension.swift in Sources */,
 				0C83C12B29DAEEB900C4592E /* UITextField + Extension.swift in Sources */,
+				751715B929E09BE000D95475 /* CastAndCrewCollectionViewCell.swift in Sources */,
 				D056719F29E01629002C2449 /* CategoriesCell.swift in Sources */,
 				751715B929E09BE000D95475 /* CastAndCrewCollectionViewCell.swift in Sources */,
 				0C83C11929DAC09300C4592E /* UIButton + Extension.swift in Sources */,
 				0C83C14529E19C2000C4592E /* AuthService.swift in Sources */,
 				0C83C11329DABAF600C4592E /* SplashViewController.swift in Sources */,
+				751715BE29E0A2B400D95475 /* MainInfo.swift in Sources */,
 				D000C84029DEC8FB009486B7 /* MovieCardsCollectionView.swift in Sources */,
 				751715BE29E0A2B400D95475 /* MainInfo.swift in Sources */,
 				75986DD929D8B8CC00BDECB0 /* MovieApp.xcdatamodeld in Sources */,

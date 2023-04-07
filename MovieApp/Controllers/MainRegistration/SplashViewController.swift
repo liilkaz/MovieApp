@@ -36,7 +36,7 @@ private extension SplashViewController {
 
     func setLayout() {
         
-        view.backgroundColor = K.Colors.splashBackground
+        view.backgroundColor = Constants.Colors.splashBackground
 
         view.addSubviews(splashImageView, splashText) {[
 

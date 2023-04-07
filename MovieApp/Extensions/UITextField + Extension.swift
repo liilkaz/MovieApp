@@ -17,7 +17,7 @@ extension UITextField {
 
         if hasBorder {
             self.layer.borderWidth = 0.3
-            self.layer.borderColor = K.Colors.splashBackground?.cgColor
+            self.layer.borderColor = Constants.Colors.splashBackground?.cgColor
         }
     }
 
@@ -39,17 +39,21 @@ extension UITextField {
 
 extension UITextField {
 
-    func setLeftPaddingPoints(_ amount:CGFloat){
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))
+    func setLeftPaddingPoints(_ amount: CGFloat) {
+        let paddingView = UIView(frame: CGRect(x: 0,
+                                               y: 0,
+                                               width: amount,
+                                               height: self.frame.size.height))
         self.leftView = paddingView
         self.leftViewMode = .always
     }
-    func setRightPaddingPoints(_ amount:CGFloat) {
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))
+    func setRightPaddingPoints(_ amount: CGFloat) {
+        let paddingView = UIView(frame: CGRect(x: 0,
+                                               y: 0,
+                                               width: amount,
+                                               height: self.frame.size.height))
         self.rightView = paddingView
         self.rightViewMode = .always
     }
 
 }
-
-

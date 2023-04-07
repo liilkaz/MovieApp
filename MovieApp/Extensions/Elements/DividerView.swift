@@ -24,7 +24,7 @@ final class DividerView: UIView {
     }()
 
     private lazy var titleLabel: UILabel = {
-        let label = UILabel(name: title, font: K.Fonts.plusJacartaSansMedium(with: 16))
+        let label = UILabel(name: title, font: Constants.Fonts.plusJacartaSansMedium(with: 16))
         return label
     }()
 

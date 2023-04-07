@@ -20,11 +20,7 @@ class MovieDetailViewController: UIViewController {
     let bottomView = UIView()
     
     let bottomButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Whatch now", for: .normal)
-        button.backgroundColor = #colorLiteral(red: 0.3925074935, green: 0.3996650577, blue: 0.7650645971, alpha: 1)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        button.setTitleColor(.white, for: .normal)
+        let button = UIButton(title: "Whatch now", backgroundColor: Constants.Colors.active, titleColor: .white, hasBorder: false)
         button.layer.cornerRadius = 24
         button.translatesAutoresizingMaskIntoConstraints = false
         return button

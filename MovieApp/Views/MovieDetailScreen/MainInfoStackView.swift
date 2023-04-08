@@ -24,8 +24,8 @@ enum Rating {
 class MainInfoStackView: UIStackView {
     
     var stars = [UIImageView](repeating: UIImageView(), count: 5)
-    
-    let viewC = UIView()
+    var info = [String]()
+    var vote_average: Double = 0.0
     
     lazy var poster: UIImageView = {
         let image = UIImageView()
@@ -114,7 +114,7 @@ class MainInfoStackView: UIStackView {
     
         addSubview(hStackReating)
         
-        let vote_average = 7.916
+//        let vote_average = 7.916
         let percent = vote_average * 10
         let rating = getRating(percent: Int(percent.rounded()))
         stars = getArrayStars(rating: rating, image: UIImage(named: "star") ?? UIImage())
@@ -169,9 +169,9 @@ class MainInfoStackView: UIStackView {
     
     func getText(for details: DetailInfo) -> String {
         switch details {
-        case .date: return "17 Sep 2021"
-        case .time: return "148 Minutes"
-        case .genres: return "Animation"
+        case .date: return info[0]
+        case .time: return "\(info[1]) Minutes"
+        case .genres: return info[2]
         }
     }
     

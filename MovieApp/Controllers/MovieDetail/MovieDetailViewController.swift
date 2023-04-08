@@ -20,7 +20,10 @@ class MovieDetailViewController: UIViewController {
     let bottomView = UIView()
     
     let bottomButton: UIButton = {
-        let button = UIButton(title: "Whatch now", backgroundColor: Constants.Colors.active, titleColor: .white, hasBorder: false)
+        let button = UIButton(title: "Whatch now",
+                              backgroundColor: Constants.Colors.active,
+                              titleColor: .white,
+                              hasBorder: false)
         button.layer.cornerRadius = 24
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -86,6 +89,8 @@ class MovieDetailViewController: UIViewController {
     }
 }
 
+//MARK: - UICollectionViewLayout
+
 extension MovieDetailViewController {
     
     enum Section: Int, CaseIterable {
@@ -124,11 +129,14 @@ extension MovieDetailViewController {
     }
     
     private func mainSection() -> NSCollectionLayoutSection {
-       let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+       let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                             heightDimension: .fractionalHeight(1.0))
        let item = NSCollectionLayoutItem(layoutSize: itemSize)
        
-       let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(630))
-       let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+       let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                              heightDimension: .absolute(630))
+       let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize,
+                                                    subitems: [item])
        
        let section = NSCollectionLayoutSection(group: group)
        section.orthogonalScrollingBehavior = .continuous
@@ -136,14 +144,18 @@ extension MovieDetailViewController {
    }
    
     private func scrollSection() -> NSCollectionLayoutSection {
-       let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(150), heightDimension: .absolute(40))
+       let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(150),
+                                             heightDimension: .absolute(40))
        let item = NSCollectionLayoutItem(layoutSize: itemSize)
        
-       let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(40))
+       let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                              heightDimension: .absolute(40))
        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
        
-       let rootGroupSize = NSCollectionLayoutSize(widthDimension: .absolute(150), heightDimension: .absolute(40))
-       let rootGroup = NSCollectionLayoutGroup.horizontal(layoutSize: rootGroupSize, subitems: [group])
+       let rootGroupSize = NSCollectionLayoutSize(widthDimension: .absolute(150),
+                                                  heightDimension: .absolute(40))
+       let rootGroup = NSCollectionLayoutGroup.horizontal(layoutSize: rootGroupSize,
+                                                          subitems: [group])
        let section = NSCollectionLayoutSection(group: rootGroup)
        section.interGroupSpacing = 21
        section.orthogonalScrollingBehavior = .continuous
@@ -175,10 +187,11 @@ extension MovieDetailViewController {
                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainInfoCollectionViewCell.reuseId,
                                                                    for: indexPath) as? MainInfoCollectionViewCell else { fatalError("Cannot create the cell") }
                let mainS = self.main[indexPath.row]
-               cell.stack.poster.image = mainS.poster
-               cell.stack.movieName.text = mainS.name
+               cell.stack.poster.image = UIImage(named: mainS.posterPath)
+               cell.stack.movieName.text = mainS.originalTitle
                cell.stack.overview.text = mainS.overview
-//                cell.stack.getRating(percent: mainS.rating)
+               cell.stack.info = [mainS.releaseDate, String(mainS.runtime), mainS.genres[1].name]
+               cell.stack.vote_average = mainS.voteAverage
                return cell
            }
            

@@ -40,7 +40,8 @@
 		75986DF829D8D13100BDECB0 /* FavorivesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75986DF729D8D13100BDECB0 /* FavorivesViewController.swift */; };
 		75986DFA29D8D15B00BDECB0 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75986DF929D8D15B00BDECB0 /* SettingViewController.swift */; };
 		75986DFD29D8DB2D00BDECB0 /* UIColor + ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75986DFC29D8DB2D00BDECB0 /* UIColor + ext.swift */; };
-		EE5D0E7429E0BB2F00CB74C5 /* SettingTableViewSell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5D0E7329E0BB2F00CB74C5 /* SettingTableViewSell.swift */; };
+		EE5D0E7429E0BB2F00CB74C5 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5D0E7329E0BB2F00CB74C5 /* SettingTableViewCell.swift */; };
+		EE5D0E7629E2021700CB74C5 /* SettingHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5D0E7529E2021700CB74C5 /* SettingHeaderTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,7 +82,8 @@
 		75986DFE29D8E07B00BDECB0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		76D0EA90BD92962100B36E96 /* Pods_MovieApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A445C87B5D3A3E7BF9EFC921 /* Pods-MovieApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp.debug.xcconfig"; path = "Target Support Files/Pods-MovieApp/Pods-MovieApp.debug.xcconfig"; sourceTree = "<group>"; };
-		EE5D0E7329E0BB2F00CB74C5 /* SettingTableViewSell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewSell.swift; sourceTree = "<group>"; };
+		EE5D0E7329E0BB2F00CB74C5 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
+		EE5D0E7529E2021700CB74C5 /* SettingHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHeaderTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,7 +210,8 @@
 				75986DF529D8D0F900BDECB0 /* HomeViewController.swift */,
 				75986DF729D8D13100BDECB0 /* FavorivesViewController.swift */,
 				75986DF929D8D15B00BDECB0 /* SettingViewController.swift */,
-				EE5D0E7329E0BB2F00CB74C5 /* SettingTableViewSell.swift */,
+				EE5D0E7529E2021700CB74C5 /* SettingHeaderTableViewCell.swift */,
+				EE5D0E7329E0BB2F00CB74C5 /* SettingTableViewCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -394,12 +397,13 @@
 				0C83C13729DB3EED00C4592E /* UIViewController + Extension.swift in Sources */,
 				75986DCF29D8B8CC00BDECB0 /* AppDelegate.swift in Sources */,
 				0C83C11D29DAD6EC00C4592E /* UIView + Extension.swift in Sources */,
-				EE5D0E7429E0BB2F00CB74C5 /* SettingTableViewSell.swift in Sources */,
+				EE5D0E7429E0BB2F00CB74C5 /* SettingTableViewCell.swift in Sources */,
 				0C83C12B29DAEEB900C4592E /* UITextField + Extension.swift in Sources */,
 				0C83C11929DAC09300C4592E /* UIButton + Extension.swift in Sources */,
 				0C83C11329DABAF600C4592E /* SplashViewController.swift in Sources */,
 				75986DD929D8B8CC00BDECB0 /* MovieApp.xcdatamodeld in Sources */,
 				75986DF229D8CC2700BDECB0 /* Constants.swift in Sources */,
+				EE5D0E7629E2021700CB74C5 /* SettingHeaderTableViewCell.swift in Sources */,
 				75986DF629D8D0F900BDECB0 /* HomeViewController.swift in Sources */,
 				0C83C11529DABF4400C4592E /* UILabel + Extension.swift in Sources */,
 				75986DF429D8D0E400BDECB0 /* RecentViewController.swift in Sources */,

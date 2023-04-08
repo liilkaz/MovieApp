@@ -16,13 +16,13 @@ extension UIStackView {
     }
 }
 
-class SettingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SettingViewController: UIViewController {
 
     enum MyConstants {
         static let logOutButtonImage: String = "logOutButton"
         static let userPhotoImage: String = "userPhoto"
         static let userNameText: String = "Andy Lexsian"
-        static let userNicknameText: String = "@blablabla"
+        static let userNicknameText: String = "@Andy1999"
         static let logOutButtonbottomAnchor: CGFloat = 100
         static let logOutButtonLeadingAnchor: CGFloat = 18
         static let logOutButtonTrailingAnchor: CGFloat = 22
@@ -39,7 +39,7 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         let label = UILabel()
         label.text = MyConstants.userNameText
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        label.textColor = .red
+        label.textColor = UIColor(named: "MainTextColor")
         label.numberOfLines = 1
         label.textAlignment = .left
         return label
@@ -49,7 +49,7 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         let label = UILabel()
         label.text = MyConstants.userNicknameText
         label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
-        label.textColor = .red
+        label.textColor = UIColor(named: "MainTextColor")
         label.numberOfLines = 1
         label.textAlignment = .left
         return label
@@ -79,6 +79,7 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         view.addSubview(userInformationStackView)
         view.addSubview(generalInformationStackView)
+        view.addSubview(tableView)
     }
     
     @objc private func logOutButtonTapped() {
@@ -108,17 +109,20 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 212),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 266)
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            tableView.topAnchor.constraint(equalTo: generalInformationStackView.topAnchor, constant: 40),
+            tableView.bottomAnchor.constraint(equalTo: logOutButton.bottomAnchor, constant: 260)
         ])
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        createTable()
+
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: idCell)
+        tableView.register(SettingHeaderTableViewCell.self, forHeaderFooterViewReuseIdentifier: idHeader)
         
         view.backgroundColor = UIColor(named: "BgColor")
         title = Constants.Titles.NavBar.setting
@@ -126,23 +130,25 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         setupViews()
         setConstraints()
     }
-    //MAKE TABLE
     
-    var tableView = UITableView()
-    let identifire = "alina"
+// TABLE
+    let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.bounces = false
+        tableView.backgroundColor = .clear
+        return tableView
+    }()
     
-    func createTable() {
-        self.tableView = UITableView(frame: view.bounds, style: .plain)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: identifire)
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        view.addSubview(tableView)
-    }
+    let idCell = "idCell"
+    let idHeader = "idHeader"
+    
+}
+
+extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        2
+        return 2
     }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0: return 1
@@ -151,11 +157,24 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         return 0
     }
-    
+     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: identifire , for: indexPath)
-        cell.textLabel!.text = "alina"
-        return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: idCell, for: indexPath) as? SettingTableViewCell
+        cell?.cellConfigure(indexPath: indexPath)
+        return cell ?? UITableViewCell()
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 40
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: idHeader) as? SettingHeaderTableViewCell
+        header?.headerConfigure(section: section)
+        return header ?? SettingHeaderTableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
 }

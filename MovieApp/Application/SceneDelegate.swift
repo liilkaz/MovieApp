@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseCore
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -15,6 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
+        FirebaseApp.configure()
         runMainFlow()
         window?.makeKeyAndVisible()
     }

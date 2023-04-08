@@ -177,7 +177,21 @@ class SignInViewController: UIViewController {
 
     @objc
     private func didTapSignUp() {
-        print("tap sign up")
+        let userFullName = "\(firstNameInput.inputTextField.text ?? "NoName") \(lastNameInput.inputTextField.text ?? "NoFeamily")"
+        AuthService.shared.register(
+            email: emailInput.inputTextField.text,
+            password: passwordInput.inputTextField.text,
+            confirmPassword: confirmPasswordInput.inputTextField.text) { [weak self] result in
+                switch result {
+
+                case .success(_):
+                    let homeVC = TabBarViewController()
+                    homeVC.modalPresentationStyle = .fullScreen
+                    self?.present(homeVC, animated: true)
+                case .failure(let error):
+                    self?.showAlert(with: "Ошибка!", and: error.localizedDescription)
+                }
+        }
     }
 
     @objc

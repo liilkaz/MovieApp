@@ -115,7 +115,6 @@
 				0C83C13029DAF82A00C4592E /* LoginViewController.swift */,
 				0C83C13429DB3BC500C4592E /* SignInViewController.swift */,
 				0C83C13A29DC6B1500C4592E /* SecondLoginViewController.swift */,
-				D063B22C29E2F43A002A46EF /* HomeViewController.swift */,
 			);
 			path = MainRegistration;
 			sourceTree = "<group>";
@@ -215,6 +214,7 @@
 				D000C83D29DEC751009486B7 /* MainScreen */,
 				0C83C11129DABA1F00C4592E /* MainRegistration */,
 				75986DD229D8B8CC00BDECB0 /* SearchViewController.swift */,
+				D063B22C29E2F43A002A46EF /* HomeViewController.swift */,
 				75986DEB29D8CA4E00BDECB0 /* TabBarViewController.swift */,
 				75986DEF29D8CBD900BDECB0 /* NavigationBarController.swift */,
 				75986DF329D8D0E400BDECB0 /* RecentViewController.swift */,

@@ -67,7 +67,7 @@
 		D000C84229DEC928009486B7 /* MovieCardsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D000C84129DEC928009486B7 /* MovieCardsCell.swift */; };
 		D056719D29E015AB002C2449 /* CategoryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D056719C29E015AB002C2449 /* CategoryCollectionView.swift */; };
 		D056719F29E01629002C2449 /* CategoriesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D056719E29E01629002C2449 /* CategoriesCell.swift */; };
-		D063B22D29E2F43A002A46EF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D063B22C29E2F43A002A46EF /* HomeViewController.swift */; };
+		D063B22D29E2F43A002A46EF /* HomeViewControllerSecond.swift in Sources */ = {isa = PBXBuildFile; fileRef = D063B22C29E2F43A002A46EF /* HomeViewControllerSecond.swift */; };
 		D0965C4929E1AB9D00CFDA35 /* MoviesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0965C4829E1AB9D00CFDA35 /* MoviesTableView.swift */; };
 		D0965C4B29E1AC8800CFDA35 /* MoviesCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0965C4A29E1AC8800CFDA35 /* MoviesCellView.swift */; };
 /* End PBXBuildFile section */
@@ -134,7 +134,7 @@
 		D000C84129DEC928009486B7 /* MovieCardsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCardsCell.swift; sourceTree = "<group>"; };
 		D056719C29E015AB002C2449 /* CategoryCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionView.swift; sourceTree = "<group>"; };
 		D056719E29E01629002C2449 /* CategoriesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCell.swift; sourceTree = "<group>"; };
-		D063B22C29E2F43A002A46EF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		D063B22C29E2F43A002A46EF /* HomeViewControllerSecond.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewControllerSecond.swift; sourceTree = "<group>"; };
 		D0965C4829E1AB9D00CFDA35 /* MoviesTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesTableView.swift; sourceTree = "<group>"; };
 		D0965C4A29E1AC8800CFDA35 /* MoviesCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCellView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -410,9 +410,10 @@
 		D02E7B7929DDACEF00AAF531 /* HomeScreen */ = {
 			isa = PBXGroup;
 			children = (
-				D063B22C29E2F43A002A46EF /* HomeViewController.swift */,
+				D063B22C29E2F43A002A46EF /* HomeViewControllerSecond.swift */,
 			);
-			path = HomeScreen;
+			name = HomeScreen;
+			path = MainScreen;
 			sourceTree = "<group>";
 		};
 		D2DA2B623F439FE719053A09 /* Pods */ = {
@@ -597,7 +598,7 @@
 				75986DF629D8D0F900BDECB0 /* HomeViewControllerSecond.swift in Sources */,
 				D0965C4929E1AB9D00CFDA35 /* MoviesTableView.swift in Sources */,
 				0C83C11529DABF4400C4592E /* UILabel + Extension.swift in Sources */,
-				D063B22D29E2F43A002A46EF /* HomeViewController.swift in Sources */,
+				D063B22D29E2F43A002A46EF /* HomeViewControllerSecond.swift in Sources */,
 				75986DF429D8D0E400BDECB0 /* RecentViewController.swift in Sources */,
 				751715C529E0A7E500D95475 /* InfoStack.swift in Sources */,
 				75986DEC29D8CA4E00BDECB0 /* TabBarViewController.swift in Sources */,

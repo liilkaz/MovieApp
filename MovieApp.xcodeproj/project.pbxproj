@@ -334,7 +334,7 @@
 			isa = PBXGroup;
 			children = (
 				75E9820529E32C520077FC3A /* GeneralScreens */,
-				75FF244B29E2FD7F00AB5022 /* MainScreenView */,
+				75FF244B29E2FD7F00AB5022 /* MainScreenViews */,
 				751715B229E0985900D95475 /* MovieDetailScreen */,
 			);
 			path = Views;
@@ -386,7 +386,7 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
-		75FF244B29E2FD7F00AB5022 /* MainScreenView */ = {
+		75FF244B29E2FD7F00AB5022 /* MainScreenViews */ = {
 			isa = PBXGroup;
 			children = (
 				75FF244C29E2FDDB00AB5022 /* CategoriesCell.swift */,
@@ -396,7 +396,7 @@
 				75FF245429E2FE7700AB5022 /* MoviesCellView.swift */,
 				75FF245629E2FE8E00AB5022 /* MoviesTableView.swift */,
 			);
-			path = MainScreenView;
+			path = MainScreenViews;
 			sourceTree = "<group>";
 		};
 		8B9EDA6421F565F8266E3D38 /* Frameworks */ = {

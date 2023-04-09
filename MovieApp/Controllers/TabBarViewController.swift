@@ -42,7 +42,7 @@ final class TabBarViewController: UITabBarController {
         switch tab {
         case .search: return SearchViewController()
         case .recent: return RecentViewController()
-        case .home: return HomeViewController()
+        case .home: return HomeViewControllerSecond()
         case .favorites: return FavorivesViewController()
         case .setting: return SettingViewController()
         }

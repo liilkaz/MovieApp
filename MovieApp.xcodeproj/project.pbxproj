@@ -26,6 +26,7 @@
 		0C83C13529DB3BC500C4592E /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C83C13429DB3BC500C4592E /* SignInViewController.swift */; };
 		0C83C13729DB3EED00C4592E /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C83C13629DB3EED00C4592E /* UIViewController + Extension.swift */; };
 		0C83C13B29DC6B1500C4592E /* SecondLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C83C13A29DC6B1500C4592E /* SecondLoginViewController.swift */; };
+		2C92CEA629DF563300B3B9A7 /* RecentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C92CEA529DF563300B3B9A7 /* RecentTableViewCell.swift */; };
 		0C83C14229E191D300C4592E /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0C83C14129E191D300C4592E /* FirebaseAuth */; };
 		0C83C14529E19C2000C4592E /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C83C14429E19C2000C4592E /* AuthService.swift */; };
 		0C83C14829E19C7600C4592E /* Validators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C83C14729E19C7600C4592E /* Validators.swift */; };
@@ -83,6 +84,7 @@
 		0C83C13429DB3BC500C4592E /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		0C83C13629DB3EED00C4592E /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
 		0C83C13A29DC6B1500C4592E /* SecondLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondLoginViewController.swift; sourceTree = "<group>"; };
+		2C92CEA529DF563300B3B9A7 /* RecentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentTableViewCell.swift; sourceTree = "<group>"; };
 		0C83C14429E19C2000C4592E /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		0C83C14729E19C7600C4592E /* Validators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validators.swift; sourceTree = "<group>"; };
 		0C83C14929E19C9F00C4592E /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
@@ -170,6 +172,14 @@
 				0C83C13229DB1C1C00C4592E /* DividerView.swift */,
 			);
 			path = Elements;
+			sourceTree = "<group>";
+		};
+		2C92CEA429DF55FB00B3B9A7 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				2C92CEA529DF563300B3B9A7 /* RecentTableViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		0C83C14329E19BEF00C4592E /* Services */ = {
@@ -316,6 +326,7 @@
 		75986DEA29D8BA2400BDECB0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2C92CEA429DF55FB00B3B9A7 /* Cells */,
 				D000C83E29DEC8B3009486B7 /* MainScreenViews */,
 				751715B229E0985900D95475 /* MovieDetailScreen */,
 			);
@@ -518,6 +529,7 @@
 				75986DFA29D8D15B00BDECB0 /* SettingViewController.swift in Sources */,
 				751715BB29E09C5C00D95475 /* MainInfoStackView.swift in Sources */,
 				75986DF029D8CBD900BDECB0 /* NavigationBarController.swift in Sources */,
+				2C92CEA629DF563300B3B9A7 /* RecentTableViewCell.swift in Sources */,
 				D056719D29E015AB002C2449 /* CategoryCollectionView.swift in Sources */,
 				75986DFD29D8DB2D00BDECB0 /* UIColor + ext.swift in Sources */,
 				751715B629E09BAF00D95475 /* MainInfoCollectionViewCell.swift in Sources */,

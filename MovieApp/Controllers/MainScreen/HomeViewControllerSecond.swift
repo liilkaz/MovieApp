@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeViewControllerSecond: UIViewController {
     
     let movieCards = MovieCardsCollectionView()
     lazy var categories = CategoryCollectionView()
@@ -70,7 +70,7 @@ class HomeViewController: UIViewController {
 
 // MARK: - ADDING METHODS
 
-extension HomeViewController {
+extension HomeViewControllerSecond {
     
     private func setupScrollView() {
         view.addSubview(scrollView)
@@ -224,7 +224,7 @@ extension HomeViewController {
 
 // MARK: - ADDING ACTIONS
 
-extension HomeViewController {
+extension HomeViewControllerSecond {
     
     @objc private func seeAllTapped() {
         

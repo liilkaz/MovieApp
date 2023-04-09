@@ -56,4 +56,3 @@ extension MovieCardsCollectionView: UICollectionViewDelegateFlowLayout {
         return CGSize(width: 188, height: collectionView.frame.height)
     }
 }
-

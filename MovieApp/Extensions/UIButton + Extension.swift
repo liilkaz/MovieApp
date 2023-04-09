@@ -13,7 +13,7 @@ extension UIButton {
         title: String,
         backgroundColor: UIColor?,
         titleColor: UIColor,
-        font: UIFont? = Constants.Fonts.plusJacartaSansMedium(with: 16),
+        font: UIFont? = Constants.Fonts.plusJacartaSansSemiBold(with: 16),
         hasBorder: Bool,
         cornerRadius: CGFloat = 4) {
         self.init(type: .system)

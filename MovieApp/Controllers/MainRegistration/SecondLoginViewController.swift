@@ -12,7 +12,8 @@ final class SecondLoginViewController: UIViewController {
     // MARK: - Private properties
     
     private lazy var titleLabel: UILabel = {
-        let label = UILabel(name: "Login", font:  Constants.Fonts.plusJacartaSansBold(with: 24))
+        let label = UILabel(name: "Login", font:
+                                Constants.Fonts.plusJacartaSansBold(with: 24))
         label.textColor = .white
         return label
     }()

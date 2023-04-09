@@ -177,7 +177,7 @@ class SignInViewController: UIViewController {
 
     @objc
     private func didTapSignUp() {
-        let userFullName = "\(firstNameInput.inputTextField.text ?? "NoName") \(lastNameInput.inputTextField.text ?? "NoFeamily")"
+        let userFullName = "\(firstNameInput.inputTextField.text ?? "NoName") \(lastNameInput.inputTextField.text ?? "NoFamily")"
         AuthService.shared.register(
             email: emailInput.inputTextField.text,
             password: passwordInput.inputTextField.text,

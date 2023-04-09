@@ -6,6 +6,10 @@
 //
 
 import UIKit
+import Firebase
+import GoogleSignIn
+import FirebaseAuth
+import GoogleSignInSwift
 
 final class LoginViewController: UIViewController {
 
@@ -59,6 +63,8 @@ final class LoginViewController: UIViewController {
                               titleColor: .label,
                               hasBorder: true,
                               cornerRadius: 24)
+
+        button.addTarget(self, action: #selector(didTapGoogleButton), for: .touchUpInside)
         button.setupGoogleImage()
         return button
     }()
@@ -154,5 +160,50 @@ final class LoginViewController: UIViewController {
     private func didTapLoginButton() {
         let secondLoginVC = SecondLoginViewController()
         present(secondLoginVC, animated: true)
+    }
+
+    @objc
+    private func didTapGoogleButton() {
+       signWithGoogle()
+    }
+}
+
+extension LoginViewController {
+    private func signWithGoogle() {
+        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+
+        // Create Google Sign In configuration object.
+        let config = GIDConfiguration(clientID: clientID)
+        GIDSignIn.sharedInstance.configuration = config
+
+        // Start the sign in flow!
+        GIDSignIn.sharedInstance.signIn(withPresenting: self) { [unowned self] result, error in
+          guard error == nil else {
+              showAlert(with: "Warning!", and: AuthError.unknownError.localizedDescription)
+              return
+          }
+
+          guard let user = result?.user,
+            let idToken = user.idToken?.tokenString
+          else {
+              return
+          }
+
+          let credential = GoogleAuthProvider.credential(withIDToken: idToken,
+                                                         accessToken: user.accessToken.tokenString)
+
+            Auth.auth().signIn(with: credential) { [weak self] result, error in
+
+                if result != nil {
+                    let homeVC = TabBarViewController()
+                    homeVC.modalPresentationStyle = .fullScreen
+                    self?.present(homeVC, animated: true)
+                }
+
+                if error != nil {
+                    self?.showAlert(with: "Warning", and: AuthError.unknownError.localizedDescription)
+                }
+            }
+        }
     }
 }

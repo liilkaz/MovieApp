@@ -100,7 +100,6 @@ class RecentTableViewCell: UITableViewCell {
     lazy var categorisLabel: UILabel = {
         let label = UILabel()
         label.text = "Action"
-//        label.frame = CGRect(x: 16.5, y: 3, width: 65, height: 24)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = Constants.Fonts.plusJacartaSansBold(with: 10)
         label.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)

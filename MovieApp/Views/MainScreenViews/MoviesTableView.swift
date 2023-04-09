@@ -31,7 +31,6 @@ class MoviesTableView: UITableView {
 // MARK: - UITableViewDelegate
 
 extension MoviesTableView: UITableViewDelegate {
-    
 }
 
 // MARK: - UITableViewDataSource

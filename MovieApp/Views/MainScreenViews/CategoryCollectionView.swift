@@ -34,7 +34,6 @@ extension CategoryCollectionView: UICollectionViewDelegate {
 
 extension CategoryCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        images.count
         5
     }
     
@@ -44,8 +43,6 @@ extension CategoryCollectionView: UICollectionViewDataSource {
         else {
             return UICollectionViewCell()
         }
-//        cell.categoryButton.titleLabel?.text = "Tetx"
-//        cell.textLabel.text = "Hi"
         cell.categoryButton.setTitle("Hi", for: .normal)
         return cell
     }

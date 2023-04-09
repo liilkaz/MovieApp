@@ -137,7 +137,6 @@ class SignInViewController: UIViewController {
         let mainStackView = UIStackView(arrangedSubviews: [firstNameInput, lastNameInput, emailInput, passwordInput, confirmPasswordInput])
         mainStackView.axis = .vertical
         mainStackView.distribution = .fillEqually
-        mainStackView.spacing = 24
 
         view.addSubviews(titleLabel, subTitleLabel, mainStackView, signUpButton, bottomStackView) {[
 
@@ -150,7 +149,6 @@ class SignInViewController: UIViewController {
             mainStackView.topAnchor.constraint(equalTo: subTitleLabel.bottomAnchor, constant: 32),
             mainStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
             mainStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
-            mainStackView.bottomAnchor.constraint(equalTo: signUpButton.topAnchor, constant: -48),
 
             signUpButton.bottomAnchor.constraint(equalTo: bottomStackView.topAnchor, constant: -24),
             signUpButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
@@ -177,7 +175,22 @@ class SignInViewController: UIViewController {
 
     @objc
     private func didTapSignUp() {
-        print("tap sign up")
+//        let userFullName = "\(firstNameInput.inputTextField.text ?? "NoName") \(lastNameInput.inputTextField.text ?? "NoFamily")"
+        AuthService.shared.register(
+            email: emailInput.inputTextField.text,
+            password: passwordInput.inputTextField.text,
+            confirmPassword: confirmPasswordInput.inputTextField.text) { [weak self] result in
+                switch result {
+
+                case .success(let user):
+                    let homeVC = TabBarViewController()
+                    homeVC.modalPresentationStyle = .fullScreen
+                    self?.present(homeVC, animated: true)
+                    print(user)
+                case .failure(let error):
+                    self?.showAlert(with: "Ошибка!", and: error.localizedDescription)
+                }
+        }
     }
 
     @objc

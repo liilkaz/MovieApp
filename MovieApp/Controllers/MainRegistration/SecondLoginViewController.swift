@@ -128,7 +128,18 @@ final class SecondLoginViewController: UIViewController {
     
     @objc
     private func didTapLoginButton() {
-        print(#function)
+        AuthService.shared.login(email: emailInput.inputTextField.text, password: passwordInput.inputTextField.text) { [weak self] result in
+            switch result {
+
+            case .success(let user):
+                let homeVC = TabBarViewController()
+                homeVC.modalPresentationStyle = .fullScreen
+                self?.present(homeVC, animated: true)
+                print(user)
+            case .failure(let error):
+                self?.showAlert(with: "Ошибка", and: error.localizedDescription)
+            }
+        }
     }
     
     @objc

@@ -26,7 +26,7 @@ class RecentViewController: UIViewController {
         setConstraints()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(RecentTableViewCell.self, forCellReuseIdentifier: RecentTableViewCell.identifier)
+        tableView.register(RecentTableViewCellTwo.self, forCellReuseIdentifier: RecentTableViewCellTwo.identifier)
     }
 
     private func setConstraints() {
@@ -53,8 +53,8 @@ extension RecentViewController: UITableViewDelegate, UITableViewDataSource {
         }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: RecentTableViewCell.identifier,
-                                                       for: indexPath) as? RecentTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: RecentTableViewCellTwo.identifier,
+                                                       for: indexPath) as? RecentTableViewCellTwo else { return UITableViewCell() }
        
         return cell
     }

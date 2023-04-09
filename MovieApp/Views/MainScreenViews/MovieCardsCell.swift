@@ -15,7 +15,6 @@ class MovieCardsCell: UICollectionViewCell {
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
         image.translatesAutoresizingMaskIntoConstraints = false
-        
         return image
     }()
     
@@ -27,7 +26,6 @@ class MovieCardsCell: UICollectionViewCell {
         label.textAlignment = .left
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
-        
         return label
     }()
     
@@ -42,7 +40,6 @@ class MovieCardsCell: UICollectionViewCell {
         label.backgroundColor = .gray.withAlphaComponent(0.2)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.layer.masksToBounds = true
-        
         return label
     }()
     

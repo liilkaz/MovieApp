@@ -21,7 +21,6 @@ class HomeViewController: UIViewController {
         label.font = Constants.Fonts.plusJacartaSansBold(with: 16)
         label.textColor = UIColor(named: "Onboarding")
         label.translatesAutoresizingMaskIntoConstraints = false
-        
         return label
     }()
     
@@ -31,7 +30,6 @@ class HomeViewController: UIViewController {
         label.font = Constants.Fonts.plusJacartaSansBold(with: 16)
         label.textColor = UIColor(named: "Onboarding")
         label.textAlignment = .left
-        
         return label
     }()
     

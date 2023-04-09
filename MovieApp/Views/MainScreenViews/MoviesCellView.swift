@@ -16,7 +16,6 @@ class MoviesCellView: UITableViewCell {
         img.image = UIImage(named: "secondMovie")
         img.translatesAutoresizingMaskIntoConstraints = false
         img.contentMode = .scaleAspectFit
-        
         return img
     }()
     
@@ -26,7 +25,6 @@ class MoviesCellView: UITableViewCell {
         label.font = Constants.Fonts.plusJacartaSansMedium(with: 12)
         label.textColor = .lightGray
         label.textAlignment = .left
-        
         return label
     }()
     
@@ -36,14 +34,12 @@ class MoviesCellView: UITableViewCell {
         label.font = Constants.Fonts.plusJacartaSansBold(with: 18)
         label.textColor = UIColor(named: "Onboarding")
         label.textAlignment = .left
-        
         return label
     }()
     
     lazy var clockImage: UIImageView = {
         let img = UIImageView()
         img.image = UIImage(systemName: "clock.fill")
-
         img.tintColor = .darkGray
         return img
     }()
@@ -54,7 +50,6 @@ class MoviesCellView: UITableViewCell {
         label.font = Constants.Fonts.plusJacartaSansMedium(with: 12)
         label.textColor = .darkGray
         label.textAlignment = .left
-        
         return label
     }()
     
@@ -64,7 +59,6 @@ class MoviesCellView: UITableViewCell {
         st.axis = .horizontal
         st.spacing = 5
         st.alignment = .center
-        
         return st
     }()
     
@@ -72,7 +66,6 @@ class MoviesCellView: UITableViewCell {
         let img = UIImageView()
         img.image = UIImage(systemName: "star.fill")
         img.tintColor = .systemYellow
-        
         return img
     }()
     

@@ -20,7 +20,6 @@ class CategoriesCell: UICollectionViewCell {
         button.layer.cornerRadius = 18
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.lightGray.cgColor
-        
         return button
     }()
     

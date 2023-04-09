@@ -28,6 +28,15 @@
 		0C83C13B29DC6B1500C4592E /* SecondLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C83C13A29DC6B1500C4592E /* SecondLoginViewController.swift */; };
 		2C92CEA629DF563300B3B9A7 /* RecentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C92CEA529DF563300B3B9A7 /* RecentTableViewCell.swift */; };
 		552DC54EB86F150CDDC824F8 /* Pods_MovieApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02C4648F82F353955262396 /* Pods_MovieApp.framework */; };
+		751715B629E09BAF00D95475 /* MainInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751715B529E09BAF00D95475 /* MainInfoCollectionViewCell.swift */; };
+		751715B929E09BE000D95475 /* CastAndCrewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751715B829E09BE000D95475 /* CastAndCrewCollectionViewCell.swift */; };
+		751715BB29E09C5C00D95475 /* MainInfoStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751715BA29E09C5C00D95475 /* MainInfoStackView.swift */; };
+		751715BE29E0A2B400D95475 /* MainInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751715BD29E0A2B400D95475 /* MainInfo.swift */; };
+		751715C029E0A2E900D95475 /* CastAndCrewInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751715BF29E0A2E900D95475 /* CastAndCrewInfo.swift */; };
+		751715C329E0A53000D95475 /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751715C229E0A53000D95475 /* MovieDetailViewController.swift */; };
+		751715C529E0A7E500D95475 /* InfoStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751715C429E0A7E500D95475 /* InfoStack.swift */; };
+		751715C929E0B9C200D95475 /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 751715C829E0B9C200D95475 /* Montserrat-Medium.ttf */; };
+		751715CB29E0BD2900D95475 /* PlusJakartaSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 751715CA29E0BD2900D95475 /* PlusJakartaSans-SemiBold.ttf */; };
 		75986DCF29D8B8CC00BDECB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75986DCE29D8B8CC00BDECB0 /* AppDelegate.swift */; };
 		75986DD129D8B8CC00BDECB0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75986DD029D8B8CC00BDECB0 /* SceneDelegate.swift */; };
 		75986DD329D8B8CC00BDECB0 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75986DD229D8B8CC00BDECB0 /* SearchViewController.swift */; };
@@ -64,6 +73,15 @@
 		0C83C13A29DC6B1500C4592E /* SecondLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondLoginViewController.swift; sourceTree = "<group>"; };
 		2C92CEA529DF563300B3B9A7 /* RecentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentTableViewCell.swift; sourceTree = "<group>"; };
 		3B62DA8D636D221D3EBE987E /* Pods-MovieApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp.release.xcconfig"; path = "Target Support Files/Pods-MovieApp/Pods-MovieApp.release.xcconfig"; sourceTree = "<group>"; };
+		751715B529E09BAF00D95475 /* MainInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInfoCollectionViewCell.swift; sourceTree = "<group>"; };
+		751715B829E09BE000D95475 /* CastAndCrewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastAndCrewCollectionViewCell.swift; sourceTree = "<group>"; };
+		751715BA29E09C5C00D95475 /* MainInfoStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInfoStackView.swift; sourceTree = "<group>"; };
+		751715BD29E0A2B400D95475 /* MainInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInfo.swift; sourceTree = "<group>"; };
+		751715BF29E0A2E900D95475 /* CastAndCrewInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastAndCrewInfo.swift; sourceTree = "<group>"; };
+		751715C229E0A53000D95475 /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
+		751715C429E0A7E500D95475 /* InfoStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoStack.swift; sourceTree = "<group>"; };
+		751715C829E0B9C200D95475 /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
+		751715CA29E0BD2900D95475 /* PlusJakartaSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		75986DCB29D8B8CC00BDECB0 /* MovieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75986DCE29D8B8CC00BDECB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75986DD029D8B8CC00BDECB0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +128,8 @@
 		0C83C11F29DAE1A900C4592E /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				751715CA29E0BD2900D95475 /* PlusJakartaSans-SemiBold.ttf */,
+				751715C829E0B9C200D95475 /* Montserrat-Medium.ttf */,
 				0C83C12329DAE23600C4592E /* PlusJakartaSans-Italic.ttf */,
 				0C83C12529DAE23700C4592E /* PlusJakartaSans-Light.ttf */,
 				0C83C12229DAE23600C4592E /* PlusJakartaSans-Medium.ttf */,
@@ -128,12 +148,40 @@
 			path = Elements;
 			sourceTree = "<group>";
 		};
-		2C92CEA429DF55FB00B3B9A7 /* Cells */ = {
+		751715B229E0985900D95475 /* MovieDetailScreen */ = {
 			isa = PBXGroup;
 			children = (
-				2C92CEA529DF563300B3B9A7 /* RecentTableViewCell.swift */,
+				751715B729E09BB700D95475 /* Cells */,
+				751715BA29E09C5C00D95475 /* MainInfoStackView.swift */,
+				751715C429E0A7E500D95475 /* InfoStack.swift */,
+			);
+			path = MovieDetailScreen;
+			sourceTree = "<group>";
+		};
+		751715B729E09BB700D95475 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				751715B529E09BAF00D95475 /* MainInfoCollectionViewCell.swift */,
+				751715B829E09BE000D95475 /* CastAndCrewCollectionViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		751715BC29E0A23F00D95475 /* MovieDetails */ = {
+			isa = PBXGroup;
+			children = (
+				751715BD29E0A2B400D95475 /* MainInfo.swift */,
+				751715BF29E0A2E900D95475 /* CastAndCrewInfo.swift */,
+			);
+			path = MovieDetails;
+			sourceTree = "<group>";
+		};
+		751715C129E0A4F900D95475 /* MovieDetail */ = {
+			isa = PBXGroup;
+			children = (
+				751715C229E0A53000D95475 /* MovieDetailViewController.swift */,
+			);
+			path = MovieDetail;
 			sourceTree = "<group>";
 		};
 		75986DC229D8B8CC00BDECB0 = {
@@ -199,6 +247,7 @@
 		75986DE829D8B9FC00BDECB0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				751715BC29E0A23F00D95475 /* MovieDetails */,
 				75986DE729D8B9F300BDECB0 /* DataModel */,
 			);
 			path = Models;
@@ -207,6 +256,7 @@
 		75986DE929D8BA0A00BDECB0 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				751715C129E0A4F900D95475 /* MovieDetail */,
 				D02E7B7929DDACEF00AAF531 /* HomeScreen */,
 				0C83C11129DABA1F00C4592E /* MainRegistration */,
 				75986DD229D8B8CC00BDECB0 /* SearchViewController.swift */,
@@ -223,7 +273,7 @@
 		75986DEA29D8BA2400BDECB0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				2C92CEA429DF55FB00B3B9A7 /* Cells */,
+				751715B229E0985900D95475 /* MovieDetailScreen */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -332,8 +382,10 @@
 				0C83C12829DAE23700C4592E /* PlusJakartaSans-Regular.ttf in Resources */,
 				0C83C12929DAE23700C4592E /* PlusJakartaSans-Light.ttf in Resources */,
 				0C83C12729DAE23700C4592E /* PlusJakartaSans-Italic.ttf in Resources */,
+				751715CB29E0BD2900D95475 /* PlusJakartaSans-SemiBold.ttf in Resources */,
 				0C83C11E29DADF3900C4592E /* Assets.xcassets in Resources */,
 				75986DDE29D8B8CD00BDECB0 /* LaunchScreen.storyboard in Resources */,
+				751715C929E0B9C200D95475 /* Montserrat-Medium.ttf in Resources */,
 				0C83C12629DAE23700C4592E /* PlusJakartaSans-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -394,23 +446,30 @@
 				0C83C11729DABFAD00C4592E /* UIFont + Extension.swift in Sources */,
 				0C83C11B29DAC1CE00C4592E /* UIImageView + Extension.swift in Sources */,
 				75986DD329D8B8CC00BDECB0 /* SearchViewController.swift in Sources */,
+				751715C029E0A2E900D95475 /* CastAndCrewInfo.swift in Sources */,
 				75986DFA29D8D15B00BDECB0 /* SettingViewController.swift in Sources */,
+				751715BB29E09C5C00D95475 /* MainInfoStackView.swift in Sources */,
 				75986DF029D8CBD900BDECB0 /* NavigationBarController.swift in Sources */,
 				2C92CEA629DF563300B3B9A7 /* RecentTableViewCell.swift in Sources */,
 				75986DFD29D8DB2D00BDECB0 /* UIColor + ext.swift in Sources */,
+				751715B629E09BAF00D95475 /* MainInfoCollectionViewCell.swift in Sources */,
+				751715C329E0A53000D95475 /* MovieDetailViewController.swift in Sources */,
 				0C83C13B29DC6B1500C4592E /* SecondLoginViewController.swift in Sources */,
 				75986DF829D8D13100BDECB0 /* FavorivesViewController.swift in Sources */,
 				0C83C13729DB3EED00C4592E /* UIViewController + Extension.swift in Sources */,
 				75986DCF29D8B8CC00BDECB0 /* AppDelegate.swift in Sources */,
 				0C83C11D29DAD6EC00C4592E /* UIView + Extension.swift in Sources */,
 				0C83C12B29DAEEB900C4592E /* UITextField + Extension.swift in Sources */,
+				751715B929E09BE000D95475 /* CastAndCrewCollectionViewCell.swift in Sources */,
 				0C83C11929DAC09300C4592E /* UIButton + Extension.swift in Sources */,
 				0C83C11329DABAF600C4592E /* SplashViewController.swift in Sources */,
+				751715BE29E0A2B400D95475 /* MainInfo.swift in Sources */,
 				75986DD929D8B8CC00BDECB0 /* MovieApp.xcdatamodeld in Sources */,
 				75986DF229D8CC2700BDECB0 /* Constants.swift in Sources */,
 				75986DF629D8D0F900BDECB0 /* HomeViewController.swift in Sources */,
 				0C83C11529DABF4400C4592E /* UILabel + Extension.swift in Sources */,
 				75986DF429D8D0E400BDECB0 /* RecentViewController.swift in Sources */,
+				751715C529E0A7E500D95475 /* InfoStack.swift in Sources */,
 				75986DEC29D8CA4E00BDECB0 /* TabBarViewController.swift in Sources */,
 				0C83C13529DB3BC500C4592E /* SignInViewController.swift in Sources */,
 				75986DD129D8B8CC00BDECB0 /* SceneDelegate.swift in Sources */,

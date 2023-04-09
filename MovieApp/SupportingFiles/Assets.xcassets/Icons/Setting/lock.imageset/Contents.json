@@ -1,7 +1,27 @@
 {
   "images" : [
     {
-      "filename" : "Icon - Lock.png",
+      "filename" : "Icon - Lock-2.svg",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "light"
+        }
+      ],
+      "filename" : "Icon - Lock-2 1.svg",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Icon - Lock.svg",
       "idiom" : "universal"
     }
   ],

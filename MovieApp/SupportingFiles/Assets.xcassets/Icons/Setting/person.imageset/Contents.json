@@ -1,7 +1,27 @@
 {
   "images" : [
     {
-      "filename" : "person.png",
+      "filename" : "person-2.svg",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "light"
+        }
+      ],
+      "filename" : "Layer 2.svg",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "person.svg",
       "idiom" : "universal"
     }
   ],

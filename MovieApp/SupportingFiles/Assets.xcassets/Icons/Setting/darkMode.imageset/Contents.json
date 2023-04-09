@@ -1,7 +1,27 @@
 {
   "images" : [
     {
-      "filename" : "Activity.png",
+      "filename" : "Activity 1.svg",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "light"
+        }
+      ],
+      "filename" : "Activity 2.svg",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Activity.svg",
       "idiom" : "universal"
     }
   ],

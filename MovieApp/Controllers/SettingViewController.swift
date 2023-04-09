@@ -23,9 +23,6 @@ class SettingViewController: UIViewController {
         static let userPhotoImage: String = "userPhoto"
         static let userNameText: String = "Andy Lexsian"
         static let userNicknameText: String = "@Andy1999"
-        static let logOutButtonbottomAnchor: CGFloat = 100
-        static let logOutButtonLeadingAnchor: CGFloat = 18
-        static let logOutButtonTrailingAnchor: CGFloat = 22
     }
     
     private lazy var logOutButton: UIButton = {
@@ -83,14 +80,15 @@ class SettingViewController: UIViewController {
     }
     
     @objc private func logOutButtonTapped() {
+        
     }
     
     private func setConstraints() {
         logOutButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            logOutButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -MyConstants.logOutButtonbottomAnchor),
-            logOutButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: MyConstants.logOutButtonLeadingAnchor),
-            logOutButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -MyConstants.logOutButtonTrailingAnchor),
+            logOutButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
+            logOutButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 18),
+            logOutButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22),
             logOutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
@@ -101,6 +99,7 @@ class SettingViewController: UIViewController {
             userInformationStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -160),
             userInformationStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
+        
         generalInformationStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             generalInformationStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 40),
@@ -132,16 +131,15 @@ class SettingViewController: UIViewController {
     }
     
 // TABLE
+    let idCell = "idCell"
+    let idHeader = "idHeader"
+    
     let tableView: UITableView = {
         let tableView = UITableView()
         tableView.bounces = false
         tableView.backgroundColor = .clear
         return tableView
     }()
-    
-    let idCell = "idCell"
-    let idHeader = "idHeader"
-    
 }
 
 extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
@@ -149,6 +147,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0: return 1

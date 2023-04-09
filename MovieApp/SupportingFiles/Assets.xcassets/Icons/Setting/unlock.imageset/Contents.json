@@ -1,7 +1,27 @@
 {
   "images" : [
     {
-      "filename" : "Unlock.png",
+      "filename" : "Combined-Shape.svg",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "light"
+        }
+      ],
+      "filename" : "Combined-Shape 1.svg",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Unlock.svg",
       "idiom" : "universal"
     }
   ],

@@ -15,7 +15,7 @@ class SettingTableViewCell: UITableViewCell {
     let cellSettingImageArray = [["person"],
                      ["lock", "unlock", "darkMode"]]
     
-    let nameSetting: UILabel = {
+    private lazy var nameSetting: UILabel = {
         let label = UILabel()
         label.textColor = UIColor(named: "MainTextColor")
         label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
@@ -24,13 +24,13 @@ class SettingTableViewCell: UITableViewCell {
         return label
     }()
     
-    let settingImage: UIImageView = {
+    private lazy var settingImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
-    let reapeatSwitch: UISwitch = {
+    private lazy var reapeatSwitch: UISwitch = {
         let reapeatSwitch = UISwitch()
         reapeatSwitch.isOn = true
         reapeatSwitch.isHidden = true
@@ -64,6 +64,7 @@ class SettingTableViewCell: UITableViewCell {
     }
     
     @objc func switchChange(paramTarget: UISwitch) {
+        
     }
     
     func setConstraints() {
@@ -81,7 +82,7 @@ class SettingTableViewCell: UITableViewCell {
         self.contentView.addSubview(reapeatSwitch)
         NSLayoutConstraint.activate([
             reapeatSwitch.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            reapeatSwitch.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5)
+            reapeatSwitch.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10)
         ])
     }
     

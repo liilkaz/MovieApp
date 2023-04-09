@@ -218,6 +218,14 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		2C92CEA429DF55FB00B3B9A7 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				2C92CEA529DF563300B3B9A7 /* RecentTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		0C83C14329E19BEF00C4592E /* Services */ = {
 			isa = PBXGroup;
 			children = (

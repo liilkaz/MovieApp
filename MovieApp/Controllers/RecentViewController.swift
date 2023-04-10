@@ -13,6 +13,7 @@ class RecentViewController: UIViewController {
 
     private lazy var tableView: UITableView = {
         let table = UITableView()
+        table.backgroundColor = UIColor(named: "BgColor")
         table.separatorStyle = .none
         table.translatesAutoresizingMaskIntoConstraints = false
         

@@ -14,6 +14,7 @@ class RecentTableViewCell: UITableViewCell {
     lazy var movieImage: UIImageView = {
         let image = UIImageView()
         image.layer.cornerRadius = 16
+        image.layer.masksToBounds = true
         image.image = UIImage(named: "картинка")
         image.frame = CGRect(x: 24, y: 10, width: 119.52, height: 160)
         
@@ -54,7 +55,6 @@ class RecentTableViewCell: UITableViewCell {
     lazy var filmNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Drifting Home"
-        label.backgroundColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         label.frame = CGRect(x: 0, y: 0, width: 124, height: 26)
         label.font = Constants.Fonts.plusJacartaSansBold(with: 18)
@@ -67,7 +67,6 @@ class RecentTableViewCell: UITableViewCell {
     lazy var timeLabel: UILabel = {
         let label = UILabel()
         label.text = "\(148) Minutes"
-        label.backgroundColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         label.frame = CGRect(x: 0, y: 0, width: 74, height: 15)
         label.font = UIFont(name: "Montserrat-Medium", size: 12)
@@ -79,7 +78,6 @@ class RecentTableViewCell: UITableViewCell {
     lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.text = "11 Sep 2021"
-        label.backgroundColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         label.frame = CGRect(x: 0, y: 0, width: 69, height: 15)
         label.font = UIFont(name: "Montserrat-Medium", size: 12)
@@ -116,7 +114,7 @@ class RecentTableViewCell: UITableViewCell {
 
     private lazy var ImageStackView: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [timeImage, dateImage, filmImage])
-        stack.spacing = 14.67
+        stack.spacing = 12
         stack.axis = .vertical
         stack.alignment = .center
         stack.distribution = .equalCentering
@@ -126,7 +124,7 @@ class RecentTableViewCell: UITableViewCell {
     
     private lazy var labelStackView: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [timeLabel, dateLabel])
-        stack.spacing = 8
+        stack.spacing = 12
         stack.axis = .vertical
         stack.alignment = .center
         stack.distribution = .equalCentering
@@ -137,6 +135,7 @@ class RecentTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        backgroundColor = UIColor(named: "BgColor")
         setConstraints()
     }
     required init?(coder: NSCoder) {
@@ -155,10 +154,10 @@ class RecentTableViewCell: UITableViewCell {
               filmNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
               filmNameLabel.leadingAnchor.constraint(equalTo: movieImage.trailingAnchor, constant: 13),
               
-              ImageStackView.topAnchor.constraint(equalTo: filmNameLabel.bottomAnchor, constant: 13.33),
+              ImageStackView.topAnchor.constraint(equalTo: filmNameLabel.bottomAnchor, constant: 12),
               ImageStackView.leadingAnchor.constraint(equalTo: movieImage.trailingAnchor, constant: 13),
             
-              labelStackView.topAnchor.constraint(equalTo: filmNameLabel.bottomAnchor, constant: 10),
+              labelStackView.topAnchor.constraint(equalTo: filmNameLabel.bottomAnchor, constant: 11),
               labelStackView.leadingAnchor.constraint(equalTo: ImageStackView.trailingAnchor, constant: 5.33),
               
               favoriteButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
@@ -170,7 +169,8 @@ class RecentTableViewCell: UITableViewCell {
               actionView.topAnchor.constraint(equalTo: labelStackView.bottomAnchor, constant: 8),
               actionView.leadingAnchor.constraint(equalTo: ImageStackView.trailingAnchor, constant: 5.33),
               actionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -145),
-              actionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -52)
+//              actionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -52),
+              actionView.heightAnchor.constraint(equalToConstant: 24)
         ])
     }
 }

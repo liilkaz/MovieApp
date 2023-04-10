@@ -8,20 +8,28 @@
 import UIKit
 
 class RecentViewController: UIViewController {
+    
+    let categories = CategoryCollectionView()
 
     private lazy var tableView: UITableView = {
         let table = UITableView()
+        table.separatorStyle = .none
         table.translatesAutoresizingMaskIntoConstraints = false
         
         return table
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.tabBarItem.title = Constants.Titles.TabBar.title(for: .recent)
+        tabBarController?.tabBar.isHidden = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "BgColor")
         title = Constants.Titles.NavBar.recent
-        navigationController?.tabBarItem.title = Constants.Titles.TabBar.title(for: .recent)
-        tableView.rowHeight = 160
+        view.addSubview(categories)
         view.addSubview(tableView)
         setConstraints()
         tableView.delegate = self
@@ -31,7 +39,12 @@ class RecentViewController: UIViewController {
 
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            categories.topAnchor.constraint(equalTo: view.topAnchor),
+            categories.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
+            categories.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            categories.heightAnchor.constraint(equalToConstant: 34),
+            
+            tableView.topAnchor.constraint(equalTo: categories.topAnchor, constant: 42),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
@@ -57,6 +70,12 @@ extension RecentViewController: UITableViewDelegate, UITableViewDataSource {
                                                        for: indexPath) as? RecentTableViewCell else { return UITableViewCell() }
        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let detailScreen = MovieDetailViewController()
+        navigationController?.pushViewController(detailScreen, animated: true)
     }
     
 }

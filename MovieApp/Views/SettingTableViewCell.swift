@@ -8,7 +8,6 @@
 import UIKit
 
 class SettingTableViewCell: UITableViewCell {
-    
     let cellNameArray = [["Profile"],
                      ["Change Password", "Change Password", "Dark Mode"]]
     
@@ -18,13 +17,19 @@ class SettingTableViewCell: UITableViewCell {
     private lazy var nameSetting: UILabel = {
         let label = UILabel()
         label.textColor = UIColor(named: "MainTextColor")
-        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private lazy var settingImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    private lazy var vectorImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -44,7 +49,6 @@ class SettingTableViewCell: UITableViewCell {
 
         self.selectionStyle = .none
         self.backgroundColor = .clear
-        
         reapeatSwitch.addTarget(self, action: #selector(switchChange(paramTarget:)), for: .valueChanged)
     }
     
@@ -61,6 +65,9 @@ class SettingTableViewCell: UITableViewCell {
         if indexPath == [1, 2] {
             reapeatSwitch.isHidden = false
         }
+        if indexPath == [0, 0] {
+            vectorImage.image = UIImage(named: "vector")
+        }
     }
     
     @objc func switchChange(paramTarget: UISwitch) {
@@ -68,22 +75,31 @@ class SettingTableViewCell: UITableViewCell {
     }
     
     func setConstraints() {
-        self.addSubview(nameSetting)
-        NSLayoutConstraint.activate([
-            nameSetting.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            nameSetting.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 60)
-        ])
-        self.addSubview(settingImage)
-        NSLayoutConstraint.activate([
-            settingImage.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            settingImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 24)
-        ])
         
+        var cellInformationStackView: UIStackView = {
+            let stackView = UIStackView ()
+            stackView.addArrangedSubview(settingImage)
+            stackView.addArrangedSubview(nameSetting)
+            stackView.axis = .horizontal
+            stackView.spacing = 12
+            stackView.translatesAutoresizingMaskIntoConstraints = false
+            return stackView
+        }()
+        
+        self.addSubview(cellInformationStackView)
+        NSLayoutConstraint.activate([
+            cellInformationStackView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            cellInformationStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 24)
+        ])
+        self.contentView.addSubview(vectorImage)
+        NSLayoutConstraint.activate([
+            vectorImage.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            vectorImage.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30)
+        ])
         self.contentView.addSubview(reapeatSwitch)
         NSLayoutConstraint.activate([
             reapeatSwitch.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            reapeatSwitch.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10)
+            reapeatSwitch.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15)
         ])
-    }
-    
+    }    
 }

@@ -13,9 +13,8 @@ class SettingHeaderTableViewCell: UITableViewHeaderFooterView {
     
     let headerLabel: UILabel = {
         let label = UILabel()
-//        label.text = "header"
         label.textColor = UIColor(named: "MainTextColor")
-        label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        label.font = UIFont(name: "PlusJakartaSans-Medium", size: 12)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         return label

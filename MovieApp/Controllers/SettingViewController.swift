@@ -7,14 +7,6 @@
 
 import UIKit
 
-extension UIStackView {
-    convenience init(arrangedSubviews: [UIView], axis: NSLayoutConstraint.Axis, spacing: CGFloat) {
-        self.init(arrangedSubviews: arrangedSubviews)
-        self.axis = axis
-        self.spacing = spacing
-        self.translatesAutoresizingMaskIntoConstraints = false
-    }
-}
 
 class SettingViewController: UIViewController {
 
@@ -25,19 +17,11 @@ class SettingViewController: UIViewController {
         static let userNicknameText: String = "@Andy1999"
     }
     
-    private lazy var logOutButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setBackgroundImage(UIImage(named: MyConstants.logOutButtonImage), for: .normal)
-        button.addTarget(self, action: #selector(logOutButtonTapped), for: .touchUpInside)
-        return button
-    }()
-    
     private lazy var userNameLabel: UILabel = {
         let label = UILabel()
         label.text = MyConstants.userNameText
-        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        label.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 18)
         label.textColor = UIColor(named: "MainTextColor")
-        label.numberOfLines = 1
         label.textAlignment = .left
         return label
     }()
@@ -45,9 +29,8 @@ class SettingViewController: UIViewController {
     private lazy var userNicknameLabel: UILabel = {
         let label = UILabel()
         label.text = MyConstants.userNicknameText
-        label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+        label.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 14)
         label.textColor = UIColor(named: "MainTextColor")
-        label.numberOfLines = 1
         label.textAlignment = .left
         return label
     }()
@@ -59,65 +42,20 @@ class SettingViewController: UIViewController {
     }()
     
     private lazy var userInformationStackView = UIStackView()
-    private lazy var generalInformationStackView = UIStackView()
     
-    private func setupViews() {
-        view.addSubview(logOutButton)
-        
-        userInformationStackView = UIStackView(arrangedSubviews: [
-            userNameLabel,
-            userNicknameLabel
-        ], axis: .vertical, spacing: 2)
-        
-        generalInformationStackView = UIStackView(arrangedSubviews: [
-            userInformationStackView,
-            userPhotoImageView
-        ], axis: .horizontal, spacing: 12)
-
-        view.addSubview(userInformationStackView)
-        view.addSubview(generalInformationStackView)
-        view.addSubview(tableView)
-    }
+    private lazy var logOutButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setBackgroundImage(UIImage(named: MyConstants.logOutButtonImage), for: .normal)
+        button.addTarget(self, action: #selector(logOutButtonTapped), for: .touchUpInside)
+        return button
+    }()
     
     @objc private func logOutButtonTapped() {
-        
-    }
-    
-    private func setConstraints() {
-        logOutButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            logOutButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
-            logOutButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 18),
-            logOutButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22),
-            logOutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
-        
-        userInformationStackView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            userInformationStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 43),
-            userInformationStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 92),
-            userInformationStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -160),
-            userInformationStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
-        
-        generalInformationStackView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            generalInformationStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 40),
-            generalInformationStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24)
-        ])
-        
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            tableView.topAnchor.constraint(equalTo: generalInformationStackView.topAnchor, constant: 40),
-            tableView.bottomAnchor.constraint(equalTo: logOutButton.bottomAnchor, constant: 260)
-        ])
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: idCell)
@@ -130,10 +68,51 @@ class SettingViewController: UIViewController {
         setConstraints()
     }
     
+    private func setupViews() {
+        
+        userInformationStackView = UIStackView(arrangedSubviews: [
+            userNameLabel,
+            userNicknameLabel
+        ], axis: .vertical, spacing: 2)
+        
+        view.addSubview(userPhotoImageView)
+        view.addSubview(userInformationStackView)
+        view.addSubview(tableView)
+        view.addSubview(logOutButton)
+    }
+  
+    private func setConstraints() {
+        userInformationStackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            userInformationStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 40),
+            userInformationStackView.leadingAnchor.constraint(equalTo: userPhotoImageView.trailingAnchor, constant: 12),
+            userInformationStackView.widthAnchor.constraint(equalToConstant: 115),
+            userInformationStackView.heightAnchor.constraint(equalToConstant: 50)
+        ])
+        userPhotoImageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            userPhotoImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 37),
+            userPhotoImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
+            userPhotoImageView.widthAnchor.constraint(equalToConstant: 56),
+            userPhotoImageView.heightAnchor.constraint(equalToConstant: 56)
+        ])
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: userPhotoImageView.bottomAnchor, constant: 32),
+            tableView.bottomAnchor.constraint(equalTo: logOutButton.topAnchor, constant: -5),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0)
+        ])
+        logOutButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            logOutButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -95),
+            logOutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+    }
+
 // TABLE
     let idCell = "idCell"
     let idHeader = "idHeader"
-    
     let tableView: UITableView = {
         let tableView = UITableView()
         tableView.bounces = false
@@ -164,7 +143,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 40
+        return 50
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -174,6 +153,18 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        return 30
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    }
+}
+
+extension UIStackView {
+    convenience init(arrangedSubviews: [UIView], axis: NSLayoutConstraint.Axis, spacing: CGFloat) {
+        self.init(arrangedSubviews: arrangedSubviews)
+        self.axis = axis
+        self.spacing = spacing
+        self.translatesAutoresizingMaskIntoConstraints = false
     }
 }

@@ -210,8 +210,6 @@
 				75986DF529D8D0F900BDECB0 /* HomeViewController.swift */,
 				75986DF729D8D13100BDECB0 /* FavorivesViewController.swift */,
 				75986DF929D8D15B00BDECB0 /* SettingViewController.swift */,
-				EE5D0E7529E2021700CB74C5 /* SettingHeaderTableViewCell.swift */,
-				EE5D0E7329E0BB2F00CB74C5 /* SettingTableViewCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -219,6 +217,8 @@
 		75986DEA29D8BA2400BDECB0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EE5D0E7529E2021700CB74C5 /* SettingHeaderTableViewCell.swift */,
+				EE5D0E7329E0BB2F00CB74C5 /* SettingTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

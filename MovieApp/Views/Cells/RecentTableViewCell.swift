@@ -9,8 +9,6 @@ import UIKit
 
 class RecentTableViewCell: UITableViewCell {
     
-    let color = UIColor(named: "IconThemeColor")!.cgColor
-    
     static let identifier = "\(RecentTableViewCell.self)"
    
     lazy var movieImage: UIImageView = {
@@ -24,9 +22,7 @@ class RecentTableViewCell: UITableViewCell {
     }()
     
     lazy var timeImage: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(named: "time")
-        image.tintColor = Constants.Colors.iconThemeColor
+        let image = UIImageView(image: UIImage(named: "time")?.withTintColor(Constants.Colors.iconThemeColor ?? UIColor.black))
         image.translatesAutoresizingMaskIntoConstraints = false
         image.frame = CGRect(x: 0, y: 0, width: 13.33, height: 13.33)
 
@@ -34,7 +30,7 @@ class RecentTableViewCell: UITableViewCell {
     }()
     
     lazy var dateImage: UIImageView = {
-        let image = UIImageView(image: UIImage(named: "date")!.withTintColor(Constants.Colors.iconThemeColor!))
+            let image = UIImageView(image: UIImage(named: "date")?.withTintColor(Constants.Colors.iconThemeColor ?? UIColor.black))
         image.translatesAutoresizingMaskIntoConstraints = false
         image.frame = CGRect(x: 0, y: 0, width: 12, height: 13.33)
 
@@ -56,7 +52,6 @@ class RecentTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.frame = CGRect(x: 0, y: 0, width: 124, height: 26)
         label.font = Constants.Fonts.plusJacartaSansBold(with: 18)
-        label.font = UIFont(name: "PlusJakartaSans-Bold", size: 18)
 
         return label
     }()
@@ -64,10 +59,10 @@ class RecentTableViewCell: UITableViewCell {
     lazy var timeLabel: UILabel = {
         let label = UILabel()
         label.text = "\(148) Minutes"
+        label.textColor = Constants.Colors.mainTextColor
         label.translatesAutoresizingMaskIntoConstraints = false
         label.frame = CGRect(x: 0, y: 0, width: 74, height: 15)
         label.font = UIFont(name: "Montserrat-Medium", size: 12)
-        label.textColor = Constants.Colors.mainTextColor
 
         return label
     }()
@@ -75,10 +70,10 @@ class RecentTableViewCell: UITableViewCell {
     lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.text = "11 Sep 2021"
+        label.textColor = Constants.Colors.mainTextColor
         label.translatesAutoresizingMaskIntoConstraints = false
         label.frame = CGRect(x: 0, y: 0, width: 69, height: 15)
         label.font = UIFont(name: "Montserrat-Medium", size: 12)
-        label.textColor = Constants.Colors.mainTextColor
 
         return label
     }()

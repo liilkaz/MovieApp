@@ -76,8 +76,8 @@ class SettingTableViewCell: UITableViewCell {
     
     func setConstraints() {
         
-        var cellInformationStackView: UIStackView = {
-            let stackView = UIStackView ()
+        let cellInformationStackView: UIStackView = {
+            let stackView = UIStackView()
             stackView.addArrangedSubview(settingImage)
             stackView.addArrangedSubview(nameSetting)
             stackView.axis = .horizontal
@@ -103,4 +103,3 @@ class SettingTableViewCell: UITableViewCell {
         ])
     }
 }
-

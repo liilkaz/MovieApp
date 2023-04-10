@@ -19,7 +19,6 @@ class HomeViewController: UIViewController {
         label.text = "Category"
         label.textAlignment = .left
         label.font = Constants.Fonts.plusJacartaSansBold(with: 16)
-        label.textColor = UIColor(named: "Onboarding")
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -29,7 +28,6 @@ class HomeViewController: UIViewController {
         let label = UILabel()
         label.text = "Box Office"
         label.font = Constants.Fonts.plusJacartaSansBold(with: 16)
-        label.textColor = UIColor(named: "Onboarding")
         label.textAlignment = .left
         
         return label

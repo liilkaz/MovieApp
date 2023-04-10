@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class SettingViewController: UIViewController {
 
     enum MyConstants {
@@ -30,7 +29,7 @@ class SettingViewController: UIViewController {
         let label = UILabel()
         label.text = MyConstants.userNicknameText
         label.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 14)
-        label.textColor = UIColor(named: "MainTextColor")
+        label.textColor = Constants.Colors.mainTextColor
         label.textAlignment = .left
         return label
     }()
@@ -115,6 +114,7 @@ class SettingViewController: UIViewController {
     let idHeader = "idHeader"
     let tableView: UITableView = {
         let tableView = UITableView()
+        tableView.separatorStyle = .none
         tableView.bounces = false
         tableView.backgroundColor = .clear
         return tableView
@@ -168,5 +168,3 @@ extension UIStackView {
         self.translatesAutoresizingMaskIntoConstraints = false
     }
 }
-
-

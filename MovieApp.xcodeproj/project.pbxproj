@@ -26,7 +26,6 @@
 		0C83C13529DB3BC500C4592E /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C83C13429DB3BC500C4592E /* SignInViewController.swift */; };
 		0C83C13729DB3EED00C4592E /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C83C13629DB3EED00C4592E /* UIViewController + Extension.swift */; };
 		0C83C13B29DC6B1500C4592E /* SecondLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C83C13A29DC6B1500C4592E /* SecondLoginViewController.swift */; };
-		2C92CEA629DF563300B3B9A7 /* RecentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C92CEA529DF563300B3B9A7 /* RecentTableViewCell.swift */; };
 		0C83C14229E191D300C4592E /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0C83C14129E191D300C4592E /* FirebaseAuth */; };
 		0C83C14529E19C2000C4592E /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C83C14429E19C2000C4592E /* AuthService.swift */; };
 		0C83C14829E19C7600C4592E /* Validators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C83C14729E19C7600C4592E /* Validators.swift */; };
@@ -34,6 +33,7 @@
 		0C83C14F29E1A6E300C4592E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0C83C14E29E1A6E300C4592E /* GoogleService-Info.plist */; };
 		0C83C15229E1B44600C4592E /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 0C83C15129E1B44600C4592E /* GoogleSignIn */; };
 		0C83C15429E1B44600C4592E /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0C83C15329E1B44600C4592E /* GoogleSignInSwift */; };
+		2C92CEA629DF563300B3B9A7 /* RecentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C92CEA529DF563300B3B9A7 /* RecentTableViewCell.swift */; };
 		552DC54EB86F150CDDC824F8 /* Pods_MovieApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02C4648F82F353955262396 /* Pods_MovieApp.framework */; };
 		751715B629E09BAF00D95475 /* MainInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751715B529E09BAF00D95475 /* MainInfoCollectionViewCell.swift */; };
 		751715B929E09BE000D95475 /* CastAndCrewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751715B829E09BE000D95475 /* CastAndCrewCollectionViewCell.swift */; };
@@ -63,6 +63,8 @@
 		D056719F29E01629002C2449 /* CategoriesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D056719E29E01629002C2449 /* CategoriesCell.swift */; };
 		D0965C4929E1AB9D00CFDA35 /* MoviesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0965C4829E1AB9D00CFDA35 /* MoviesTableView.swift */; };
 		D0965C4B29E1AC8800CFDA35 /* MoviesCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0965C4A29E1AC8800CFDA35 /* MoviesCellView.swift */; };
+		EE73434B29E479C5006B6B3D /* SettingHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE73434A29E479C5006B6B3D /* SettingHeaderTableViewCell.swift */; };
+		EE73434D29E479ED006B6B3D /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE73434C29E479ED006B6B3D /* SettingTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,11 +86,11 @@
 		0C83C13429DB3BC500C4592E /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		0C83C13629DB3EED00C4592E /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
 		0C83C13A29DC6B1500C4592E /* SecondLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondLoginViewController.swift; sourceTree = "<group>"; };
-		2C92CEA529DF563300B3B9A7 /* RecentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentTableViewCell.swift; sourceTree = "<group>"; };
 		0C83C14429E19C2000C4592E /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		0C83C14729E19C7600C4592E /* Validators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validators.swift; sourceTree = "<group>"; };
 		0C83C14929E19C9F00C4592E /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
 		0C83C14E29E1A6E300C4592E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2C92CEA529DF563300B3B9A7 /* RecentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentTableViewCell.swift; sourceTree = "<group>"; };
 		3B62DA8D636D221D3EBE987E /* Pods-MovieApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp.release.xcconfig"; path = "Target Support Files/Pods-MovieApp/Pods-MovieApp.release.xcconfig"; sourceTree = "<group>"; };
 		751715B529E09BAF00D95475 /* MainInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInfoCollectionViewCell.swift; sourceTree = "<group>"; };
 		751715B829E09BE000D95475 /* CastAndCrewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastAndCrewCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -123,6 +125,8 @@
 		D056719E29E01629002C2449 /* CategoriesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCell.swift; sourceTree = "<group>"; };
 		D0965C4829E1AB9D00CFDA35 /* MoviesTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesTableView.swift; sourceTree = "<group>"; };
 		D0965C4A29E1AC8800CFDA35 /* MoviesCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCellView.swift; sourceTree = "<group>"; };
+		EE73434A29E479C5006B6B3D /* SettingHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		EE73434C29E479ED006B6B3D /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,58 +178,6 @@
 			path = Elements;
 			sourceTree = "<group>";
 		};
-		751715B229E0985900D95475 /* MovieDetailScreen */ = {
-			isa = PBXGroup;
-			children = (
-				751715B729E09BB700D95475 /* Cells */,
-				751715BA29E09C5C00D95475 /* MainInfoStackView.swift */,
-				751715C429E0A7E500D95475 /* InfoStack.swift */,
-			);
-			path = MovieDetailScreen;
-			sourceTree = "<group>";
-		};
-		751715B729E09BB700D95475 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				751715B529E09BAF00D95475 /* MainInfoCollectionViewCell.swift */,
-				751715B829E09BE000D95475 /* CastAndCrewCollectionViewCell.swift */,
-			);
-			path = Cells;
-			sourceTree = "<group>";
-		};
-		751715BC29E0A23F00D95475 /* MovieDetails */ = {
-			isa = PBXGroup;
-			children = (
-				751715BD29E0A2B400D95475 /* MainInfo.swift */,
-				751715BF29E0A2E900D95475 /* CastAndCrewInfo.swift */,
-			);
-			path = MovieDetails;
-			sourceTree = "<group>";
-		};
-		751715C129E0A4F900D95475 /* MovieDetail */ = {
-			isa = PBXGroup;
-			children = (
-				751715C229E0A53000D95475 /* MovieDetailViewController.swift */,
-			);
-			path = MovieDetail;
-			sourceTree = "<group>";
-		};
-		2C92CEA429DF55FB00B3B9A7 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				2C92CEA529DF563300B3B9A7 /* RecentTableViewCell.swift */,
-			);
-			path = Cells;
-			sourceTree = "<group>";
-		};
-		2C92CEA429DF55FB00B3B9A7 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				2C92CEA529DF563300B3B9A7 /* RecentTableViewCell.swift */,
-			);
-			path = Cells;
-			sourceTree = "<group>";
-		};
 		0C83C14329E19BEF00C4592E /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -241,6 +193,14 @@
 				0C83C14929E19C9F00C4592E /* AuthError.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		2C92CEA429DF55FB00B3B9A7 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				2C92CEA529DF563300B3B9A7 /* RecentTableViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		751715B229E0985900D95475 /* MovieDetailScreen */ = {
@@ -354,7 +314,6 @@
 		75986DE929D8BA0A00BDECB0 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				751715C129E0A4F900D95475 /* MovieDetail */,
 				D000C83D29DEC751009486B7 /* MainScreen */,
 				751715C129E0A4F900D95475 /* MovieDetail */,
 				0C83C11129DABA1F00C4592E /* MainRegistration */,
@@ -371,10 +330,10 @@
 		75986DEA29D8BA2400BDECB0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				751715B229E0985900D95475 /* MovieDetailScreen */,
 				2C92CEA429DF55FB00B3B9A7 /* Cells */,
 				D000C83E29DEC8B3009486B7 /* MainScreenViews */,
 				751715B229E0985900D95475 /* MovieDetailScreen */,
+				EE73434E29E47A08006B6B3D /* SettingScreen */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -431,6 +390,15 @@
 				3B62DA8D636D221D3EBE987E /* Pods-MovieApp.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		EE73434E29E47A08006B6B3D /* SettingScreen */ = {
+			isa = PBXGroup;
+			children = (
+				EE73434A29E479C5006B6B3D /* SettingHeaderTableViewCell.swift */,
+				EE73434C29E479ED006B6B3D /* SettingTableViewCell.swift */,
+			);
+			path = SettingScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -567,6 +535,7 @@
 			files = (
 				0C83C13329DB1C1C00C4592E /* DividerView.swift in Sources */,
 				0C83C13129DAF82A00C4592E /* LoginViewController.swift in Sources */,
+				EE73434B29E479C5006B6B3D /* SettingHeaderTableViewCell.swift in Sources */,
 				0C83C12F29DAF55500C4592E /* InputWithButton.swift in Sources */,
 				0C83C11729DABFAD00C4592E /* UIFont + Extension.swift in Sources */,
 				0C83C11B29DAC1CE00C4592E /* UIImageView + Extension.swift in Sources */,
@@ -592,6 +561,7 @@
 				0C83C11929DAC09300C4592E /* UIButton + Extension.swift in Sources */,
 				0C83C14529E19C2000C4592E /* AuthService.swift in Sources */,
 				0C83C11329DABAF600C4592E /* SplashViewController.swift in Sources */,
+				EE73434D29E479ED006B6B3D /* SettingTableViewCell.swift in Sources */,
 				751715BE29E0A2B400D95475 /* MainInfo.swift in Sources */,
 				D000C84029DEC8FB009486B7 /* MovieCardsCollectionView.swift in Sources */,
 				751715BE29E0A2B400D95475 /* MainInfo.swift in Sources */,

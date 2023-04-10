@@ -14,6 +14,7 @@ enum Constants {
         static var splashBackground = UIColor(named: "Onboarding")
         static var mainTextColor = UIColor(named: "MainTextColor")
         static var otherTextColor = UIColor(hexString: "#78828A")
+        static var iconThemeColor = UIColor(named: "IconThemeColor")
     }
     
     enum Titles {

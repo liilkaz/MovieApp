@@ -32,24 +32,26 @@ class MoviesCellView: UITableViewCell {
         let label = UILabel()
         label.text = "Film name"
         label.font = Constants.Fonts.plusJacartaSansBold(with: 18)
-        label.textColor = UIColor(named: "Onboarding")
         label.textAlignment = .left
         return label
     }()
-    
+
     lazy var clockImage: UIImageView = {
-        let img = UIImageView()
-        img.image = UIImage(systemName: "clock.fill")
-        img.tintColor = .darkGray
-        return img
+        let image = UIImageView(image: UIImage(named: "time")?.withTintColor(Constants.Colors.iconThemeColor ?? UIColor.black))
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.frame = CGRect(x: 0, y: 0, width: 13.33, height: 13.33)
+
+        return image
     }()
     
     lazy var durationLabel: UILabel = {
         let label = UILabel()
-        label.text = "150 minutes"
-        label.font = Constants.Fonts.plusJacartaSansMedium(with: 12)
-        label.textColor = .darkGray
-        label.textAlignment = .left
+        label.text = "\(150) Minutes"
+        label.textColor = Constants.Colors.mainTextColor
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.frame = CGRect(x: 0, y: 0, width: 74, height: 15)
+        label.font = UIFont(name: "Montserrat-Medium", size: 12)
+
         return label
     }()
     
@@ -177,6 +179,7 @@ extension MoviesCellView {
             mainStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             mainStack.topAnchor.constraint(equalTo: contentView.topAnchor),
             mainStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            
         ])
     }
     

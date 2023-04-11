@@ -13,10 +13,11 @@ enum NetworkConstants {
     static let imageUrl = "https://image.tmdb.org/t/p/w500/"
 }
 
-//MARK: -- примеры запросов, позже удалю
-//https://api.themoviedb.org/3/movie/{movie_id}?api_key=<<api_key>>&language=en-US
-//https://api.themoviedb.org/3/tv/{tv_id}?api_key=<<api_key>>&language=en-US
+// MARK: - примеры запросов, позже удалю
 
-//https://api.themoviedb.org/3/discover/tv?api_key=0f9652e080a421b13a031fc5237543ee&language=en-US&sort_by=popularity.desc
+// https://api.themoviedb.org/3/movie/{movie_id}?api_key=<<api_key>>&language=en-US
+// https://api.themoviedb.org/3/tv/{tv_id}?api_key=<<api_key>>&language=en-US
 
-//https://api.themoviedb.org/3/discover/movie?api_key=0f9652e080a421b13a031fc5237543ee&language=en-US&sort_by=popularity.desc
+// https://api.themoviedb.org/3/discover/tv?api_key=0f9652e080a421b13a031fc5237543ee&language=en-US&sort_by=popularity.desc
+
+// https://api.themoviedb.org/3/discover/movie?api_key=0f9652e080a421b13a031fc5237543ee&language=en-US&sort_by=popularity.desc

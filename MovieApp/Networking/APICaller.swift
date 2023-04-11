@@ -10,12 +10,11 @@ import Foundation
 class APICaller {
     static let shared = APICaller()
     
-    
     func getPopularMovies (completion: @escaping (Result<[Movie], Error>) -> Void) {
         
         guard let url = URL(string: "\(NetworkConstants.baseUrl)/discover/movie?api_key=\(NetworkConstants.apiKey)&language=en-US&sort_by=popularity.desc") else {return}
 //        print (url)
-        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, responce, error in
+        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else {return}
             do {
                 let results = try JSONDecoder().decode(SortedMovies.self, from: data)
@@ -23,18 +22,17 @@ class APICaller {
                 
             } catch {
                 completion(.failure(error))
-                print ("error in getPopularMovies")
+                print("error in getPopularMovies")
             }
         }
         task.resume()
     }
     
-   
     func getPopularTvShows (completion: @escaping (Result<[TvShow], Error>) -> Void) {
         
         guard let url = URL(string: "\(NetworkConstants.baseUrl)/discover/tv?api_key=\(NetworkConstants.apiKey)&language=en-US&sort_by=popularity.desc") else {return}
-        print (url)
-        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, responce, error in
+        print(url)
+        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else {return}
             do {
                 let results = try JSONDecoder().decode(SortedTvShows.self, from: data)
@@ -42,20 +40,17 @@ class APICaller {
                 
             } catch {
                 completion(.failure(error))
-                print ("error in getPopularTvShows")
+                print("error in getPopularTvShows")
             }
         }
         task.resume()
     }
 
-
-    
-    
     func getDetailedMovie (with id: Int, completion: @escaping (Result<DetailedMovie, Error>) -> Void) {
         
         guard let url = URL(string: "\(NetworkConstants.baseUrl)/movie/\(id)?api_key=\(NetworkConstants.apiKey)&language=en-US") else {return}
-        print (url)
-        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, responce, error in
+        print(url)
+        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else {return}
             do {
                 let results = try JSONDecoder().decode(DetailedMovie.self, from: data)
@@ -63,18 +58,17 @@ class APICaller {
                 
             } catch {
                 completion(.failure(error))
-                print ("error in getDetailedMovie")
+                print("error in getDetailedMovie")
             }
         }
         task.resume()
     }
     
-    
     func getDetailedTvShow (with id: Int, completion: @escaping (Result<DetailedTvShow, Error>) -> Void) {
         
         guard let url = URL(string: "\(NetworkConstants.baseUrl)/tv/\(id)?api_key=\(NetworkConstants.apiKey)&language=en-US") else {return}
-        print (url)
-        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, responce, error in
+        print(url)
+        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else {return}
             do {
                 let results = try JSONDecoder().decode(DetailedTvShow.self, from: data)
@@ -82,7 +76,7 @@ class APICaller {
                 
             } catch {
                 completion(.failure(error))
-                print ("error in getDetailedTvShow")
+                print("error in getDetailedTvShow")
             }
         }
         task.resume()
@@ -90,7 +84,7 @@ class APICaller {
    
 }
 
-//MARK: -- Примеры вызова методов для получения информации во вью контроллере:
+// MARK: - Примеры вызова методов для получения информации во вью контроллере:
 
 /*
  Получение популярных фильмов:
@@ -148,6 +142,5 @@ class APICaller {
          print(error.localizedDescription)
      }
  }
- 
- 
+
  */

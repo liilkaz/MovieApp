@@ -178,7 +178,7 @@ extension HomeViewController {
             let label = UILabel()
             label.text = "Hi, Andy"
             label.font = Constants.Fonts.plusJacartaSansBold(with: 18)
-            label.textColor = UIColor(named: "BgColor")
+            label.textColor = Constants.Colors.mainTextColor
             
             return label
         }()
@@ -187,7 +187,7 @@ extension HomeViewController {
             let label = UILabel()
             label.text = "Only stream movie lovers"
             label.font = Constants.Fonts.plusJacartaSansMedium(with: 12)
-            label.textColor = UIColor(named: "BgColor")
+            label.textColor = Constants.Colors.mainTextColor
             
             return label
         }()
@@ -195,7 +195,7 @@ extension HomeViewController {
         lazy var verticalStack: UIStackView = {
             let stack = UIStackView(arrangedSubviews: [greeting, description])
             stack.axis = .vertical
-            stack.spacing = 10
+            stack.spacing = 5
             stack.alignment = .leading
             stack.distribution = .fill
             

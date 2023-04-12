@@ -53,6 +53,9 @@
 		752F18F329E5A8B300B020E2 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752F18F229E5A8B300B020E2 /* APICaller.swift */; };
 		752F18F529E5A8EF00B020E2 /* APIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752F18F429E5A8EF00B020E2 /* APIModel.swift */; };
 		752F18F729E5A91100B020E2 /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752F18F629E5A91100B020E2 /* NetworkConstants.swift */; };
+		752F18F929E5AC8B00B020E2 /* ExpandableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752F18F829E5AC8B00B020E2 /* ExpandableLabel.swift */; };
+		757D2ED729E6B43B00761289 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 757D2ED629E6B43B00761289 /* SDWebImage */; };
+		757D2ED929E6B43B00761289 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 757D2ED829E6B43B00761289 /* SDWebImageMapKit */; };
 		75986DCF29D8B8CC00BDECB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75986DCE29D8B8CC00BDECB0 /* AppDelegate.swift */; };
 		75986DD129D8B8CC00BDECB0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75986DD029D8B8CC00BDECB0 /* SceneDelegate.swift */; };
 		75986DD329D8B8CC00BDECB0 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75986DD229D8B8CC00BDECB0 /* SearchViewController.swift */; };
@@ -119,6 +122,7 @@
 		752F18F229E5A8B300B020E2 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		752F18F429E5A8EF00B020E2 /* APIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModel.swift; sourceTree = "<group>"; };
 		752F18F629E5A91100B020E2 /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
+		752F18F829E5AC8B00B020E2 /* ExpandableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableLabel.swift; sourceTree = "<group>"; };
 		75986DCB29D8B8CC00BDECB0 /* MovieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75986DCE29D8B8CC00BDECB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75986DD029D8B8CC00BDECB0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -156,6 +160,8 @@
 				0C83C14229E191D300C4592E /* FirebaseAuth in Frameworks */,
 				0C83C15229E1B44600C4592E /* GoogleSignIn in Frameworks */,
 				0C83C15429E1B44600C4592E /* GoogleSignInSwift in Frameworks */,
+				757D2ED929E6B43B00761289 /* SDWebImageMapKit in Frameworks */,
+				757D2ED729E6B43B00761289 /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,6 +261,7 @@
 				751715B729E09BB700D95475 /* Cells */,
 				751715BA29E09C5C00D95475 /* MainInfoStackView.swift */,
 				751715C429E0A7E500D95475 /* InfoStack.swift */,
+				752F18F829E5AC8B00B020E2 /* ExpandableLabel.swift */,
 			);
 			path = MovieDetailScreen;
 			sourceTree = "<group>";
@@ -482,6 +489,8 @@
 				0C83C14129E191D300C4592E /* FirebaseAuth */,
 				0C83C15129E1B44600C4592E /* GoogleSignIn */,
 				0C83C15329E1B44600C4592E /* GoogleSignInSwift */,
+				757D2ED629E6B43B00761289 /* SDWebImage */,
+				757D2ED829E6B43B00761289 /* SDWebImageMapKit */,
 			);
 			productName = MovieApp;
 			productReference = 75986DCB29D8B8CC00BDECB0 /* MovieApp.app */;
@@ -514,6 +523,7 @@
 			packageReferences = (
 				0C83C14029E191D300C4592E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				0C83C15029E1B44600C4592E /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				757D2ED529E6B43B00761289 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = 75986DCC29D8B8CC00BDECB0 /* Products */;
 			projectDirPath = "";
@@ -602,6 +612,7 @@
 				0C83C11B29DAC1CE00C4592E /* UIImageView + Extension.swift in Sources */,
 				00D9A1DA29E69C8000EE9A24 /* CheckboxView.swift in Sources */,
 				75986DD329D8B8CC00BDECB0 /* SearchViewController.swift in Sources */,
+				752F18F929E5AC8B00B020E2 /* ExpandableLabel.swift in Sources */,
 				751715C029E0A2E900D95475 /* CastAndCrewInfo.swift in Sources */,
 				75986DFA29D8D15B00BDECB0 /* SettingViewController.swift in Sources */,
 				751715BB29E09C5C00D95475 /* MainInfoStackView.swift in Sources */,
@@ -882,6 +893,14 @@
 				minimumVersion = 7.0.0;
 			};
 		};
+		757D2ED529E6B43B00761289 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -899,6 +918,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0C83C15029E1B44600C4592E /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
+		};
+		757D2ED629E6B43B00761289 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 757D2ED529E6B43B00761289 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		757D2ED829E6B43B00761289 /* SDWebImageMapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 757D2ED529E6B43B00761289 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImageMapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 

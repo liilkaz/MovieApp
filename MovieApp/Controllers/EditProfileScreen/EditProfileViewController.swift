@@ -16,6 +16,7 @@ class EditProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        setupChangePhoto()
         setupCheckbox()
         setupAvatar()
         createDatePicker()
@@ -27,6 +28,12 @@ private extension EditProfileViewController {
         view = profileView
         tabBarController?.tabBar.isHidden = true
         navigationItem.title = "Profile"
+    }
+    
+    func setupChangePhoto() {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(dismissView))
+        gesture.delegate = self
+        profileView.changePhotoView.addGestureRecognizer(gesture)
     }
     
     func setupCheckbox() {
@@ -59,16 +66,16 @@ private extension EditProfileViewController {
     }
     
     // MARK: - private @objc methods
+    @objc func dismissView() {
+        profileView.changePhotoView.isHidden = true
+    }
     
     @objc func checkboxTapped() {
         profileView.maleCheckbox.checkmark.toggle()
     }
     
     @objc func avatarTapped() {
-        print("tap")
-//        let vc = ChangePhotoViewController()
-//        vc.modalPresentationStyle = .fullScreen
-//        navigationController?.present(vc, animated: true)
+        profileView.changePhotoView.isHidden = false
     }
     
     @objc func doneButtonTapped() {
@@ -77,5 +84,11 @@ private extension EditProfileViewController {
         dateFormatter.timeStyle = .none
         profileView.dateOfBirthInput.inputTextField.text = dateFormatter.string(from: datePicker.date)
         self.view.endEditing(true)
+    }
+}
+
+extension EditProfileViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        return touch.view == profileView.changePhotoView.self
     }
 }

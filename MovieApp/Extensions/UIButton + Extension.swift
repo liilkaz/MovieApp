@@ -42,4 +42,16 @@ extension UIButton {
         ])
         
     }
+    
+    func setupImage(_ image: UIImage?) {
+        let image = UIImageView(image: image ?? UIImage(), contentMode: .scaleAspectFit)
+        image.translatesAutoresizingMaskIntoConstraints = false
+
+        self.addSubview(image)
+
+        NSLayoutConstraint.activate([
+            image.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 18),
+            image.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+        ])
+    }
 }

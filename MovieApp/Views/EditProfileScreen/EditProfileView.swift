@@ -26,6 +26,13 @@ class EditProfileView: UIView {
         return avatar
     }()
     
+    lazy var changePhotoView: ChangePhotoView = {
+        let view = ChangePhotoView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isHidden = true
+        return view
+    }()
+    
     // MARK: - input panel
     
     let firstNameInput: InputPanel = {
@@ -140,6 +147,7 @@ private extension EditProfileView {
     func setupView() {
         self.backgroundColor = .systemBackground
         self.addSubview(scrollView)
+        self.addSubview(changePhotoView)
         
         scrollView.addSubview(avatarView)
         scrollView.addSubview(inputPanelStackView)
@@ -160,6 +168,11 @@ private extension EditProfileView {
     
     func setConstraints() {
         NSLayoutConstraint.activate([
+            changePhotoView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
+            changePhotoView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
+            changePhotoView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0),
+            changePhotoView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0),
+            
             scrollView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 0),
             scrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
             scrollView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0),

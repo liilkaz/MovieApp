@@ -13,6 +13,7 @@
 		00D9A1DC29E69CF500EE9A24 /* CircularCheckmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D9A1DB29E69CF500EE9A24 /* CircularCheckmark.swift */; };
 		00D9A1DE29E69D3900EE9A24 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D9A1DD29E69D3900EE9A24 /* TextView.swift */; };
 		00D9A1E129E6CB8400EE9A24 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D9A1E029E6CB8400EE9A24 /* EditProfileViewController.swift */; };
+		00D9A1E429E6F51400EE9A24 /* ChangePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D9A1E329E6F51400EE9A24 /* ChangePhotoView.swift */; };
 		0C83C11329DABAF600C4592E /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C83C11229DABAF600C4592E /* SplashViewController.swift */; };
 		0C83C11529DABF4400C4592E /* UILabel + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C83C11429DABF4400C4592E /* UILabel + Extension.swift */; };
 		0C83C11729DABFAD00C4592E /* UIFont + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C83C11629DABFAD00C4592E /* UIFont + Extension.swift */; };
@@ -86,6 +87,7 @@
 		00D9A1DB29E69CF500EE9A24 /* CircularCheckmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularCheckmark.swift; sourceTree = "<group>"; };
 		00D9A1DD29E69D3900EE9A24 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		00D9A1E029E6CB8400EE9A24 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		00D9A1E329E6F51400EE9A24 /* ChangePhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePhotoView.swift; sourceTree = "<group>"; };
 		0C83C11229DABAF600C4592E /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		0C83C11429DABF4400C4592E /* UILabel + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel + Extension.swift"; sourceTree = "<group>"; };
 		0C83C11629DABFAD00C4592E /* UIFont + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont + Extension.swift"; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				00D9A1D929E69C8000EE9A24 /* CheckboxView.swift */,
 				00D9A1DB29E69CF500EE9A24 /* CircularCheckmark.swift */,
 				00D9A1DD29E69D3900EE9A24 /* TextView.swift */,
+				00D9A1E329E6F51400EE9A24 /* ChangePhotoView.swift */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -608,6 +611,7 @@
 				0C83C12F29DAF55500C4592E /* InputWithButton.swift in Sources */,
 				752F18F529E5A8EF00B020E2 /* APIModel.swift in Sources */,
 				0C83C11729DABFAD00C4592E /* UIFont + Extension.swift in Sources */,
+				00D9A1E429E6F51400EE9A24 /* ChangePhotoView.swift in Sources */,
 				00D9A1DC29E69CF500EE9A24 /* CircularCheckmark.swift in Sources */,
 				0C83C11B29DAC1CE00C4592E /* UIImageView + Extension.swift in Sources */,
 				00D9A1DA29E69C8000EE9A24 /* CheckboxView.swift in Sources */,

@@ -16,7 +16,7 @@ extension UITextField {
         self.placeholder = placeholder
 
         if hasBorder {
-            self.layer.borderWidth = 0.3
+            self.layer.borderWidth = 1
             self.layer.borderColor = Constants.Colors.splashBackground?.cgColor
         }
     }

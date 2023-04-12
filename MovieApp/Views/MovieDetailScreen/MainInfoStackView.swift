@@ -66,8 +66,8 @@ class MainInfoStackView: UIStackView {
         return label
     }()
     
-    lazy var overview: UILabel = {
-        let label = UILabel()
+    let overview: ExpandableLabel = {
+        let label = ExpandableLabel()
         label.numberOfLines = 0
         label.textAlignment = .left
         label.font = Constants.Fonts.plusJacartaSansMedium(with: 14)

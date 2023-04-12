@@ -27,6 +27,11 @@ class MainInfoStackView: UIStackView {
     
     let viewC = UIView()
     
+    var info: [String] = []
+    var vote_average: Float?
+    
+    var vc = MovieDetailViewController()
+    
     lazy var poster: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
@@ -114,8 +119,9 @@ class MainInfoStackView: UIStackView {
     
         addSubview(hStackReating)
         
-        let vote_average = 7.916
-        let percent = vote_average * 10
+//        vote_average = vc.vote_average
+//        let vote_average = 7.916
+        let percent = (vote_average ?? 2) * 10
         let rating = getRating(percent: Int(percent.rounded()))
         stars = getArrayStars(rating: rating, image: UIImage(named: "star") ?? UIImage())
         
@@ -159,7 +165,7 @@ class MainInfoStackView: UIStackView {
         ])
     }
     
-    private func getImage(for details: DetailInfo) -> UIImage {
+    func getImage(for details: DetailInfo) -> UIImage {
         switch details {
         case .date: return UIImage(named: "date") ?? UIImage()
         case .time: return UIImage(named: "time") ?? UIImage()
@@ -189,7 +195,7 @@ class MainInfoStackView: UIStackView {
         }
     }
     
-    private func getArrayStars(rating: Rating, image: UIImage) -> [UIImageView] {
+    func getArrayStars(rating: Rating, image: UIImage) -> [UIImageView] {
         let color = UIColor(red: 0.98, green: 0.80, blue: 0.08, alpha: 1.00)
         switch rating {
         case .five:

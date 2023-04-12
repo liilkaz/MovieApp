@@ -8,7 +8,7 @@
 import UIKit
 import SDWebImage
 
-class MovieDetailViewController: UIViewController {
+class MovieDetailViewController: UIViewController, UICollectionViewDelegate {
     
     var dataS: UICollectionViewDiffableDataSource<Section, Int>! = nil
     var collectionView: UICollectionView! = nil
@@ -16,7 +16,10 @@ class MovieDetailViewController: UIViewController {
     private lazy var scrollRange: ClosedRange<Int> = (mainRange.upperBound + 1)...(mainRange.upperBound + scroll.count)
     
     var id: Int?
-    private var main: DetailedMovie?
+    var imageUrl: String?
+    var vote_average: Float?
+    
+    private var movie: DetailedMovie?
     private var scroll: [CastAndCrewInfo] = CastAndCrewInfo.testData()
     
     let bottomView = UIView()
@@ -50,11 +53,13 @@ class MovieDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        getDetail()
         setupView()
         setConstraints()
         setupNavBar()
         configureHierarchy()
         configureDataSource()
+        collectionView.delegate = self
     }
     
     func setupView() {
@@ -126,7 +131,7 @@ extension MovieDetailViewController {
     }
     
     private func mainSection() -> NSCollectionLayoutSection {
-       let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(800))
+       let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(630))
        let item = NSCollectionLayoutItem(layoutSize: itemSize)
        
        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(630))
@@ -176,20 +181,9 @@ extension MovieDetailViewController {
            if self.mainRange ~= identifier {
                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainInfoCollectionViewCell.reuseId,
                                                                    for: indexPath) as? MainInfoCollectionViewCell else { fatalError("Cannot create the cell") }
-               APICaller.shared.getDetailedMovie(with: id ?? 585511) { [weak self] result in
-                   switch result {
-                   case .success(let movie):
-                       self?.main = movie
-                       DispatchQueue.main.async { [self] in
-                           print(self?.main ??  "where is movie")
-                           cell.stack.poster.sd_setImage(with: URL(string: "\(NetworkConstants.imageUrl + (main?.poster_path)!)?api_key=\(NetworkConstants.apiKey)"))
-                           cell.stack.movieName.text = main?.title
-                           cell.stack.overview.text = main?.overview
-                       }
-                   case .failure(let error):
-                       print(error.localizedDescription)
-                   }
-               }
+               cell.stack.poster.sd_setImage(with: URL(string: imageUrl ?? ""))
+               cell.stack.movieName.text = movie?.title
+               cell.stack.overview.text = movie?.overview
 
                return cell
            }
@@ -218,4 +212,23 @@ extension MovieDetailViewController {
        dataS.apply(snapshot, animatingDifferences: false)
        
        }
+    
+    func getDetail() {
+        APICaller.shared.getDetailedMovie(with: id ?? 585511) { [weak self] result in
+            switch result {
+            case .success(let movie):
+                DispatchQueue.main.async { [self] in
+                    print(self?.movie ??  "where is movie")
+                    self?.movie = movie
+                    self?.imageUrl = "\(NetworkConstants.imageUrl + (movie.poster_path)!)?api_key=\(NetworkConstants.apiKey)"
+                    self?.vote_average = movie.vote_average
+                    self?.collectionView.reloadData()
+                    
+                    print(movie.vote_average)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
 }

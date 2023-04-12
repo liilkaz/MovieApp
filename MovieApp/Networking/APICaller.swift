@@ -49,7 +49,7 @@ class APICaller {
     func getDetailedMovie (with id: Int, completion: @escaping (Result<DetailedMovie, Error>) -> Void) {
         
         guard let url = URL(string: "\(NetworkConstants.baseUrl)/movie/\(id)?api_key=\(NetworkConstants.apiKey)&language=en-US") else {return}
-        print(url)
+//        print(url)
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else {return}
             do {

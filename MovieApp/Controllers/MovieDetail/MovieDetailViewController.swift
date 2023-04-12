@@ -14,7 +14,8 @@ class MovieDetailViewController: UIViewController {
     var collectionView: UICollectionView! = nil
     private lazy var mainRange: ClosedRange<Int> = 1...1
     private lazy var scrollRange: ClosedRange<Int> = (mainRange.upperBound + 1)...(mainRange.upperBound + scroll.count)
-
+    
+    var id: Int?
     private var main: DetailedMovie?
     private var scroll: [CastAndCrewInfo] = CastAndCrewInfo.testData()
     
@@ -175,17 +176,15 @@ extension MovieDetailViewController {
            if self.mainRange ~= identifier {
                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainInfoCollectionViewCell.reuseId,
                                                                    for: indexPath) as? MainInfoCollectionViewCell else { fatalError("Cannot create the cell") }
-               APICaller.shared.getDetailedMovie(with: 585511) { [weak self] result in
+               APICaller.shared.getDetailedMovie(with: id ?? 585511) { [weak self] result in
                    switch result {
                    case .success(let movie):
                        self?.main = movie
                        DispatchQueue.main.async { [self] in
                            print(self?.main ??  "where is movie")
-                           
+                           cell.stack.poster.sd_setImage(with: URL(string: "\(NetworkConstants.imageUrl + (main?.poster_path)!)?api_key=\(NetworkConstants.apiKey)"))
                            cell.stack.movieName.text = main?.title
                            cell.stack.overview.text = main?.overview
-
-                           //                cell.stack.getRating(percent: mainS.rating)
                        }
                    case .failure(let error):
                        print(error.localizedDescription)

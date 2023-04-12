@@ -6,15 +6,16 @@
 //
 
 import UIKit
+import SDWebImage
 
 class MovieDetailViewController: UIViewController {
     
     var dataS: UICollectionViewDiffableDataSource<Section, Int>! = nil
     var collectionView: UICollectionView! = nil
-    private lazy var mainRange: ClosedRange<Int> = 1...main.count
+    private lazy var mainRange: ClosedRange<Int> = 1...1
     private lazy var scrollRange: ClosedRange<Int> = (mainRange.upperBound + 1)...(mainRange.upperBound + scroll.count)
 
-    private var main: [MainInfo] = MainInfo.testData()
+    private var main: DetailedMovie?
     private var scroll: [CastAndCrewInfo] = CastAndCrewInfo.testData()
     
     let bottomView = UIView()
@@ -124,14 +125,14 @@ extension MovieDetailViewController {
     }
     
     private func mainSection() -> NSCollectionLayoutSection {
-       let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+       let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(800))
        let item = NSCollectionLayoutItem(layoutSize: itemSize)
        
-       let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(630))
-       let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+       let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(630))
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: 1)
        
        let section = NSCollectionLayoutSection(group: group)
-       section.orthogonalScrollingBehavior = .continuous
+//        section.orthogonalScrollingBehavior = .groupPaging
        return section
    }
    
@@ -170,15 +171,27 @@ extension MovieDetailViewController {
 
     func configureDataSource() {
        dataS = UICollectionViewDiffableDataSource<Section, Int>(
-           collectionView: collectionView) {(collectionView: UICollectionView, indexPath: IndexPath, identifier: Int) -> UICollectionViewCell? in
+        collectionView: collectionView) { [self](collectionView: UICollectionView, indexPath: IndexPath, identifier: Int) -> UICollectionViewCell? in
            if self.mainRange ~= identifier {
                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainInfoCollectionViewCell.reuseId,
                                                                    for: indexPath) as? MainInfoCollectionViewCell else { fatalError("Cannot create the cell") }
-               let mainS = self.main[indexPath.row]
-               cell.stack.poster.image = mainS.poster
-               cell.stack.movieName.text = mainS.name
-               cell.stack.overview.text = mainS.overview
-//                cell.stack.getRating(percent: mainS.rating)
+               APICaller.shared.getDetailedMovie(with: 585511) { [weak self] result in
+                   switch result {
+                   case .success(let movie):
+                       self?.main = movie
+                       DispatchQueue.main.async { [self] in
+                           print(self?.main ??  "where is movie")
+                           
+                           cell.stack.movieName.text = main?.title
+                           cell.stack.overview.text = main?.overview
+
+                           //                cell.stack.getRating(percent: mainS.rating)
+                       }
+                   case .failure(let error):
+                       print(error.localizedDescription)
+                   }
+               }
+
                return cell
            }
            

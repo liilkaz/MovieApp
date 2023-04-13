@@ -7,8 +7,9 @@
 
 import UIKit
 import SDWebImage
+import SafariServices
 
-class MovieDetailViewController: UIViewController, UICollectionViewDelegate {
+class MovieDetailViewController: UIViewController, UICollectionViewDelegate, SFSafariViewControllerDelegate {
     
     var dataS: UICollectionViewDiffableDataSource<Section, Int>! = nil
     var collectionView: UICollectionView! = nil
@@ -22,6 +23,7 @@ class MovieDetailViewController: UIViewController, UICollectionViewDelegate {
     
     var rating: Rating?
     
+    var trailers: [YouTubeTrailer]?
     private var movie: DetailedMovie?
     private var scroll: [CastAndCrewInfo] = CastAndCrewInfo.testData()
     
@@ -57,6 +59,7 @@ class MovieDetailViewController: UIViewController, UICollectionViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         getDetail()
+        getTrailerMovie()
         setupView()
         setConstraints()
         setupNavBar()
@@ -73,6 +76,19 @@ class MovieDetailViewController: UIViewController, UICollectionViewDelegate {
         view.addSubview(bottomView)
         bottomView.backgroundColor = .white
         bottomView.addSubview(bottomButton)
+        bottomButton.addTarget(self, action: #selector(whachNowTapped), for: .touchUpInside)
+    }
+    
+    @objc func whachNowTapped() {
+        if trailers != nil {showSafariVC(for: trailers?[0].youtubeURL ?? "")}
+    }
+    
+    func showSafariVC(for url: String) {
+        guard let url = URL(string: url) else {
+        return }
+        let safariVC = SFSafariViewController(url: url)
+        safariVC.delegate = self
+        present(safariVC, animated: true)
     }
     
     func setupNavBar() {
@@ -236,6 +252,18 @@ extension MovieDetailViewController {
                 }
             case .failure(let error):
                 print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func getTrailerMovie() {
+        APICaller.shared.getTrailer(with: id ?? 585511) { [weak self] result in
+            switch result {
+            case .success(let trailers):
+                DispatchQueue.main.async {
+                    self?.trailers = trailers
+                }
+            case .failure(let error): print(error.localizedDescription)
             }
         }
     }

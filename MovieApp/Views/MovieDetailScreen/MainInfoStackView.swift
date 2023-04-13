@@ -16,8 +16,7 @@ enum Rating {
 }
 
 class MainInfoStackView: UIStackView {
-    
-//    var stars = [UIImageView](repeating: UIImageView(), count: 5)
+
     let viewC = UIView()
     
     let dateStack = InfoStack(icon: UIImage(named: "date") ?? UIImage())
@@ -146,59 +145,4 @@ class MainInfoStackView: UIStackView {
             actorLabel.topAnchor.constraint(equalTo: overview.bottomAnchor, constant: 24)
         ])
     }
-    
-//    func getRating(percent: Int) -> Rating {
-//        if percent > 80 {
-//            return Rating.five
-//        } else if percent > 60 {
-//            return Rating.four
-//        } else if percent > 40 {
-//            return Rating.three
-//        } else if percent > 20 {
-//            return Rating.two
-//        } else {
-//            return Rating.one
-//        }
-//    }
-//    
-//    func getArrayStars(rating: Rating) -> [UIImageView] {
-//        var stars = [UIImageView](repeating: UIImageView(), count: 5)
-//        let image = UIImage(named: "star") ?? UIImage()
-//        let color = UIColor(red: 0.98, green: 0.80, blue: 0.08, alpha: 1.00)
-//        switch rating {
-//        case .five:
-//            for _ in 1...stars.count {
-//                stars.append(UIImageView(image: image.withTintColor(color)))
-//            }
-//            return stars
-//        case .four:
-//            for _ in 1...4 {
-//                stars.append(UIImageView(image: image.withTintColor(color)))
-//            }
-//            stars.append(UIImageView(image: image))
-//            return stars
-//        case .three:
-//            for _ in 1...3 {
-//                stars.append(UIImageView(image: image.withTintColor(color)))
-//            }
-//            for _ in 1...2 {
-//                stars.append(UIImageView(image: image))
-//            }
-//            return stars
-//        case .two:
-//            for _ in 1...2 {
-//                stars.append(UIImageView(image: image.withTintColor(color)))
-//            }
-//            for _ in 1...3 {
-//                stars.append(UIImageView(image: image))
-//            }
-//            return stars
-//        case .one:
-//            stars.append(UIImageView(image: image.withTintColor(color)))
-//            for _ in 1...4 {
-//                stars.append(UIImageView(image: image))
-//            }
-//            return stars
-//        }
-//    }
 }

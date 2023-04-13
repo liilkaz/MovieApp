@@ -122,3 +122,23 @@ struct Genre: Codable {
     let id: Int
     let name: String
 }
+
+struct MovieVideoResponse: Codable {
+    
+    let results: [YouTubeTrailer]
+}
+
+struct YouTubeTrailer: Codable {
+    
+    let id: String
+    let key: String
+    let name: String
+    let site: String
+    
+    var youtubeURL: String {
+        guard site == "YouTube" else {
+            return ""
+        }
+        return "https://youtube.com/watch?v=\(key)"
+    }
+}

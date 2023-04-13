@@ -100,7 +100,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
                                                        for: indexPath) as? RecentTableViewCell else { return UITableViewCell() }
         cell.filmNameLabel.text = movies[indexPath.row].title
         cell.movieImage.sd_setImage(with: URL(string: imageURLs[indexPath.row]))
-        cell.dateLabel.text = movies[indexPath.row].release_date
+        cell.dateLabel.text = movies[indexPath.row].textDate
 
         cell.timeLabel.text = "\(runtimes[indexPath.row]) minutes"
         return cell

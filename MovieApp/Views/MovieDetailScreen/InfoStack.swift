@@ -10,7 +10,6 @@ import UIKit
 class InfoStack: UIStackView {
     
     let icon: UIImage
-    let text: String
 
     var iconImage: UIImageView = {
         let image = UIImageView()
@@ -27,9 +26,8 @@ class InfoStack: UIStackView {
         return label
     }()
 
-    init(icon: UIImage, text: String) {
+    init(icon: UIImage) {
         self.icon = icon
-        self.text = text
         super.init(frame: .zero)
         setupView()
     }
@@ -42,7 +40,6 @@ class InfoStack: UIStackView {
         addArrangedSubview(iconImage)
         iconImage.image = icon
         addArrangedSubview(label)
-        label.text = text
         spacing = 4
         translatesAutoresizingMaskIntoConstraints = false
     }

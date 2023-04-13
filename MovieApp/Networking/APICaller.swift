@@ -81,7 +81,24 @@ class APICaller {
         }
         task.resume()
     }
-   
+    
+    func getTrailer (with id: Int, completion: @escaping (Result<[YouTubeTrailer], Error>) -> Void) {
+        
+        guard let url = URL(string: "\(NetworkConstants.baseUrl)/movie/\(id)/videos?api_key=\(NetworkConstants.apiKey)&language=en-US") else {return}
+        print(url)
+        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
+            guard let data = data, error == nil else {return}
+            do {
+                let results = try JSONDecoder().decode(MovieVideoResponse.self, from: data)
+                completion(.success(results.results))
+                
+            } catch {
+                completion(.failure(error))
+                print("error in getTrailer")
+            }
+        }
+        task.resume()
+    }
 }
 
 // MARK: - Примеры вызова методов для получения информации во вью контроллере:

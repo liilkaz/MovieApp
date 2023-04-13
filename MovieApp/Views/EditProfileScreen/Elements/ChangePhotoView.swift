@@ -110,4 +110,3 @@ private extension ChangePhotoView {
         ])
     }
 }
-

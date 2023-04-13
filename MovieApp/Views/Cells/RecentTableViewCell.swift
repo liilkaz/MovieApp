@@ -21,7 +21,7 @@ class RecentTableViewCell: UITableViewCell {
         return image
     }()
     
-    lazy var timeImage: UIImageView = {
+    let timeImage: UIImageView = {
         let image = UIImageView(image: UIImage(named: "time")?.withTintColor(Constants.Colors.iconThemeColor ?? UIColor.black))
         image.translatesAutoresizingMaskIntoConstraints = false
         image.frame = CGRect(x: 0, y: 0, width: 13.33, height: 13.33)
@@ -29,7 +29,7 @@ class RecentTableViewCell: UITableViewCell {
         return image
     }()
     
-    lazy var dateImage: UIImageView = {
+    let dateImage: UIImageView = {
             let image = UIImageView(image: UIImage(named: "date")?.withTintColor(Constants.Colors.iconThemeColor ?? UIColor.black))
         image.translatesAutoresizingMaskIntoConstraints = false
         image.frame = CGRect(x: 0, y: 0, width: 12, height: 13.33)
@@ -37,7 +37,7 @@ class RecentTableViewCell: UITableViewCell {
         return image
     }()
     
-    lazy var filmImage: UIImageView = {
+    let filmImage: UIImageView = {
         let image = UIImageView(image: UIImage(named: "film")?.withTintColor(Constants.Colors.iconThemeColor ?? UIColor.black))
         image.frame = CGRect(x: 0, y: 0, width: 12, height: 12)
         image.translatesAutoresizingMaskIntoConstraints = false

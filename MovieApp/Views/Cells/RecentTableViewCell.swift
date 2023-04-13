@@ -21,7 +21,7 @@ class RecentTableViewCell: UITableViewCell {
         return image
     }()
     
-    lazy var timeImage: UIImageView = {
+    let timeImage: UIImageView = {
         let image = UIImageView(image: UIImage(named: "time")?.withTintColor(Constants.Colors.iconThemeColor ?? UIColor.black))
         image.translatesAutoresizingMaskIntoConstraints = false
         image.frame = CGRect(x: 0, y: 0, width: 13.33, height: 13.33)
@@ -29,7 +29,7 @@ class RecentTableViewCell: UITableViewCell {
         return image
     }()
     
-    lazy var dateImage: UIImageView = {
+    let dateImage: UIImageView = {
             let image = UIImageView(image: UIImage(named: "date")?.withTintColor(Constants.Colors.iconThemeColor ?? UIColor.black))
         image.translatesAutoresizingMaskIntoConstraints = false
         image.frame = CGRect(x: 0, y: 0, width: 12, height: 13.33)
@@ -37,7 +37,7 @@ class RecentTableViewCell: UITableViewCell {
         return image
     }()
     
-    lazy var filmImage: UIImageView = {
+    let filmImage: UIImageView = {
         let image = UIImageView(image: UIImage(named: "film")?.withTintColor(Constants.Colors.iconThemeColor ?? UIColor.black))
         image.frame = CGRect(x: 0, y: 0, width: 12, height: 12)
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -98,10 +98,9 @@ class RecentTableViewCell: UITableViewCell {
     }()
     
     lazy var favoriteButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setBackgroundImage(UIImage(named: "favorite"), for: .normal)
-
         return button
     }()
 
@@ -130,19 +129,20 @@ class RecentTableViewCell: UITableViewCell {
         
         backgroundColor = UIColor(named: "BgColor")
         setConstraints()
+        
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     func setConstraints() {
-        self.addSubview(movieImage)
-        self.addSubview(filmNameLabel)
-        self.addSubview(ImageStackView)
-        self.addSubview(labelStackView)
-        self.addSubview(favoriteButton)
-        self.addSubview(actionView)
-        actionView.addSubview(categorisLabel)
+        contentView.addSubview(movieImage)
+        contentView.addSubview(filmNameLabel)
+        contentView.addSubview(ImageStackView)
+        contentView.addSubview(labelStackView)
+        contentView.addSubview(favoriteButton)
+        contentView.addSubview(actionView)
+        contentView.addSubview(categorisLabel)
         NSLayoutConstraint.activate([
               filmNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
               filmNameLabel.leadingAnchor.constraint(equalTo: movieImage.trailingAnchor, constant: 13),

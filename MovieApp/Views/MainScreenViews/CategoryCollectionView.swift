@@ -9,6 +9,10 @@ import UIKit
 
 class CategoryCollectionView: UICollectionView {
     
+    var categories = ["All", "Actoin", "Adventure", "Mystery", "Fantasy", "Other"]
+    
+    // : [FilmCategories]
+    
     init() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -34,7 +38,7 @@ extension CategoryCollectionView: UICollectionViewDelegate {
 
 extension CategoryCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        5
+        categories.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -43,12 +47,10 @@ extension CategoryCollectionView: UICollectionViewDataSource {
         else {
             return UICollectionViewCell()
         }
-        cell.categoryButton.setTitle("Hi", for: .normal)
+        cell.categoryButton.setTitle(categories[indexPath.row], for: .normal)
         return cell
     }
-    
 }
-
 extension CategoryCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 88, height: collectionView.frame.height)

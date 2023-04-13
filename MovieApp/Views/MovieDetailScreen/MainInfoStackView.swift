@@ -7,12 +7,6 @@
 
 import UIKit
 
-enum DetailInfo: Int, CaseIterable {
-    case date
-    case time
-    case genres
-}
-
 enum Rating {
     case five
     case four
@@ -23,15 +17,13 @@ enum Rating {
 
 class MainInfoStackView: UIStackView {
     
-    var stars = [UIImageView](repeating: UIImageView(), count: 5)
-    
+//    var stars = [UIImageView](repeating: UIImageView(), count: 5)
     let viewC = UIView()
     
-    var info: [String] = []
-    var vote_average: Float?
-    
-    var vc = MovieDetailViewController()
-    
+    let dateStack = InfoStack(icon: UIImage(named: "date") ?? UIImage())
+    let timeStack = InfoStack(icon: UIImage(named: "time") ?? UIImage())
+    let genreStack = InfoStack(icon: UIImage(named: "film") ?? UIImage())
+
     lazy var poster: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
@@ -112,20 +104,10 @@ class MainInfoStackView: UIStackView {
         addSubview(poster)
         addSubview(movieName)
         addSubview(hStack)
-        
-        DetailInfo.allCases.forEach { info in
-            hStack.addArrangedSubview(InfoStack(icon: getImage(for: info), text: getText(for: info)))
-        }
-    
+        hStack.addArrangedSubview(dateStack)
+        hStack.addArrangedSubview(timeStack)
+        hStack.addArrangedSubview(genreStack)
         addSubview(hStackReating)
-        
-//        vote_average = vc.vote_average
-//        let vote_average = 7.916
-        let percent = (vote_average ?? 2) * 10
-        let rating = getRating(percent: Int(percent.rounded()))
-        stars = getArrayStars(rating: rating, image: UIImage(named: "star") ?? UIImage())
-        
-        stars.forEach(self.hStackReating.addArrangedSubview)
         
         hStackReating.contentMode = .scaleAspectFill
         hStackReating.spacing = 6
@@ -165,72 +147,58 @@ class MainInfoStackView: UIStackView {
         ])
     }
     
-    func getImage(for details: DetailInfo) -> UIImage {
-        switch details {
-        case .date: return UIImage(named: "date") ?? UIImage()
-        case .time: return UIImage(named: "time") ?? UIImage()
-        case .genres: return UIImage(named: "film") ?? UIImage()
-        }
-    }
-    
-    func getText(for details: DetailInfo) -> String {
-        switch details {
-        case .date: return "17 Sep 2021"
-        case .time: return "148 Minutes"
-        case .genres: return "Animation"
-        }
-    }
-    
-    func getRating(percent: Int) -> Rating {
-        if percent > 80 {
-            return Rating.five
-        } else if percent > 60 {
-            return Rating.four
-        } else if percent > 40 {
-            return Rating.three
-        } else if percent > 20 {
-            return Rating.two
-        } else {
-            return Rating.one
-        }
-    }
-    
-    func getArrayStars(rating: Rating, image: UIImage) -> [UIImageView] {
-        let color = UIColor(red: 0.98, green: 0.80, blue: 0.08, alpha: 1.00)
-        switch rating {
-        case .five:
-            for _ in 1...stars.count {
-                stars.append(UIImageView(image: image.withTintColor(color)))
-            }
-            return stars
-        case .four:
-            for _ in 1...4 {
-                stars.append(UIImageView(image: image.withTintColor(color)))
-            }
-            stars.append(UIImageView(image: image))
-            return stars
-        case .three:
-            for _ in 1...3 {
-                stars.append(UIImageView(image: image.withTintColor(color)))
-            }
-            for _ in 1...2 {
-                stars.append(UIImageView(image: image))
-            }
-            return stars
-        case .two:
-            for _ in 1...2 {
-                stars.append(UIImageView(image: image.withTintColor(color)))
-            }
-            for _ in 1...3 {
-                stars.append(UIImageView(image: image))
-            }
-            return stars
-        case .one:
-            stars.append(UIImageView(image: image.withTintColor(color)))
-            for _ in 1...4 {
-                stars.append(UIImageView(image: image))
-            }
-            return stars
-        }
-    }
+//    func getRating(percent: Int) -> Rating {
+//        if percent > 80 {
+//            return Rating.five
+//        } else if percent > 60 {
+//            return Rating.four
+//        } else if percent > 40 {
+//            return Rating.three
+//        } else if percent > 20 {
+//            return Rating.two
+//        } else {
+//            return Rating.one
+//        }
+//    }
+//    
+//    func getArrayStars(rating: Rating) -> [UIImageView] {
+//        var stars = [UIImageView](repeating: UIImageView(), count: 5)
+//        let image = UIImage(named: "star") ?? UIImage()
+//        let color = UIColor(red: 0.98, green: 0.80, blue: 0.08, alpha: 1.00)
+//        switch rating {
+//        case .five:
+//            for _ in 1...stars.count {
+//                stars.append(UIImageView(image: image.withTintColor(color)))
+//            }
+//            return stars
+//        case .four:
+//            for _ in 1...4 {
+//                stars.append(UIImageView(image: image.withTintColor(color)))
+//            }
+//            stars.append(UIImageView(image: image))
+//            return stars
+//        case .three:
+//            for _ in 1...3 {
+//                stars.append(UIImageView(image: image.withTintColor(color)))
+//            }
+//            for _ in 1...2 {
+//                stars.append(UIImageView(image: image))
+//            }
+//            return stars
+//        case .two:
+//            for _ in 1...2 {
+//                stars.append(UIImageView(image: image.withTintColor(color)))
+//            }
+//            for _ in 1...3 {
+//                stars.append(UIImageView(image: image))
+//            }
+//            return stars
+//        case .one:
+//            stars.append(UIImageView(image: image.withTintColor(color)))
+//            for _ in 1...4 {
+//                stars.append(UIImageView(image: image))
+//            }
+//            return stars
+//        }
+//    }
 }

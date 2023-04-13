@@ -18,6 +18,9 @@ class MovieDetailViewController: UIViewController, UICollectionViewDelegate {
     var id: Int?
     var imageUrl: String?
     var vote_average: Float?
+    var ratingStars = [UIImageView](repeating: UIImageView(), count: 5)
+    
+    var rating: Rating?
     
     private var movie: DetailedMovie?
     private var scroll: [CastAndCrewInfo] = CastAndCrewInfo.testData()
@@ -184,7 +187,14 @@ extension MovieDetailViewController {
                cell.stack.poster.sd_setImage(with: URL(string: imageUrl ?? ""))
                cell.stack.movieName.text = movie?.title
                cell.stack.overview.text = movie?.overview
-
+               cell.stack.dateStack.label.text = movie?.textDate
+               cell.stack.timeStack.label.text = "\(movie?.runtime ?? 0) minutes"
+               let vote_average = movie?.vote_average
+               if vote_average ?? 0 > 0 {
+                   rating = getRating(percent: Int((vote_average ?? 2) * 10))
+                   ratingStars = getArrayStars(rating: self.rating ?? .one)
+                   ratingStars.forEach( cell.stack.self.hStackReating.addArrangedSubview)
+               }
                return cell
            }
            
@@ -221,14 +231,67 @@ extension MovieDetailViewController {
                     print(self?.movie ??  "where is movie")
                     self?.movie = movie
                     self?.imageUrl = "\(NetworkConstants.imageUrl + (movie.poster_path)!)?api_key=\(NetworkConstants.apiKey)"
-                    self?.vote_average = movie.vote_average
+
                     self?.collectionView.reloadData()
-                    
-                    print(movie.vote_average)
                 }
             case .failure(let error):
                 print(error.localizedDescription)
             }
+        }
+    }
+    
+    func getRating(percent: Int) -> Rating {
+        if percent > 80 {
+            return Rating.five
+        } else if percent > 60 {
+            return Rating.four
+        } else if percent > 40 {
+            return Rating.three
+        } else if percent > 20 {
+            return Rating.two
+        } else {
+            return Rating.one
+        }
+    }
+    
+    func getArrayStars(rating: Rating) -> [UIImageView] {
+        var stars = [UIImageView](repeating: UIImageView(), count: 5)
+        let image = UIImage(named: "star") ?? UIImage()
+        let color = UIColor(red: 0.98, green: 0.80, blue: 0.08, alpha: 1.00)
+        switch rating {
+        case .five:
+            for _ in 1...stars.count {
+                stars.append(UIImageView(image: image.withTintColor(color)))
+            }
+            return stars
+        case .four:
+            for _ in 1...4 {
+                stars.append(UIImageView(image: image.withTintColor(color)))
+            }
+            stars.append(UIImageView(image: image))
+            return stars
+        case .three:
+            for _ in 1...3 {
+                stars.append(UIImageView(image: image.withTintColor(color)))
+            }
+            for _ in 1...2 {
+                stars.append(UIImageView(image: image))
+            }
+            return stars
+        case .two:
+            for _ in 1...2 {
+                stars.append(UIImageView(image: image.withTintColor(color)))
+            }
+            for _ in 1...3 {
+                stars.append(UIImageView(image: image))
+            }
+            return stars
+        case .one:
+            stars.append(UIImageView(image: image.withTintColor(color)))
+            for _ in 1...4 {
+                stars.append(UIImageView(image: image))
+            }
+            return stars
         }
     }
 }

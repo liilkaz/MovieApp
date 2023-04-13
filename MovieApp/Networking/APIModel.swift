@@ -15,6 +15,24 @@ struct Movie: Codable {
     let vote_average: Float
     let vote_count: Int
     let genre_ids: [Int]
+    
+    static let dateFormatterF: DateFormatter = {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-mm-dd"
+            return dateFormatter
+        }()
+    
+    static let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMM yyyy"
+        return formatter
+    }()
+    
+    var textDate: String {
+        let releaseDate = self.release_date
+        guard let date = Movie.dateFormatterF.date(from: releaseDate) else {return ""}
+        return Movie.dateFormatter.string(from: date)
+    }
 }
 
 struct TvShow: Codable {
@@ -45,6 +63,24 @@ struct DetailedMovie: Codable {
     let vote_count: Int
     let vote_average: Float
     let genres: [Genre]
+    
+    static let dateFormatterF: DateFormatter = {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-mm-dd"
+            return dateFormatter
+        }()
+    
+    static let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMM yyyy"
+        return formatter
+    }()
+    
+    var textDate: String {
+        let releaseDate = self.release_date
+        guard let date = Movie.dateFormatterF.date(from: releaseDate) else {return ""}
+        return Movie.dateFormatter.string(from: date)
+    }
 }
 
 struct DetailedTvShow: Codable {

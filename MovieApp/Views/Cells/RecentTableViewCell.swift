@@ -98,10 +98,9 @@ class RecentTableViewCell: UITableViewCell {
     }()
     
     lazy var favoriteButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setBackgroundImage(UIImage(named: "favorite"), for: .normal)
-
         return button
     }()
 
@@ -130,19 +129,20 @@ class RecentTableViewCell: UITableViewCell {
         
         backgroundColor = UIColor(named: "BgColor")
         setConstraints()
+        
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     func setConstraints() {
-        self.addSubview(movieImage)
-        self.addSubview(filmNameLabel)
-        self.addSubview(ImageStackView)
-        self.addSubview(labelStackView)
-        self.addSubview(favoriteButton)
-        self.addSubview(actionView)
-        actionView.addSubview(categorisLabel)
+        contentView.addSubview(movieImage)
+        contentView.addSubview(filmNameLabel)
+        contentView.addSubview(ImageStackView)
+        contentView.addSubview(labelStackView)
+        contentView.addSubview(favoriteButton)
+        contentView.addSubview(actionView)
+        contentView.addSubview(categorisLabel)
         NSLayoutConstraint.activate([
               filmNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
               filmNameLabel.leadingAnchor.constraint(equalTo: movieImage.trailingAnchor, constant: 13),

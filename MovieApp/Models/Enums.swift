@@ -10,6 +10,8 @@ import UIKit
 enum FilmCategories: Int, CaseIterable {
     
     case all
+    case other
+    
     case action = 28
     case adventure = 12
     case animation = 16
@@ -72,6 +74,8 @@ enum FilmCategories: Int, CaseIterable {
             return "War"
         case .western:
             return "Western"
+        case .other:
+            return "Other"
             
         }
     }

@@ -9,9 +9,7 @@ import UIKit
 
 class CategoryCollectionView: UICollectionView {
     
-    var categories = ["All", "Actoin", "Adventure", "Mystery", "Fantasy", "Other"]
-    
-    // : [FilmCategories]
+    var categories: [FilmCategories] = [.all, .action, .adventure, .mystery, .fantasy, .comedy, .crime, .other]
     
     init() {
         let layout = UICollectionViewFlowLayout()
@@ -47,7 +45,7 @@ extension CategoryCollectionView: UICollectionViewDataSource {
         else {
             return UICollectionViewCell()
         }
-        cell.categoryButton.setTitle(categories[indexPath.row], for: .normal)
+        cell.categoryButton.setTitle(categories[indexPath.row].movieCategories, for: .normal)
         return cell
     }
 }

@@ -13,6 +13,10 @@ class SettingTableViewCell: UITableViewCell {
     
     let cellSettingImageArray = [["person"],
                      ["lock", "unlock", "darkMode"]]
+
+    private var theme: Theme?
+
+    var didTapped: (() -> Void)?
     
     private lazy var nameSetting: UILabel = {
         let label = UILabel()
@@ -49,11 +53,22 @@ class SettingTableViewCell: UITableViewCell {
 
         self.selectionStyle = .none
         self.backgroundColor = .clear
+        settingSwitch()
         reapeatSwitch.addTarget(self, action: #selector(switchChange(paramTarget:)), for: .valueChanged)
     }
     
     required init?(coder: NSCoder) {
         fatalError("alina")
+    }
+
+    private func settingSwitch() {
+        switch Theme.current {
+
+        case .light:
+            reapeatSwitch.isOn = false
+        case .dark:
+            reapeatSwitch.isOn = true
+        }
     }
     
     func cellConfigure(indexPath: IndexPath) {
@@ -71,7 +86,10 @@ class SettingTableViewCell: UITableViewCell {
     }
     
     @objc func switchChange(paramTarget: UISwitch) {
-        
+        theme = paramTarget.isOn ? .dark : .light
+        theme?.save()
+        didTapped?()
+        print("switch")
     }
     
     func setConstraints() {

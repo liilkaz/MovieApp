@@ -139,6 +139,9 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: idCell, for: indexPath) as? SettingTableViewCell
         cell?.cellConfigure(indexPath: indexPath)
+        cell?.didTapped = { [weak self] in
+            self?.animationSetTheme()
+        }
         return cell ?? UITableViewCell()
     }
     
@@ -166,5 +169,13 @@ extension UIStackView {
         self.axis = axis
         self.spacing = spacing
         self.translatesAutoresizingMaskIntoConstraints = false
+    }
+}
+
+private extension SettingViewController {
+    func animationSetTheme() {
+        UIView.animate(withDuration: 0.3) {
+            self.view.window?.overrideUserInterfaceStyle = Theme.current.userInterfaceStyle
+        }
     }
 }

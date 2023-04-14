@@ -45,7 +45,19 @@ extension CategoryCollectionView: UICollectionViewDataSource {
         else {
             return UICollectionViewCell()
         }
-        cell.categoryButton.setTitle(categories[indexPath.row].movieCategories, for: .normal)
+        
+//        if indexPath.item == 0 {
+//            collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredVertically)
+//            cell.configure(with: nil)
+//            return cell
+//        } else {
+//            let category = categories[indexPath.item - 1]
+//            cell.configure(with: category)
+//            return cell
+//        }
+        
+//        cell.categoryButton.setTitle(categories[indexPath.row].movieCategories, for: .normal)
+        cell.categoryLabel.text = "Action"
         return cell
     }
 }

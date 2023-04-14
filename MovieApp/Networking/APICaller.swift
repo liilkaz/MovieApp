@@ -12,7 +12,7 @@ class APICaller {
     
     func getPopularMovies (completion: @escaping (Result<[Movie], Error>) -> Void) {
         
-        guard let url = URL(string: "\(NetworkConstants.baseUrl)/discover/movie?api_key=\(NetworkConstants.apiKey)&language=en-US&sort_by=popularity.desc") else {return}
+        guard let url = URL(string: "\(NetworkConstants.baseUrl)/discover/movie?api_key=\(NetworkConstants.apiKey)&language=en-US&sort_by=popularity.desc") else { return }
 //        print (url)
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else {return}
@@ -30,7 +30,7 @@ class APICaller {
     
     func getPopularTvShows (completion: @escaping (Result<[TvShow], Error>) -> Void) {
         
-        guard let url = URL(string: "\(NetworkConstants.baseUrl)/discover/tv?api_key=\(NetworkConstants.apiKey)&language=en-US&sort_by=popularity.desc") else {return}
+        guard let url = URL(string: "\(NetworkConstants.baseUrl)/discover/tv?api_key=\(NetworkConstants.apiKey)&language=en-US&sort_by=popularity.desc") else { return }
         print(url)
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else {return}

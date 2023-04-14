@@ -48,7 +48,13 @@ extension CategoryCollectionView: UICollectionViewDataSource {
         cell.categoryButton.setTitle(categories[indexPath.row].movieCategories, for: .normal)
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(categories[indexPath.row].rawValue)
+    }
+    
 }
+
 extension CategoryCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 88, height: collectionView.frame.height)

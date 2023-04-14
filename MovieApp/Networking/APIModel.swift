@@ -33,6 +33,10 @@ struct Movie: Codable {
         guard let date = Movie.dateFormatterF.date(from: releaseDate) else {return ""}
         return Movie.dateFormatter.string(from: date)
     }
+    
+    var urlImage: URL {
+        return URL(string: "\(NetworkConstants.imageUrl + ((poster_path ?? "")))?api_key=\(NetworkConstants.apiKey)") ?? URL(string: "")!
+    }
 }
 
 struct TvShow: Codable {

@@ -11,6 +11,8 @@ import SDWebImage
 class SearchViewController: UIViewController {
     
     let categories = CategoryCollectionView()
+    let movieCategories = FilmCategories.allCases
+    var selectCategory: FilmCategories = .all
     var movies: [Movie] = []
     var detail: DetailedMovie?
     var runtimes: [Int] = []
@@ -44,19 +46,28 @@ class SearchViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tableView.reloadData()
         navigationController?.tabBarItem.title = Constants.Titles.TabBar.title(for: .search)
         tabBarController?.tabBar.isHidden = false
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        DispatchQueue.main.async {
+//            self.tableView.reloadData()
+//        }
+        
         view.backgroundColor = UIColor(named: "BgColor")
         title = Constants.Titles.NavBar.search
         view.addSubview(searchTextField)
         view.addSubview(categories)
         view.addSubview(tableView)
         setConstraints()
-        getMovies()
+//        getMovies()
+        getMoviesByGenres(genre: 9648)
+        tableView.delegate = self
+        tableView.dataSource = self
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(RecentTableViewCell.self, forCellReuseIdentifier: RecentTableViewCell.identifier)
@@ -99,10 +110,11 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RecentTableViewCell.identifier,
                                                        for: indexPath) as? RecentTableViewCell else { return UITableViewCell() }
         cell.filmNameLabel.text = movies[indexPath.row].title
-        cell.movieImage.sd_setImage(with: URL(string: imageURLs[indexPath.row]))
+        cell.movieImage.sd_setImage(with: movies[indexPath.row].urlImage)
         cell.dateLabel.text = movies[indexPath.row].textDate
 
-        cell.timeLabel.text = "\(runtimes[indexPath.row]) minutes"
+//        cell.timeLabel.text = "\(runtimes[indexPath.row]) minutes"
+        
         return cell
     }
     
@@ -115,6 +127,30 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
+extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        categories.categories.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = categories.dequeueReusableCell(withReuseIdentifier: CategoriesCell.identifier,
+                                             for: indexPath) as? CategoriesCell
+        else {
+            return UICollectionViewCell()
+        }
+        cell.categoryButton.setTitle(categories.categories[indexPath.row].movieCategories, for: .normal)
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(categories.categories[indexPath.row].rawValue)
+        getMoviesByGenres(genre: categories.categories[indexPath.row].rawValue)
+        DispatchQueue.main.async {
+            collectionView.reloadData()
+        }
+    }
+}
+
 // MARK: - APICaller
 
 extension SearchViewController {
@@ -125,7 +161,7 @@ extension SearchViewController {
                 DispatchQueue.main.async {
                     self?.movies = movies
                     movies.forEach { movies in
-                        self?.imageURLs.append("\(NetworkConstants.imageUrl + ((movies.poster_path)!))?api_key=\(NetworkConstants.apiKey)")
+
                         self?.getRuntimes(id: movies.id)
                     }
                     print(self?.movies ??  "where are movies?")
@@ -149,5 +185,21 @@ extension SearchViewController {
                 print(error.localizedDescription)
             }
         }
+    }
+    func getMoviesByGenres(genre: Int) {
+        print(genre)
+        APICaller.shared.getMoviesByGenre(with: genre) { [weak self] result in
+            switch result {
+            case .success(let movies):
+                DispatchQueue.main.async {
+                    self?.movies = movies
+                    self?.tableView.reloadData()
+                }
+                print(self?.movies)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        
     }
 }

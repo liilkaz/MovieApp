@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct Movie: Codable {
-    let id: Int
+struct Movie: Codable, Hashable {
+    var id: Int
     let title: String
     let poster_path: String?
     let release_date: String
@@ -32,6 +32,10 @@ struct Movie: Codable {
         let releaseDate = self.release_date
         guard let date = Movie.dateFormatterF.date(from: releaseDate) else {return ""}
         return Movie.dateFormatter.string(from: date)
+    }
+    
+    var urlImage: URL {
+        return URL(string: "\(NetworkConstants.imageUrl + ((poster_path ?? "")))?api_key=\(NetworkConstants.apiKey)") ?? URL(string: "")!
     }
 }
 

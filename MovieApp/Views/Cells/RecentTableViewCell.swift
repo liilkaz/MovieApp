@@ -15,7 +15,6 @@ class RecentTableViewCell: UITableViewCell {
         let image = UIImageView()
         image.layer.cornerRadius = 16
         image.layer.masksToBounds = true
-//        image.image = UIImage(named: "картинка")
         image.frame = CGRect(x: 24, y: 10, width: 119.52, height: 160)
         
         return image
@@ -47,8 +46,7 @@ class RecentTableViewCell: UITableViewCell {
     
     lazy var filmNameLabel: UILabel = {
         let label = UILabel()
-        label.numberOfLines = 0
-//        label.text = "Drifting Home"
+        label.numberOfLines = 2
         label.textColor = Constants.Colors.mainTextColor
         label.translatesAutoresizingMaskIntoConstraints = false
         label.frame = CGRect(x: 0, y: 0, width: 124, height: 26)
@@ -146,7 +144,7 @@ class RecentTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
               filmNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
               filmNameLabel.leadingAnchor.constraint(equalTo: movieImage.trailingAnchor, constant: 13),
-              filmNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+              filmNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -38),
               
               ImageStackView.topAnchor.constraint(equalTo: filmNameLabel.bottomAnchor, constant: 12),
               ImageStackView.leadingAnchor.constraint(equalTo: movieImage.trailingAnchor, constant: 13),

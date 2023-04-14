@@ -10,6 +10,7 @@ import UIKit
 class HomeViewController: UIViewController {
     
     let movieCards = MovieCardsCollectionView()
+    let movieArray = AllMovies.shared
     lazy var categories = CategoryCollectionView()
     lazy var moviesList = MoviesTableView(frame: .zero)
     lazy var scrollView = UIScrollView()
@@ -62,6 +63,8 @@ class HomeViewController: UIViewController {
         setupCategories()
         setupHorizontalStack()
         setupMoviesList()
+        
+//        movieArray.popularMovies
     }
 
 }

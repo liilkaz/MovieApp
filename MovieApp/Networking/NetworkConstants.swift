@@ -23,4 +23,6 @@ enum NetworkConstants {
 // https://api.themoviedb.org/3/discover/movie?api_key=0f9652e080a421b13a031fc5237543ee&language=en-US&sort_by=popularity.desc
 
 // https://api.themoviedb.org/3/movie/585511/videos?api_key=0f9652e080a421b13a031fc5237543ee&language=en-US //youtube
-// 
+//
+
+//https://api.themoviedb.org/3/discover/movie?api_key=0f9652e080a421b13a031fc5237543ee&with_genres=28 - жанры

@@ -34,6 +34,8 @@ class MainInfoStackView: UIStackView {
     
     lazy var movieName: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .center
         label.font = Constants.Fonts.plusJacartaSansBold(with: 24)
         label.textColor = Constants.Colors.mainTextColor
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -129,6 +131,8 @@ class MainInfoStackView: UIStackView {
             
             movieName.topAnchor.constraint(equalTo: poster.bottomAnchor, constant: 24),
             movieName.centerXAnchor.constraint(equalTo: centerXAnchor),
+            movieName.leadingAnchor.constraint(equalTo: leadingAnchor),
+            movieName.trailingAnchor.constraint(equalTo: trailingAnchor),
             
             hStack.topAnchor.constraint(equalTo: movieName.bottomAnchor, constant: 16),
             hStack.centerXAnchor.constraint(equalTo: centerXAnchor),

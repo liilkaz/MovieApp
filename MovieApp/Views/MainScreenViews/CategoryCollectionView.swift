@@ -9,7 +9,8 @@ import UIKit
 
 class CategoryCollectionView: UICollectionView {
     
-    var categories: [FilmCategories] = [.all, .action, .adventure, .mystery, .fantasy, .comedy, .crime, .other]
+    var categories: [FilmCategories] = [.all, .action, .adventure, .mystery, .fantasy, .comedy, .crime]
+    var didTappedCell: ((_ id: Int) -> Void)?
     
     init() {
         let layout = UICollectionViewFlowLayout()
@@ -48,7 +49,13 @@ extension CategoryCollectionView: UICollectionViewDataSource {
         cell.categoryButton.setTitle(categories[indexPath.row].movieCategories, for: .normal)
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        didTappedCell?(categories[indexPath.row].rawValue)
+    }
+    
 }
+
 extension CategoryCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 88, height: collectionView.frame.height)

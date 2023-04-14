@@ -8,6 +8,8 @@
 import UIKit
 
 final class SplashViewController: UIViewController {
+    
+    private let moviesArray = AllMovies.shared
 
     // MARK: - Private Properties
 
@@ -27,6 +29,7 @@ final class SplashViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setLayout()
+        moviesArray.getAllMovies()
     }
 }
 

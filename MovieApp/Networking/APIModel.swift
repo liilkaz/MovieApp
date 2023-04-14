@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct Movie: Codable {
-    let id: Int
+struct Movie: Codable, Hashable {
+    var id: Int
     let title: String
     let poster_path: String?
     let release_date: String

@@ -13,10 +13,12 @@ class SearchViewController: UIViewController {
     let categories = CategoryCollectionView()
     let movieCategories = FilmCategories.allCases
     var selectCategory: FilmCategories = .all
-    var movies: [Movie] = []
-    var detail: DetailedMovie?
-    var runtimes: [Int] = []
-    var imageURLs: [String] = []
+//    var detail: DetailedMovie?
+//    var runtimes: [Int] = []
+    
+    var moviesByGenre = [Movie]()
+    
+    let movieArray = AllMovies.shared
     
     let searchTextField: UITextField = {
         let textField = UITextField(backgroundColor: UIColor(named: "BgColor") ?? UIColor(),
@@ -53,21 +55,23 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        DispatchQueue.main.async {
-//            self.tableView.reloadData()
-//        }
-        
+        moviesByGenre = movieArray.allMovies
         view.backgroundColor = UIColor(named: "BgColor")
         title = Constants.Titles.NavBar.search
         view.addSubview(searchTextField)
         view.addSubview(categories)
         view.addSubview(tableView)
         setConstraints()
-//        getMovies()
-        getMoviesByGenres(genre: 9648)
-        tableView.delegate = self
-        tableView.dataSource = self
-        
+        categories.didTappedCell = {[weak self] id in
+            if id == 0 {
+                self?.moviesByGenre = self?.movieArray.allMovies ?? []
+            } else {
+                self?.moviesByGenre = self?.movieArray.allMovies.filter({ $0.genre_ids[0] == id
+                }) ?? []
+                print(self?.moviesByGenre)
+            }
+            self?.tableView.reloadData()
+        }
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(RecentTableViewCell.self, forCellReuseIdentifier: RecentTableViewCell.identifier)
@@ -100,7 +104,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
  
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return movies.count
+        return moviesByGenre.count
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
             return 180
@@ -109,9 +113,9 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RecentTableViewCell.identifier,
                                                        for: indexPath) as? RecentTableViewCell else { return UITableViewCell() }
-        cell.filmNameLabel.text = movies[indexPath.row].title
-        cell.movieImage.sd_setImage(with: movies[indexPath.row].urlImage)
-        cell.dateLabel.text = movies[indexPath.row].textDate
+        cell.filmNameLabel.text = moviesByGenre[indexPath.row].title
+        cell.movieImage.sd_setImage(with: moviesByGenre[indexPath.row].urlImage)
+        cell.dateLabel.text = moviesByGenre[indexPath.row].textDate
 
 //        cell.timeLabel.text = "\(runtimes[indexPath.row]) minutes"
         
@@ -121,85 +125,60 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let detailScreen = MovieDetailViewController()
-        detailScreen.id = movies[indexPath.row].id
+        detailScreen.id = moviesByGenre[indexPath.row].id
         navigationController?.pushViewController(detailScreen, animated: true)
     }
     
 }
-
-extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        categories.categories.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = categories.dequeueReusableCell(withReuseIdentifier: CategoriesCell.identifier,
-                                             for: indexPath) as? CategoriesCell
-        else {
-            return UICollectionViewCell()
-        }
-        cell.categoryButton.setTitle(categories.categories[indexPath.row].movieCategories, for: .normal)
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(categories.categories[indexPath.row].rawValue)
-        getMoviesByGenres(genre: categories.categories[indexPath.row].rawValue)
-        DispatchQueue.main.async {
-            collectionView.reloadData()
-        }
-    }
-}
-
-// MARK: - APICaller
-
-extension SearchViewController {
-    func getMovies() {
-        APICaller.shared.getPopularMovies { [weak self] result in
-            switch result {
-            case .success(let movies):
-                DispatchQueue.main.async {
-                    self?.movies = movies
-                    movies.forEach { movies in
-
-                        self?.getRuntimes(id: movies.id)
-                    }
-                    print(self?.movies ??  "where are movies?")
-
-                    self?.tableView.reloadData()
-                }
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-    }
-    func getRuntimes(id: Int) {
-        APICaller.shared.getDetailedMovie(with: id) { [weak self] result in
-            switch result {
-            case .success(let movie):
+//// MARK: - APICaller
+//
+//extension SearchViewController {
+//    func getMovies() {
+//        APICaller.shared.getPopularMovies { [weak self] result in
+//            switch result {
+//            case .success(let movies):
 //                DispatchQueue.main.async {
-                    self?.runtimes.append((movie.runtime)!)
-//                    print(self?.runtimes)
+//                    self?.movies = movies
+//                    movies.forEach { movies in
+//
+//                        self?.getRuntimes(id: movies.id)
+//                    }
+//                    print(self?.movies ??  "where are movies?")
+//
+//                    self?.tableView.reloadData()
 //                }
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-    }
-    func getMoviesByGenres(genre: Int) {
-        print(genre)
-        APICaller.shared.getMoviesByGenre(with: genre) { [weak self] result in
-            switch result {
-            case .success(let movies):
-                DispatchQueue.main.async {
-                    self?.movies = movies
-                    self?.tableView.reloadData()
-                }
-                print(self?.movies)
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-        
-    }
-}
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//        }
+//    }
+//    func getRuntimes(id: Int) {
+//        APICaller.shared.getDetailedMovie(with: id) { [weak self] result in
+//            switch result {
+//            case .success(let movie):
+////                DispatchQueue.main.async {
+//                    self?.runtimes.append((movie.runtime)!)
+////                    print(self?.runtimes)
+////                }
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//        }
+//    }
+//    func getMoviesByGenres(genre: Int) {
+//        print(genre)
+//        APICaller.shared.getMoviesByGenre(with: genre) { [weak self] result in
+//            switch result {
+//            case .success(let movies):
+//                DispatchQueue.main.async {
+//                    self?.movies = movies
+//                    self?.tableView.reloadData()
+//                }
+//                print(self?.movies)
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//        }
+//        
+//    }
+//}

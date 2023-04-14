@@ -24,7 +24,7 @@ final class TabBarViewController: UITabBarController {
     
     private func configure() {
         tabBar.backgroundColor = UIColor(named: "TabBarColor")
-        
+
         let controllers: [NavigationBarController] = Tabs.allCases.map { tab in
             let controller = NavigationBarController(rootViewController: getController(for: tab))
             
@@ -36,6 +36,7 @@ final class TabBarViewController: UITabBarController {
                                                      
         }
         setViewControllers(controllers, animated: false)
+        selectedIndex = 2
     }
     
     private func getController(for tab: Tabs) -> UIViewController {

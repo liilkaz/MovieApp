@@ -52,6 +52,12 @@ class SettingViewController: UIViewController {
     @objc private func logOutButtonTapped() {
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.tabBarItem.title = Constants.Titles.TabBar.title(for: .setting)
+        tabBarController?.tabBar.isHidden = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,8 +67,6 @@ class SettingViewController: UIViewController {
         tableView.register(SettingHeaderTableViewCell.self, forHeaderFooterViewReuseIdentifier: idHeader)
         
         view.backgroundColor = UIColor(named: "BgColor")
-        title = Constants.Titles.NavBar.setting
-        navigationController?.tabBarItem.title = Constants.Titles.TabBar.title(for: .setting)
         setupViews()
         setConstraints()
     }

@@ -10,40 +10,51 @@ import UIKit
 class EditProfileViewController: UIViewController {
     
     let profileView = EditProfileView()
-    
+    let imagePicker = UIImagePickerController()
     let datePicker = UIDatePicker()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        setupChangePhoto()
-        setupCheckbox()
-        setupAvatar()
+        setupImagePicker()
+        setupGestures()
+        setupChangePhotoButtons()
         createDatePicker()
     }
 }
 
 private extension EditProfileViewController {
+    
     func setupView() {
         view = profileView
         tabBarController?.tabBar.isHidden = true
         navigationItem.title = "Profile"
     }
     
-    func setupChangePhoto() {
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(dismissView))
-        gesture.delegate = self
-        profileView.changePhotoView.addGestureRecognizer(gesture)
+    func setupGestures() {
+        let changePhotoGesture = UITapGestureRecognizer(target: self, action: #selector(dismissView))
+        let checkboxGesture = UITapGestureRecognizer(target: self, action: #selector(checkboxTapped))
+        let avatarGesture = UITapGestureRecognizer(target: self, action: #selector(avatarTapped))
+        
+        changePhotoGesture.delegate = self
+        
+        profileView.changePhotoView.addGestureRecognizer(changePhotoGesture)
+        profileView.maleCheckbox.addGestureRecognizer(checkboxGesture)
+        profileView.avatarView.addGestureRecognizer(avatarGesture)
     }
     
-    func setupCheckbox() {
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(checkboxTapped))
-        profileView.maleCheckbox.addGestureRecognizer(gesture)
+    func setupImagePicker() {
+        imagePicker.delegate = self
     }
     
-    func setupAvatar() {
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(avatarTapped))
-        profileView.avatarView.addGestureRecognizer(gesture)
+    func setupChangePhotoButtons() {
+        let takePhotoButton = profileView.changePhotoView.takePhotoButton
+        let choosePhotoButton = profileView.changePhotoView.choosePhotoButton
+//        let deletePhotoButton = profileView.changePhotoView.deletePhotoButton
+        
+        takePhotoButton.addTarget(self, action: #selector(takePhotoPressed), for: .touchUpInside)
+        choosePhotoButton.addTarget(self, action: #selector(choosePhotoPressed), for: .touchUpInside)
+        
     }
     
     func createToolbar() -> UIToolbar {
@@ -85,10 +96,39 @@ private extension EditProfileViewController {
         profileView.dateOfBirthInput.inputTextField.text = dateFormatter.string(from: datePicker.date)
         self.view.endEditing(true)
     }
+    
+    @objc func takePhotoPressed() {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            imagePicker.sourceType = .camera
+            present(imagePicker, animated: true)
+        } else {
+            print("Camera not available")
+        }
+    }
+    
+    @objc func choosePhotoPressed() {
+        imagePicker.sourceType = .photoLibrary
+        present(imagePicker, animated: true)
+    }
 }
 
 extension EditProfileViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         return touch.view == profileView.changePhotoView.self
+    }
+}
+
+extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
+        
+        profileView.avatarView.imageView.image = image
+        
+        picker.dismiss(animated: true)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
     }
 }

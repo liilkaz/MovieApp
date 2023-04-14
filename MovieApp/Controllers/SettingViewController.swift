@@ -52,6 +52,12 @@ class SettingViewController: UIViewController {
     @objc private func logOutButtonTapped() {
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.tabBarItem.title = Constants.Titles.TabBar.title(for: .setting)
+        tabBarController?.tabBar.isHidden = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,8 +67,6 @@ class SettingViewController: UIViewController {
         tableView.register(SettingHeaderTableViewCell.self, forHeaderFooterViewReuseIdentifier: idHeader)
         
         view.backgroundColor = UIColor(named: "BgColor")
-        title = Constants.Titles.NavBar.setting
-        navigationController?.tabBarItem.title = Constants.Titles.TabBar.title(for: .setting)
         setupViews()
         setConstraints()
     }
@@ -139,6 +143,9 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: idCell, for: indexPath) as? SettingTableViewCell
         cell?.cellConfigure(indexPath: indexPath)
+        cell?.didTapped = { [weak self] in
+            self?.animationSetTheme()
+        }
         return cell ?? UITableViewCell()
     }
     
@@ -157,6 +164,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        navigationController?.pushViewController(EditProfileViewController(), animated: true)
     }
 }
 
@@ -166,5 +174,13 @@ extension UIStackView {
         self.axis = axis
         self.spacing = spacing
         self.translatesAutoresizingMaskIntoConstraints = false
+    }
+}
+
+private extension SettingViewController {
+    func animationSetTheme() {
+        UIView.animate(withDuration: 0.3) {
+            self.view.window?.overrideUserInterfaceStyle = Theme.current.userInterfaceStyle
+        }
     }
 }

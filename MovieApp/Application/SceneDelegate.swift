@@ -29,6 +29,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     private func startApp() {
+        window?.overrideUserInterfaceStyle = Theme.current.userInterfaceStyle
 
         window?.rootViewController = SplashViewController()
 

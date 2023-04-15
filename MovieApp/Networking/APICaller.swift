@@ -12,7 +12,7 @@ class APICaller {
     
     func getPopularMovies (completion: @escaping (Result<[Movie], Error>) -> Void) {
         guard let url = URL(string: "\(NetworkConstants.baseUrl)/discover/movie?api_key=\(NetworkConstants.apiKey)&language=en-US&sort_by=popularity.desc") else {return}
-//        print (url)
+        //        print (url)
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else {return}
             do {
@@ -44,11 +44,11 @@ class APICaller {
         }
         task.resume()
     }
-
+    
     func getDetailedMovie (with id: Int, completion: @escaping (Result<DetailedMovie, Error>) -> Void) {
         
         guard let url = URL(string: "\(NetworkConstants.baseUrl)/movie/\(id)?api_key=\(NetworkConstants.apiKey)&language=en-US") else {return}
-//        print(url)
+        //        print(url)
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else {return}
             do {
@@ -103,8 +103,8 @@ class APICaller {
         
         guard let url = URL(string: "\(NetworkConstants.baseUrl)/discover/movie?api_key=\(NetworkConstants.apiKey)&language=en-US&with_genres=\(id)") else {return}
         print(url)
-    
-    //https://api.themoviedb.org/3/discover/movie?api_key=0f9652e080a421b13a031fc5237543ee&with_genres=28
+        
+        //https://api.themoviedb.org/3/discover/movie?api_key=0f9652e080a421b13a031fc5237543ee&with_genres=28
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else {return}
             do {
@@ -121,7 +121,7 @@ class APICaller {
     
     func getCredits(with id: Int, completion: @escaping (Result<Credits, Error>) -> Void) {
         guard let url = URL(string: "\(NetworkConstants.baseUrl)/movie/\(id)/credits?api_key=\(NetworkConstants.apiKey)&language=en-US") else {return}
-//        https://api.themoviedb.org/3/movie/585511/credits?api_key=0f9652e080a421b13a031fc5237543ee&language=en-US
+        //        https://api.themoviedb.org/3/movie/585511/credits?api_key=0f9652e080a421b13a031fc5237543ee&language=en-US
         print(url)
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else {return}
@@ -132,6 +132,25 @@ class APICaller {
             } catch {
                 completion(.failure(error))
                 print("error in getCredits")
+            }
+        }
+        task.resume()
+    }
+    
+    // MARK: - Поиск по ключевому слову
+    
+    func searchMovie(keyWord: String, completion: @escaping (Result<[Movie], Error>) -> Void) {
+        guard let url = URL(string: "\(NetworkConstants.baseUrl)/search/movie?api_key=\(NetworkConstants.apiKey)&query=\(keyWord)") else {return}
+        //    print("url for searched : \(url)")
+        
+        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
+            guard let data = data, error == nil else {return}
+            do {
+                let results = try JSONDecoder().decode(SortedMovies.self, from: data)
+                completion(.success(results.results))
+            } catch {
+                completion(.failure(error))
+                print("error in searchMovie: \(error)")
             }
         }
         task.resume()

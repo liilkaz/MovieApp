@@ -24,12 +24,33 @@ final class SplashViewController: UIViewController {
         return label
     }()
 
+    private lazy var activityImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "Loading")
+        return imageView
+    }()
+
 // MARK: - Life cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setLayout()
-        moviesArray.getAllMovies()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        activityImageView.startAnimationLoading()
+        moviesArray.getAllMovies { [weak self] in
+            self?.activityImageView.stopAnimationLoading()
+            self?.moveToLogin()
+        }
+    }
+
+    private func moveToLogin() {
+        let loginVC = LoginViewController()
+        let navigationController = UINavigationController(rootViewController: loginVC)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true)
     }
 }
 
@@ -41,7 +62,7 @@ private extension SplashViewController {
         
         view.backgroundColor = Constants.Colors.splashBackground
 
-        view.addSubviews(splashImageView, splashText) {[
+        view.addSubviews(splashImageView, splashText, activityImageView) {[
 
             splashImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 150),
             splashImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -49,7 +70,14 @@ private extension SplashViewController {
             splashImageView.heightAnchor.constraint(equalToConstant: 150),
 
             splashText.topAnchor.constraint(equalTo: splashImageView.bottomAnchor, constant: 32),
-            splashText.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            splashText.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+
+            activityImageView.widthAnchor.constraint(equalToConstant: 80),
+            activityImageView.heightAnchor.constraint(equalToConstant: 80),
+            activityImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityImageView.bottomAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+                constant: -40)
 
         ]}
     }

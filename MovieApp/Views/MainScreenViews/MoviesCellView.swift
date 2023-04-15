@@ -14,6 +14,8 @@ class MoviesCellView: UITableViewCell {
     lazy var image: UIImageView = {
         let img = UIImageView()
         img.image = UIImage(named: "secondMovie")
+        img.layer.cornerRadius = 16
+        img.layer.masksToBounds = true
         img.translatesAutoresizingMaskIntoConstraints = false
         img.contentMode = .scaleAspectFill
         return img
@@ -181,7 +183,7 @@ extension MoviesCellView {
             mainStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             mainStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             mainStack.topAnchor.constraint(equalTo: contentView.topAnchor),
-            mainStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            mainStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
         ])
     }

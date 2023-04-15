@@ -15,7 +15,7 @@ class SearchViewController: UIViewController {
 //    var selectCategory: FilmCategories = .all
 //    var detail: DetailedMovie?
 //    var runtimes: [Int] = []
-    
+//    var searchTimer: Timer?
     var moviesByGenre = [Movie]()
     
     let movieArray = AllMovies.shared
@@ -74,8 +74,26 @@ class SearchViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(RecentTableViewCell.self, forCellReuseIdentifier: RecentTableViewCell.identifier)
+        searchTextField.delegate = self
     }
-
+    
+    func fetchSearchedMovies(with searchText: String) {
+//        searchTimer?.invalidate()
+//        searchTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { [weak self] (timer) in
+            APICaller.shared.searchMovie(keyWord: searchText) { [weak self] result in
+                switch result {
+                case .success(let movies):
+                    self?.moviesByGenre = movies
+                    DispatchQueue.main.async {
+                        self?.tableView.reloadData()
+                        print(self?.moviesByGenre ?? "where are movies?")
+                    }
+                case .failure(let error):
+                    print(error)
+                }
+            }
+//        })
+    }
     private func setConstraints() {
         NSLayoutConstraint.activate([
             searchTextField.topAnchor.constraint(equalTo: view.topAnchor),
@@ -128,3 +146,72 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         navigationController?.pushViewController(detailScreen, animated: true)
     }
 }
+
+extension SearchViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if let word = searchTextField.text {
+            fetchSearchedMovies(with: word)
+        }
+        return true
+    }
+    
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+////        var word = searchTextField.text
+//        if let word = searchTextField.text {
+//            fetchSearchedMovies(with: word)
+//        }
+//    }
+}
+
+
+// extension SearchViewController {
+//    func getMovies() {
+//        APICaller.shared.getPopularMovies { [weak self] result in
+//            switch result {
+//            case .success(let movies):
+//                DispatchQueue.main.async {
+//                    self?.movies = movies
+//                    movies.forEach { movies in
+//
+//                        self?.getRuntimes(id: movies.id)
+//                    }
+//                    print(self?.movies ??  "where are movies?")
+//
+//                    self?.tableView.reloadData()
+//                }
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//        }
+//    }
+//    func getRuntimes(id: Int) {
+//        APICaller.shared.getDetailedMovie(with: id) { [weak self] result in
+//            switch result {
+//            case .success(let movie):
+////                DispatchQueue.main.async {
+//                    self?.runtimes.append((movie.runtime)!)
+////                    print(self?.runtimes)
+////                }
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//        }
+//    }
+//    func getMoviesByGenres(genre: Int) {
+//        print(genre)
+//        APICaller.shared.getMoviesByGenre(with: genre) { [weak self] result in
+//            switch result {
+//            case .success(let movies):
+//                DispatchQueue.main.async {
+//                    self?.movies = movies
+//                    self?.tableView.reloadData()
+//                }
+//                print(self?.movies)
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//        }
+//
+//    }
+//}

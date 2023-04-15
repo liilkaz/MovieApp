@@ -11,7 +11,6 @@ class APICaller {
     static let shared = APICaller()
     
     func getPopularMovies (completion: @escaping (Result<[Movie], Error>) -> Void) {
-        
         guard let url = URL(string: "\(NetworkConstants.baseUrl)/discover/movie?api_key=\(NetworkConstants.apiKey)&language=en-US&sort_by=popularity.desc") else {return}
 //        print (url)
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
@@ -115,6 +114,24 @@ class APICaller {
             } catch {
                 completion(.failure(error))
                 print("error in getTrailer")
+            }
+        }
+        task.resume()
+    }
+    
+    func getCredits(with id: Int, completion: @escaping (Result<Credits, Error>) -> Void) {
+        guard let url = URL(string: "\(NetworkConstants.baseUrl)/movie/\(id)/credits?api_key=\(NetworkConstants.apiKey)&language=en-US") else {return}
+//        https://api.themoviedb.org/3/movie/585511/credits?api_key=0f9652e080a421b13a031fc5237543ee&language=en-US
+        print(url)
+        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
+            guard let data = data, error == nil else {return}
+            do {
+                let results = try JSONDecoder().decode(Credits.self, from: data)
+                completion(.success(results))
+                
+            } catch {
+                completion(.failure(error))
+                print("error in getCredits")
             }
         }
         task.resume()

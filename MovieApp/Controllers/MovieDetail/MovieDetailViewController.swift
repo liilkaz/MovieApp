@@ -14,18 +14,15 @@ class MovieDetailViewController: UIViewController, UICollectionViewDelegate, SFS
     var dataS: UICollectionViewDiffableDataSource<Section, Int>! = nil
     var collectionView: UICollectionView! = nil
     private lazy var mainRange: ClosedRange<Int> = 1...1
-    private lazy var scrollRange: ClosedRange<Int> = (mainRange.upperBound + 1)...(mainRange.upperBound + scroll.count)
+    private lazy var scrollRange: ClosedRange<Int> = (mainRange.upperBound + 1)...(mainRange.upperBound + (castAndCrew?.cast.count ?? 10))
     
     var id: Int?
-    var imageUrl: String?
-    var vote_average: Float?
     var ratingStars = [UIImageView](repeating: UIImageView(), count: 5)
-    
     var rating: Rating?
     
     var trailers: [YouTubeTrailer]?
     private var movie: DetailedMovie?
-    private var scroll: [CastAndCrewInfo] = CastAndCrewInfo.testData()
+    private var castAndCrew: Credits?
     
     let bottomView = UIView()
     
@@ -59,6 +56,7 @@ class MovieDetailViewController: UIViewController, UICollectionViewDelegate, SFS
     override func viewDidLoad() {
         super.viewDidLoad()
         getDetail()
+//        getCredits()
         getTrailerMovie()
         setupView()
         setConstraints()
@@ -200,11 +198,12 @@ extension MovieDetailViewController {
            if self.mainRange ~= identifier {
                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainInfoCollectionViewCell.reuseId,
                                                                    for: indexPath) as? MainInfoCollectionViewCell else { fatalError("Cannot create the cell") }
-               cell.stack.poster.sd_setImage(with: URL(string: imageUrl ?? ""))
+               cell.stack.poster.sd_setImage(with: movie?.urlImage)
                cell.stack.movieName.text = movie?.title
                cell.stack.overview.text = movie?.overview
                cell.stack.dateStack.label.text = movie?.textDate
                cell.stack.timeStack.label.text = "\(movie?.runtime ?? 0) minutes"
+               cell.stack.genreStack.label.text = movie?.genres[0].name
                let vote_average = movie?.vote_average
                if vote_average ?? 0 > 0 {
                    rating = getRating(percent: Int((vote_average ?? 2) * 10))
@@ -218,10 +217,9 @@ extension MovieDetailViewController {
                guard let cell = collectionView.dequeueReusableCell(
                    withReuseIdentifier: CastAndCrewCollectionViewCell.reuseId,
                    for: indexPath) as? CastAndCrewCollectionViewCell else {fatalError("Cannot create the cell")}
-               let scrollS = self.scroll[indexPath.row]
-               cell.avatar.image = scrollS.avatar
-               cell.name.text = scrollS.name
-               cell.role.text = scrollS.prof
+               cell.avatar.sd_setImage(with: castAndCrew?.cast[indexPath.row].urlImage)
+               cell.name.text = castAndCrew?.cast[indexPath.row].name
+               cell.role.text = castAndCrew?.cast[indexPath.row].character
                return cell
            }
            fatalError("Cannot create the cell")
@@ -244,10 +242,22 @@ extension MovieDetailViewController {
             switch result {
             case .success(let movie):
                 DispatchQueue.main.async { [self] in
-                    print(self?.movie ??  "where is movie")
                     self?.movie = movie
-                    self?.imageUrl = "\(NetworkConstants.imageUrl + (movie.poster_path)!)?api_key=\(NetworkConstants.apiKey)"
-
+                    self?.getCredits()
+                }
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func getCredits() {
+        APICaller.shared.getCredits(with: id ?? 585511) { [weak self] result in
+            switch result {
+            case .success(let credits):
+                DispatchQueue.main.async { [self] in
+                    self?.castAndCrew = credits
                     self?.collectionView.reloadData()
                 }
             case .failure(let error):
@@ -255,7 +265,7 @@ extension MovieDetailViewController {
             }
         }
     }
-    
+
     func getTrailerMovie() {
         APICaller.shared.getTrailer(with: id ?? 585511) { [weak self] result in
             switch result {

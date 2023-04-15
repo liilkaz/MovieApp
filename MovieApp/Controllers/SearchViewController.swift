@@ -68,7 +68,6 @@ class SearchViewController: UIViewController {
             } else {
                 self?.moviesByGenre = self?.movieArray.allMovies.filter({ $0.genre_ids[0] == id
                 }) ?? []
-                print(self?.moviesByGenre)
             }
             self?.tableView.reloadData()
         }
@@ -116,7 +115,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         cell.filmNameLabel.text = moviesByGenre[indexPath.row].title
         cell.movieImage.sd_setImage(with: moviesByGenre[indexPath.row].urlImage)
         cell.dateLabel.text = moviesByGenre[indexPath.row].textDate
-
+        
 //        cell.timeLabel.text = "\(runtimes[indexPath.row]) minutes"
         
         return cell

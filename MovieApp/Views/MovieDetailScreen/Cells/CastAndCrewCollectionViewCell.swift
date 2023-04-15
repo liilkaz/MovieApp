@@ -15,7 +15,7 @@ class CastAndCrewCollectionViewCell: UICollectionViewCell {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
-        image.layer.cornerRadius = frame.height / 2
+//        image.layer.cornerRadius = frame.height / 2
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
@@ -40,6 +40,7 @@ class CastAndCrewCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         setupViews()
         setConstraints()
+        avatar.layer.cornerRadius = frame.height / 2
     }
     
     required init?(coder: NSCoder) {

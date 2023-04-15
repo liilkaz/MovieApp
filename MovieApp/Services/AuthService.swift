@@ -69,4 +69,31 @@ class AuthService {
 
         }
     }
+
+    func logout() {
+        do {
+            try auth.signOut()
+        } catch {
+            print("error logout \(error.localizedDescription)")
+        }
+    }
+
+    func updatePassword(newPass: String) {
+        auth.currentUser?.updatePassword(to: newPass) { error in
+            guard let error else { return }
+            print("error update password \(error.localizedDescription)")
+        }
+    }
+
+    func resetPassword() {
+        guard let email = auth.currentUser?.email else { return }
+        auth.sendPasswordReset(withEmail: email) { error in
+            guard let error else { return }
+            print("erorr resetPass \(error.localizedDescription)")
+        }
+    }
+
+    func getEmailUser() -> String? {
+        auth.currentUser?.email
+    }
 }

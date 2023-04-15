@@ -12,7 +12,7 @@ class SearchViewController: UIViewController {
     
     let categories = CategoryCollectionView()
     let movieCategories = FilmCategories.allCases
-    var selectCategory: FilmCategories = .all
+//    var selectCategory: FilmCategories = .all
 //    var detail: DetailedMovie?
 //    var runtimes: [Int] = []
     
@@ -127,5 +127,4 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         detailScreen.id = moviesByGenre[indexPath.row].id
         navigationController?.pushViewController(detailScreen, animated: true)
     }
-    
 }

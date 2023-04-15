@@ -11,6 +11,7 @@ final class AllMovies {
     var allMovies = [Movie]()
     var allTvShows = [TvShow]()
     var popularMovies = [Movie]()
+    var genres = [Genre]()
     var categories: [FilmCategories] = FilmCategories.allCases
     static let shared = AllMovies()
     
@@ -21,6 +22,12 @@ final class AllMovies {
                     self.getMoviesByGenres(genre: category.rawValue)
                 }
         }
+        DispatchQueue.global().async(group: moviesGroup) {
+            self.getPopularMovies()
+        }
+        DispatchQueue.global().async(group: moviesGroup) {
+            self.getGenres()
+        }
         moviesGroup.notify(queue: DispatchQueue.main) {
             completion?()
         }
@@ -28,7 +35,7 @@ final class AllMovies {
     }
     
     func getMoviesByGenres(genre: Int) {
-        print(genre)
+//        print(genre)
         APICaller.shared.getMoviesByGenre(with: genre) { [weak self] result in
             switch result {
             case .success(let movies):
@@ -45,7 +52,7 @@ final class AllMovies {
            APICaller.shared.getPopularMovies { [weak self] result in
                switch result {
                case .success(let movies):
-                   DispatchQueue.main.async {
+                   DispatchQueue.global().async {
                        self?.popularMovies = movies
                        }
                case .failure(let error):
@@ -53,4 +60,18 @@ final class AllMovies {
                }
            }
        }
+    
+    func getGenres() {
+        APICaller.shared.getGenres { [weak self] result in
+            switch result {
+            case .success(let genres):
+                DispatchQueue.global().async {
+                    self?.genres = genres
+                    print(self?.genres)
+                    }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
 }

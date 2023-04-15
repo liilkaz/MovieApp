@@ -9,6 +9,8 @@ import UIKit
 
 class MoviesTableView: UITableView {
     
+    let movieArray = AllMovies.shared
+    
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         
@@ -38,7 +40,7 @@ extension MoviesTableView: UITableViewDelegate {
 extension MoviesTableView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        5
+        movieArray.allMovies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

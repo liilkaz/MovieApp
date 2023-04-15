@@ -9,7 +9,7 @@ import UIKit
 
 class EditProfileView: UIView {
     
-    let scrollView: UIScrollView = {
+    private let scrollView: UIScrollView = {
         let scroll = UIScrollView()
         scroll.showsVerticalScrollIndicator = false
         scroll.showsHorizontalScrollIndicator = false
@@ -75,7 +75,7 @@ class EditProfileView: UIView {
     
     // MARK: - stack view
     
-    let inputPanelStackView: UIStackView = {
+    private let inputPanelStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.spacing = 16
@@ -84,7 +84,7 @@ class EditProfileView: UIView {
         return stackView
     }()
     
-    let checkboxStackView: UIStackView = {
+    private let checkboxStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.spacing = 16
         stackView.axis = .horizontal
@@ -119,7 +119,7 @@ class EditProfileView: UIView {
     
     let saveChangesButton: UIButton = {
         let button = UIButton(title: "Save Changes",
-                              backgroundColor: UIColor(hexString: "#ECF1F6"),
+                              backgroundColor: .lightGray,
                               titleColor: .systemGray,
                               font: Constants.Fonts.plusJacartaSansSemiBold(with: 16),
                               hasBorder: false,
@@ -145,7 +145,7 @@ class EditProfileView: UIView {
 
 private extension EditProfileView {
     func setupView() {
-        self.backgroundColor = .systemBackground
+        self.backgroundColor = UIColor(named: "BgColor")
         self.addSubview(scrollView)
         self.addSubview(changePhotoView)
         

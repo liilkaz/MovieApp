@@ -9,6 +9,7 @@ import UIKit
 
 enum Constants {
     enum Colors {
+        static var backgroundColor = UIColor(named: "BgColor")
         static var active = UIColor(hexString: "#514EB6")
         static var inactive = UIColor(hexString: "#BFC6CC")
         static var splashBackground = UIColor(named: "Onboarding")
@@ -75,7 +76,7 @@ enum Constants {
                 case .search: return UIImage(named: "activeSearch")
                 case .recent: return UIImage(named: "activeRecent")
                 case .home: return UIImage(named: "home")
-                case .favorites: return UIImage(named: "activeFavorite")
+                case .favorites: return UIImage(named: "favorite_fill")
                 case .setting: return UIImage(named: "activeSetting")
                 }
             }

@@ -47,6 +47,12 @@ extension CategoryCollectionView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         cell.categoryButton.setTitle(categories[indexPath.row].movieCategories, for: .normal)
+        
+        if indexPath.row == 0 {
+            DispatchQueue.main.async {
+                cell.isSelected = true
+            }
+        }
         return cell
     }
     

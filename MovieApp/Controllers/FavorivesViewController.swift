@@ -8,6 +8,8 @@
 import UIKit
 
 class FavorivesViewController: UIViewController {
+    
+    let movieArray = AllMovies.shared
 
     private lazy var tableView: UITableView = {
         let table = UITableView()
@@ -53,7 +55,7 @@ extension FavorivesViewController: UITableViewDelegate, UITableViewDataSource {
  
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 5
+        return movieArray.allMovies.count
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
             return 180
@@ -62,6 +64,9 @@ extension FavorivesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RecentTableViewCell.identifier,
                                                        for: indexPath) as? RecentTableViewCell else { return UITableViewCell() }
+        cell.filmNameLabel.text = movieArray.allMovies[indexPath.row].title
+        cell.movieImage.sd_setImage(with: movieArray.allMovies[indexPath.row].urlImage)
+        cell.dateLabel.text = movieArray.allMovies[indexPath.row].textDate
        
         return cell
     }

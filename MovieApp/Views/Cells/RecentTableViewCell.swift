@@ -9,6 +9,14 @@ import UIKit
 
 class RecentTableViewCell: UITableViewCell {
     
+    private var isFavorite: Bool = false {
+            didSet {
+                favoriteButton.imageView?.image = nil
+                let image = UIImage(named: isFavorite ? "favorite_fill" : "favorite")
+                favoriteButton.setImage(image, for: .normal)
+            }
+        }
+    
     static let identifier = "\(RecentTableViewCell.self)"
    
     lazy var movieImage: UIImageView = {
@@ -96,9 +104,12 @@ class RecentTableViewCell: UITableViewCell {
     }()
     
     lazy var favoriteButton: UIButton = {
-        let button = UIButton(type: .system)
+        let button = UIButton(type: .custom)
+        button.addTarget(self, action: #selector(didTapLike), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setBackgroundImage(UIImage(named: "favorite"), for: .normal)
+        let image = UIImage(named: isFavorite ? "favorite_fill" : "favorite")
+        button.setImage(image, for: .normal)
+
         return button
     }()
 
@@ -127,10 +138,13 @@ class RecentTableViewCell: UITableViewCell {
         
         backgroundColor = UIColor(named: "BgColor")
         setConstraints()
-        
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc func didTapLike() {
+        isFavorite = !isFavorite
     }
     
     func setConstraints() {

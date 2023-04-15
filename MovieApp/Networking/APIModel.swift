@@ -35,7 +35,7 @@ struct Movie: Codable, Hashable {
     }
     
     var urlImage: URL {
-        return URL(string: "\(NetworkConstants.imageUrl + ((poster_path ?? "")))?api_key=\(NetworkConstants.apiKey)") ?? URL(string: "")!
+        return URL(string: "\(NetworkConstants.imageUrl + ((poster_path ?? "")))?api_key=\(NetworkConstants.apiKey)") ?? URL(fileURLWithPath: "")
     }
 }
 
@@ -67,6 +67,10 @@ struct DetailedMovie: Codable {
     let vote_count: Int
     let vote_average: Float
     let genres: [Genre]
+    
+    var urlImage: URL {
+        return URL(string: "\(NetworkConstants.imageUrl + ((poster_path ?? "")))?api_key=\(NetworkConstants.apiKey)") ?? URL(fileURLWithPath: "")
+    }
     
     static let dateFormatterF: DateFormatter = {
             let dateFormatter = DateFormatter()
@@ -101,6 +105,10 @@ struct DetailedTvShow: Codable {
     let genres: [Genre]
 }
 
+struct CastAndCrew: Codable {
+    let results: Credits
+}
+
 struct Credits: Codable {
     let id: Int
     let cast: [Cast]
@@ -113,6 +121,11 @@ struct Cast: Codable {
     let character: String
     let profile_path: String?
     let order: Int
+    
+    var urlImage: URL {
+        return URL(string: "\(NetworkConstants.imageUrl + ((profile_path ?? "")))?api_key=\(NetworkConstants.apiKey)") ?? URL(fileURLWithPath: "")
+    }
+    
 }
 
 struct Crew: Codable {
@@ -120,6 +133,10 @@ struct Crew: Codable {
     let name: String
     let job: String
     let profile_path: String?
+    
+    var urlImage: URL {
+        return URL(string: "\(NetworkConstants.imageUrl + ((profile_path ?? "")))?api_key=\(NetworkConstants.apiKey)") ?? URL(fileURLWithPath: "")
+    }
 }
 
 struct Genre: Codable {

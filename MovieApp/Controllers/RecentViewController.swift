@@ -10,6 +10,9 @@ import UIKit
 class RecentViewController: UIViewController {
     
     let categories = CategoryCollectionView()
+    let movieCategories = FilmCategories.allCases
+    var moviesByGenre = [Movie]()
+    let movieArray = AllMovies.shared
 
     private lazy var tableView: UITableView = {
         let table = UITableView()
@@ -28,6 +31,7 @@ class RecentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        moviesByGenre = movieArray.allMovies
         view.backgroundColor = UIColor(named: "BgColor")
         title = Constants.Titles.NavBar.recent
         view.addSubview(categories)
@@ -36,6 +40,16 @@ class RecentViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(RecentTableViewCell.self, forCellReuseIdentifier: RecentTableViewCell.identifier)
+        
+        categories.didTappedCell = {[weak self] id in
+            if id == 0 {
+                self?.moviesByGenre = self?.movieArray.allMovies ?? []
+            } else {
+                self?.moviesByGenre = self?.movieArray.allMovies.filter({ $0.genre_ids[0] == id
+                }) ?? []
+            }
+            self?.tableView.reloadData()
+        }
     }
 
     private func setConstraints() {
@@ -60,7 +74,7 @@ extension RecentViewController: UITableViewDelegate, UITableViewDataSource {
  
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 5
+        return moviesByGenre.count
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
             return 180
@@ -69,6 +83,9 @@ extension RecentViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RecentTableViewCell.identifier,
                                                        for: indexPath) as? RecentTableViewCell else { return UITableViewCell() }
+        cell.filmNameLabel.text = moviesByGenre[indexPath.row].title
+        cell.movieImage.sd_setImage(with: moviesByGenre[indexPath.row].urlImage)
+        cell.dateLabel.text = moviesByGenre[indexPath.row].textDate
        
         return cell
     }
@@ -76,6 +93,7 @@ extension RecentViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let detailScreen = MovieDetailViewController()
+        detailScreen.id = moviesByGenre[indexPath.row].id
         navigationController?.pushViewController(detailScreen, animated: true)
     }
     

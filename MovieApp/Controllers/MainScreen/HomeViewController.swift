@@ -9,6 +9,8 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    //инициализатор для передачи данных о пользователе
+
     let movieCards = MovieCardsCollectionView()
     let movieArray = AllMovies.shared
     lazy var categories = CategoryCollectionView()

@@ -12,10 +12,10 @@ class SearchViewController: UIViewController {
     
     let categories = CategoryCollectionView()
     let movieCategories = FilmCategories.allCases
-    var selectCategory: FilmCategories = .all
+//    var selectCategory: FilmCategories = .all
 //    var detail: DetailedMovie?
 //    var runtimes: [Int] = []
-    
+//    var searchTimer: Timer?
     var moviesByGenre = [Movie]()
     
     let movieArray = AllMovies.shared
@@ -68,15 +68,32 @@ class SearchViewController: UIViewController {
             } else {
                 self?.moviesByGenre = self?.movieArray.allMovies.filter({ $0.genre_ids[0] == id
                 }) ?? []
-                print(self?.moviesByGenre)
             }
             self?.tableView.reloadData()
         }
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(RecentTableViewCell.self, forCellReuseIdentifier: RecentTableViewCell.identifier)
+        searchTextField.delegate = self
     }
-
+    
+    func fetchSearchedMovies(with searchText: String) {
+//        searchTimer?.invalidate()
+//        searchTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { [weak self] (timer) in
+            APICaller.shared.searchMovie(keyWord: searchText) { [weak self] result in
+                switch result {
+                case .success(let movies):
+                    self?.moviesByGenre = movies
+                    DispatchQueue.main.async {
+                        self?.tableView.reloadData()
+                        print(self?.moviesByGenre ?? "where are movies?")
+                    }
+                case .failure(let error):
+                    print(error)
+                }
+            }
+//        })
+    }
     private func setConstraints() {
         NSLayoutConstraint.activate([
             searchTextField.topAnchor.constraint(equalTo: view.topAnchor),
@@ -116,7 +133,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         cell.filmNameLabel.text = moviesByGenre[indexPath.row].title
         cell.movieImage.sd_setImage(with: moviesByGenre[indexPath.row].urlImage)
         cell.dateLabel.text = moviesByGenre[indexPath.row].textDate
-
+        
 //        cell.timeLabel.text = "\(runtimes[indexPath.row]) minutes"
         
         return cell
@@ -128,11 +145,27 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         detailScreen.id = moviesByGenre[indexPath.row].id
         navigationController?.pushViewController(detailScreen, animated: true)
     }
-    
 }
-//// MARK: - APICaller
-//
-//extension SearchViewController {
+
+extension SearchViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if let word = searchTextField.text {
+            fetchSearchedMovies(with: word)
+        }
+        return true
+    }
+    
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+////        var word = searchTextField.text
+//        if let word = searchTextField.text {
+//            fetchSearchedMovies(with: word)
+//        }
+//    }
+}
+
+
+// extension SearchViewController {
 //    func getMovies() {
 //        APICaller.shared.getPopularMovies { [weak self] result in
 //            switch result {
@@ -179,6 +212,6 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
 //                print(error.localizedDescription)
 //            }
 //        }
-//        
+//
 //    }
 //}

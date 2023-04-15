@@ -12,13 +12,19 @@ final class AllMovies {
     var allTvShows = [TvShow]()
     var popularMovies = [Movie]()
     var categories: [FilmCategories] = FilmCategories.allCases
-    
     static let shared = AllMovies()
     
-    func getAllMovies() {
-        categories.forEach { category in
-            getMoviesByGenres(genre: category.rawValue)
+    func getAllMovies(with completion: (() -> Void)?) {
+        let moviesGroup = DispatchGroup()
+            self.categories.forEach { category in
+                DispatchQueue.global().async(group: moviesGroup) {
+                    self.getMoviesByGenres(genre: category.rawValue)
+                }
         }
+        moviesGroup.notify(queue: DispatchQueue.main) {
+            completion?()
+        }
+
     }
     
     func getMoviesByGenres(genre: Int) {

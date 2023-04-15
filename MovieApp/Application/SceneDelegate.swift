@@ -30,12 +30,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     private func startApp() {
         window?.overrideUserInterfaceStyle = Theme.current.userInterfaceStyle
-
         window?.rootViewController = SplashViewController()
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0) { [weak self] in
-            self?.window?.rootViewController = TabBarViewController()
-        }
     }
 
 }

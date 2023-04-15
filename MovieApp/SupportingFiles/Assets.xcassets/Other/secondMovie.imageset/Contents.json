@@ -1,19 +1,8 @@
 {
   "images" : [
     {
-      "filename" : "Rectangle 22477@1x.png",
-      "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "filename" : "Rectangle 22477@2x.png",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "Rectangle 22477@3x.png",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "filename" : "Rectangle 22477.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {

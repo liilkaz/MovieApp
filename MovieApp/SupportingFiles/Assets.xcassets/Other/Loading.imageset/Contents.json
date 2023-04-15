@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "cast.jpeg",
+      "filename" : "Loading 2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Loading 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "Loading.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -9,6 +9,8 @@ import UIKit
 
 class MovieCardsCollectionView: UICollectionView {
     
+    let movieArray = AllMovies.shared
+    
     init() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -32,7 +34,7 @@ extension MovieCardsCollectionView: UICollectionViewDelegate {
 
 extension MovieCardsCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        5
+        movieArray.popularMovies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -41,9 +43,9 @@ extension MovieCardsCollectionView: UICollectionViewDataSource {
         else {
             return UICollectionViewCell()
         }
-        cell.picture.image = UIImage(named: "movie")
-        cell.filmName.text = "Thor"
-        cell.category.text = "Action"
+        cell.picture.sd_setImage(with: movieArray.popularMovies[indexPath.row].urlImage)
+        cell.filmName.text = movieArray.popularMovies[indexPath.row].title
+//        cell.category.text = movieArray.popularMovies[indexPath.row].genre_ids
         return cell
     }
     

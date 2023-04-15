@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import Combine
 
 class SettingViewController: UIViewController {
 
+    private var anyCancellable = Set<AnyCancellable>()
+
     enum MyConstants {
         static let logOutButtonImage: String = "logOutButton"
-        static let userPhotoImage: String = "userPhoto"
         static let userNameText: String = "Andy Lexsian"
         static let userNicknameText: String = "@Andy1999"
     }
@@ -19,8 +21,8 @@ class SettingViewController: UIViewController {
     private lazy var userNameLabel: UILabel = {
         let label = UILabel()
         label.text = MyConstants.userNameText
-        label.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 18)
-        label.textColor = UIColor(named: "MainTextColor")
+        label.font = Constants.Fonts.plusJacartaSansSemiBold(with: 18)
+        label.textColor = Constants.Colors.mainTextColor
         label.textAlignment = .left
         return label
     }()
@@ -28,7 +30,7 @@ class SettingViewController: UIViewController {
     private lazy var userNicknameLabel: UILabel = {
         let label = UILabel()
         label.text = MyConstants.userNicknameText
-        label.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 14)
+        label.font = Constants.Fonts.plusJacartaSansSemiBold(with: 14)
         label.textColor = Constants.Colors.mainTextColor
         label.textAlignment = .left
         return label
@@ -36,24 +38,38 @@ class SettingViewController: UIViewController {
     
     private lazy var userPhotoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: MyConstants.userPhotoImage)
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.borderWidth = 0.3
+        imageView.clipsToBounds = true
+        imageView.layer.borderColor = Constants.Colors.mainTextColor?.cgColor
+        
         return imageView
     }()
     
     private lazy var userInformationStackView = UIStackView()
     
     private lazy var logOutButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setBackgroundImage(UIImage(named: MyConstants.logOutButtonImage), for: .normal)
+        let button = UIButton(title: "Log Out",
+                              backgroundColor: Constants.Colors.backgroundColor,
+                              titleColor: Constants.Colors.active,
+                              font: Constants.Fonts.plusJacartaSansMedium(with: 16),
+                              hasBorder: true,
+                              cornerRadius: 32)
         button.addTarget(self, action: #selector(logOutButtonTapped), for: .touchUpInside)
         return button
     }()
     
     @objc private func logOutButtonTapped() {
+        print("logout")
+        AuthService.shared.logout()
+        let logVC = LoginViewController()
+        logVC.modalPresentationStyle = .fullScreen
+        present(logVC, animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        title = Constants.Titles.NavBar.setting
         navigationController?.tabBarItem.title = Constants.Titles.TabBar.title(for: .setting)
         tabBarController?.tabBar.isHidden = false
     }
@@ -66,12 +82,13 @@ class SettingViewController: UIViewController {
         tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: idCell)
         tableView.register(SettingHeaderTableViewCell.self, forHeaderFooterViewReuseIdentifier: idHeader)
         
-        view.backgroundColor = UIColor(named: "BgColor")
+        view.backgroundColor = Constants.Colors.backgroundColor
         setupViews()
         setConstraints()
     }
     
     private func setupViews() {
+        userPhotoImageView.layer.cornerRadius = 28
         
         userInformationStackView = UIStackView(arrangedSubviews: [
             userNameLabel,
@@ -109,7 +126,10 @@ class SettingViewController: UIViewController {
         logOutButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             logOutButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -95),
-            logOutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+//            logOutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logOutButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 18),
+            logOutButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22),
+            logOutButton.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
 
@@ -164,9 +184,54 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath == IndexPath(row: 0, section: 0) {
+        print(indexPath)
+
+        if indexPath.section == 0 {
             navigationController?.pushViewController(EditProfileViewController(), animated: true)
         }
+
+        if indexPath == [1, 0] {
+            showUpdateAlert()
+        }
+
+        if indexPath == [1, 1] {
+            guard let email = AuthService.shared.getEmailUser() else { return }
+            AuthService.shared.resetPassword()
+            showAlert(with: "Password Reset", and: "send email on \(email)")
+        }
+    }
+
+    func showUpdateAlert() {
+
+        let alertController = UIAlertController(title: "Change password", message: "new password 6 or more chars", preferredStyle: .alert)
+
+        var alertTextField = UITextField()
+        alertTextField.isSecureTextEntry = true
+        let addActionButton = UIAlertAction(title: "Change", style: .default) { _ in
+            guard let newPassword = alertTextField.text else { return }
+            AuthService.shared.updatePassword(newPass: newPassword)
+        }
+
+        addActionButton.isEnabled = false
+
+        alertController.addTextField { alertTF in
+            alertTF.placeholder = "Input new password"
+            alertTextField = alertTF
+        }
+
+        alertTextField.textPublisher()
+            .sink(receiveValue: { text in
+                let trimmedStr = text.trimmingCharacters(in: .whitespacesAndNewlines)
+                addActionButton.isEnabled = !trimmedStr.isEmpty
+            })
+            .store(in: &self.anyCancellable)
+
+        let cancelActionButton = UIAlertAction(title: "Cancel", style: .cancel)
+
+        alertController.addAction(addActionButton)
+        alertController.addAction(cancelActionButton)
+        alertController.preferredAction = addActionButton
+        present(alertController, animated: true)
     }
 }
 

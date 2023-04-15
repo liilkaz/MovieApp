@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 extension UITextField {
 
@@ -100,5 +101,14 @@ extension UITextField {
         iconContainerView.addSubview(iconView)
         self.rightView = iconContainerView
         self.rightViewMode = .always
+    }
+
+// MARK: - Publisher
+
+    func textPublisher() -> AnyPublisher<String, Never> {
+        NotificationCenter.default
+            .publisher(for: UITextField.textDidChangeNotification, object: self)
+            .map { ($0.object as? UITextField)?.text ?? "" }
+            .eraseToAnyPublisher()
     }
 }

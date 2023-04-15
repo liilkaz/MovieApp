@@ -9,6 +9,7 @@ import UIKit
 
 enum Constants {
     enum Colors {
+        static var backgroundColor = UIColor(named: "BgColor")
         static var active = UIColor(hexString: "#514EB6")
         static var inactive = UIColor(hexString: "#BFC6CC")
         static var splashBackground = UIColor(named: "Onboarding")

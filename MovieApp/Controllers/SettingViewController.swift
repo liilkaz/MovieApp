@@ -11,7 +11,7 @@ class SettingViewController: UIViewController {
 
     enum MyConstants {
         static let logOutButtonImage: String = "logOutButton"
-        static let userPhotoImage: String = "userPhoto"
+        static let userPhotoImage: String = "profileIcon"
         static let userNameText: String = "Andy Lexsian"
         static let userNicknameText: String = "@Andy1999"
     }

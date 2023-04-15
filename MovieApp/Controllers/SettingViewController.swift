@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import Combine
 
 class SettingViewController: UIViewController {
+
+    private var anyCancellable = Set<AnyCancellable>()
 
     enum MyConstants {
         static let logOutButtonImage: String = "logOutButton"
@@ -57,6 +60,11 @@ class SettingViewController: UIViewController {
     }()
     
     @objc private func logOutButtonTapped() {
+        print("logout")
+        AuthService.shared.logout()
+        let logVC = LoginViewController()
+        logVC.modalPresentationStyle = .fullScreen
+        present(logVC, animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -176,7 +184,54 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        navigationController?.pushViewController(EditProfileViewController(), animated: true)
+        print(indexPath)
+
+        if indexPath.section == 0 {
+            navigationController?.pushViewController(EditProfileViewController(), animated: true)
+        }
+
+        if indexPath == [1, 0] {
+            showUpdateAlert()
+        }
+
+        if indexPath == [1, 1] {
+            guard let email = AuthService.shared.getEmailUser() else { return }
+            AuthService.shared.resetPassword()
+            showAlert(with: "Password Reset", and: "send email on \(email)")
+        }
+    }
+
+    func showUpdateAlert() {
+
+        let alertController = UIAlertController(title: "Change password", message: "new password 6 or more chars", preferredStyle: .alert)
+
+        var alertTextField = UITextField()
+        alertTextField.isSecureTextEntry = true
+        let addActionButton = UIAlertAction(title: "Change", style: .default) { _ in
+            guard let newPassword = alertTextField.text else { return }
+            AuthService.shared.updatePassword(newPass: newPassword)
+        }
+
+        addActionButton.isEnabled = false
+
+        alertController.addTextField { alertTF in
+            alertTF.placeholder = "Input new password"
+            alertTextField = alertTF
+        }
+
+        alertTextField.textPublisher()
+            .sink(receiveValue: { text in
+                let trimmedStr = text.trimmingCharacters(in: .whitespacesAndNewlines)
+                addActionButton.isEnabled = !trimmedStr.isEmpty
+            })
+            .store(in: &self.anyCancellable)
+
+        let cancelActionButton = UIAlertAction(title: "Cancel", style: .cancel)
+
+        alertController.addAction(addActionButton)
+        alertController.addAction(cancelActionButton)
+        alertController.preferredAction = addActionButton
+        present(alertController, animated: true)
     }
 }
 

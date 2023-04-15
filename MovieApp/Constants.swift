@@ -75,7 +75,7 @@ enum Constants {
                 case .search: return UIImage(named: "activeSearch")
                 case .recent: return UIImage(named: "activeRecent")
                 case .home: return UIImage(named: "home")
-                case .favorites: return UIImage(named: "activeFavorite")
+                case .favorites: return UIImage(named: "favorite_fill")
                 case .setting: return UIImage(named: "activeSetting")
                 }
             }

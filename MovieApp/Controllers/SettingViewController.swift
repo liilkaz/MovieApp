@@ -126,7 +126,7 @@ class SettingViewController: UIViewController {
         logOutButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             logOutButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -95),
-            logOutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            logOutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             logOutButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 18),
             logOutButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22),
             logOutButton.heightAnchor.constraint(equalToConstant: 60)

@@ -9,6 +9,9 @@ import UIKit
 
 class MoviesTableView: UITableView {
     
+    let movieArray = AllMovies.shared
+    var moviesByGenre = [Movie]()
+    
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         
@@ -20,6 +23,7 @@ class MoviesTableView: UITableView {
         translatesAutoresizingMaskIntoConstraints = false
         separatorColor = .clear
         showsVerticalScrollIndicator = false
+        moviesByGenre = movieArray.allMovies
     }
     
     required init?(coder: NSCoder) {
@@ -38,7 +42,7 @@ extension MoviesTableView: UITableViewDelegate {
 extension MoviesTableView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        5
+        movieArray.allMovies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -46,7 +50,10 @@ extension MoviesTableView: UITableViewDataSource {
                                              for: indexPath) as? MoviesCellView else {
             return UITableViewCell()
         }
-        cell.image.image = UIImage(named: "secondMovie")
+        cell.image.sd_setImage(with: moviesByGenre[indexPath.row].urlImage)
+        cell.filmName.text = moviesByGenre[indexPath.row].title
+        cell.reviewRaitingLabel.text = "\(moviesByGenre[indexPath.row].vote_average)"
+        
         return cell
     }
     

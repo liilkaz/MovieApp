@@ -15,7 +15,7 @@ class MoviesCellView: UITableViewCell {
         let img = UIImageView()
         img.image = UIImage(named: "secondMovie")
         img.translatesAutoresizingMaskIntoConstraints = false
-        img.contentMode = .scaleAspectFit
+        img.contentMode = .scaleAspectFill
         return img
     }()
     
@@ -175,6 +175,9 @@ extension MoviesCellView {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
+            image.widthAnchor.constraint(equalToConstant: 80),
+            image.heightAnchor.constraint(equalToConstant: 80),
+            
             mainStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             mainStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             mainStack.topAnchor.constraint(equalTo: contentView.topAnchor),

@@ -47,7 +47,7 @@ final class SplashViewController: UIViewController {
     }
 
     private func moveToLogin() {
-        let loginVC = TabBarViewController()
+        let loginVC = LoginViewController()
         let navigationController = UINavigationController(rootViewController: loginVC)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)

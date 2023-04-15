@@ -20,6 +20,7 @@ class EditProfileViewController: UIViewController {
         setupGestures()
         setupChangePhotoButtons()
         createDatePicker()
+        setupTextField()
     }
 }
 
@@ -47,14 +48,21 @@ private extension EditProfileViewController {
         imagePicker.delegate = self
     }
     
+    func setupTextField() {
+        profileView.firstNameInput.inputTextField.delegate = self
+        profileView.lastNameInput.inputTextField.delegate = self
+        profileView.emailInput.inputTextField.delegate = self
+        profileView.dateOfBirthInput.inputTextField.delegate = self
+    }
+    
     func setupChangePhotoButtons() {
         let takePhotoButton = profileView.changePhotoView.takePhotoButton
         let choosePhotoButton = profileView.changePhotoView.choosePhotoButton
-//        let deletePhotoButton = profileView.changePhotoView.deletePhotoButton
+        let deletePhotoButton = profileView.changePhotoView.deletePhotoButton
         
         takePhotoButton.addTarget(self, action: #selector(takePhotoPressed), for: .touchUpInside)
         choosePhotoButton.addTarget(self, action: #selector(choosePhotoPressed), for: .touchUpInside)
-        
+        deletePhotoButton.addTarget(self, action: #selector(deleteButtonPressed), for: .touchUpInside)
     }
     
     func createToolbar() -> UIToolbar {
@@ -77,6 +85,7 @@ private extension EditProfileViewController {
     }
     
     // MARK: - private @objc methods
+    
     @objc func dismissView() {
         profileView.changePhotoView.isHidden = true
     }
@@ -106,11 +115,17 @@ private extension EditProfileViewController {
         }
     }
     
+    @objc func deleteButtonPressed() {
+        profileView.avatarView.imageView.image = UIImage(named: "profileIcon")
+    }
+    
     @objc func choosePhotoPressed() {
         imagePicker.sourceType = .photoLibrary
         present(imagePicker, animated: true)
     }
 }
+
+// MARK: - UIGestureRecognizerDelegate
 
 extension EditProfileViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
@@ -118,17 +133,25 @@ extension EditProfileViewController: UIGestureRecognizerDelegate {
     }
 }
 
+// MARK: - UIImagePickerControllerDelegate
+
 extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
         
-        profileView.avatarView.imageView.image = image
+        profileView.avatarView.imageView.image = image.circle()
         
         picker.dismiss(animated: true)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true)
+    }
+}
+
+extension EditProfileViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
     }
 }

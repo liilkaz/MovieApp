@@ -15,6 +15,7 @@ class TextView: UIView {
         textView.text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
         textView.font = Constants.Fonts.plusJacartaSansLight(with: 16)
         textView.textColor = .systemGray
+        textView.backgroundColor = .clear
         return textView
     }()
     

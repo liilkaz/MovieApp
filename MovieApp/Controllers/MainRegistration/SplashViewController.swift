@@ -41,7 +41,6 @@ final class SplashViewController: UIViewController {
         super.viewDidAppear(animated)
         activityImageView.startAnimationLoading()
         moviesArray.getAllMovies { [weak self] in
-            sleep(1)
             self?.activityImageView.stopAnimationLoading()
             self?.moveToLogin()
         }

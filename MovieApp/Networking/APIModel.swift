@@ -35,7 +35,7 @@ struct Movie: Codable, Hashable {
     }
     
     var urlImage: URL {
-        return URL(string: "\(NetworkConstants.imageUrl + ((poster_path ?? "")))?api_key=\(NetworkConstants.apiKey)") ?? URL(string: "")!
+        return URL(string: "\(NetworkConstants.imageUrl + ((poster_path ?? "")))?api_key=\(NetworkConstants.apiKey)") ?? URL(fileURLWithPath: "")
     }
 }
 
@@ -69,7 +69,7 @@ struct DetailedMovie: Codable {
     let genres: [Genre]
     
     var urlImage: URL {
-        return URL(string: "\(NetworkConstants.imageUrl + ((poster_path ?? "")))?api_key=\(NetworkConstants.apiKey)") ?? URL(string: "")!
+        return URL(string: "\(NetworkConstants.imageUrl + ((poster_path ?? "")))?api_key=\(NetworkConstants.apiKey)") ?? URL(fileURLWithPath: "")
     }
     
     static let dateFormatterF: DateFormatter = {
@@ -123,7 +123,7 @@ struct Cast: Codable {
     let order: Int
     
     var urlImage: URL {
-        return URL(string: "\(NetworkConstants.imageUrl + ((profile_path ?? "")))?api_key=\(NetworkConstants.apiKey)") ?? URL(string: "")!
+        return URL(string: "\(NetworkConstants.imageUrl + ((profile_path ?? "")))?api_key=\(NetworkConstants.apiKey)") ?? URL(fileURLWithPath: "")
     }
     
 }
@@ -135,7 +135,7 @@ struct Crew: Codable {
     let profile_path: String?
     
     var urlImage: URL {
-        return URL(string: "\(NetworkConstants.imageUrl + ((profile_path ?? "")))?api_key=\(NetworkConstants.apiKey)") ?? URL(string: "")!
+        return URL(string: "\(NetworkConstants.imageUrl + ((profile_path ?? "")))?api_key=\(NetworkConstants.apiKey)") ?? URL(fileURLWithPath: "")
     }
 }
 

@@ -11,7 +11,9 @@ class APICaller {
     static let shared = APICaller()
     
     func getPopularMovies (completion: @escaping (Result<[Movie], Error>) -> Void) {
-        guard let url = URL(string: "\(NetworkConstants.baseUrl)/discover/movie?api_key=\(NetworkConstants.apiKey)&language=en-US&sort_by=popularity.desc") else {return}
+        guard let url = URL(
+            string: "\(NetworkConstants.baseUrl)/discover/movie?api_key=\(NetworkConstants.apiKey)&language=en-US&sort_by=popularity.desc")
+        else {return}
 //        print (url)
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else {return}
@@ -29,7 +31,9 @@ class APICaller {
     
     func getPopularTvShows (completion: @escaping (Result<[TvShow], Error>) -> Void) {
         
-        guard let url = URL(string: "\(NetworkConstants.baseUrl)/discover/tv?api_key=\(NetworkConstants.apiKey)&language=en-US&sort_by=popularity.desc") else {return}
+        guard let url = URL(
+            string: "\(NetworkConstants.baseUrl)/discover/tv?api_key=\(NetworkConstants.apiKey)&language=en-US&sort_by=popularity.desc")
+        else {return}
         print(url)
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else {return}
@@ -101,10 +105,9 @@ class APICaller {
     
     func getMoviesByGenre(with id: Int, completion: @escaping (Result<[Movie], Error>) -> Void) {
         
-        guard let url = URL(string: "\(NetworkConstants.baseUrl)/discover/movie?api_key=\(NetworkConstants.apiKey)&language=en-US&with_genres=\(id)") else {return}
-        print(url)
-    
-    //https://api.themoviedb.org/3/discover/movie?api_key=0f9652e080a421b13a031fc5237543ee&with_genres=28
+        guard let url = URL(
+            string: "\(NetworkConstants.baseUrl)/discover/movie?api_key=\(NetworkConstants.apiKey)&language=en-US&with_genres=\(id)")
+        else {return}
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else {return}
             do {
@@ -121,8 +124,6 @@ class APICaller {
     
     func getCredits(with id: Int, completion: @escaping (Result<Credits, Error>) -> Void) {
         guard let url = URL(string: "\(NetworkConstants.baseUrl)/movie/\(id)/credits?api_key=\(NetworkConstants.apiKey)&language=en-US") else {return}
-//        https://api.themoviedb.org/3/movie/585511/credits?api_key=0f9652e080a421b13a031fc5237543ee&language=en-US
-        print(url)
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else {return}
             do {

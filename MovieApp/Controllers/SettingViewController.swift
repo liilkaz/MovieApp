@@ -11,7 +11,6 @@ class SettingViewController: UIViewController {
 
     enum MyConstants {
         static let logOutButtonImage: String = "logOutButton"
-        static let userPhotoImage: String = "userPhoto"
         static let userNameText: String = "Andy Lexsian"
         static let userNicknameText: String = "@Andy1999"
     }
@@ -19,8 +18,8 @@ class SettingViewController: UIViewController {
     private lazy var userNameLabel: UILabel = {
         let label = UILabel()
         label.text = MyConstants.userNameText
-        label.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 18)
-        label.textColor = UIColor(named: "MainTextColor")
+        label.font = Constants.Fonts.plusJacartaSansSemiBold(with: 18)
+        label.textColor = Constants.Colors.mainTextColor
         label.textAlignment = .left
         return label
     }()
@@ -28,7 +27,7 @@ class SettingViewController: UIViewController {
     private lazy var userNicknameLabel: UILabel = {
         let label = UILabel()
         label.text = MyConstants.userNicknameText
-        label.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 14)
+        label.font = Constants.Fonts.plusJacartaSansSemiBold(with: 14)
         label.textColor = Constants.Colors.mainTextColor
         label.textAlignment = .left
         return label
@@ -36,15 +35,23 @@ class SettingViewController: UIViewController {
     
     private lazy var userPhotoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: MyConstants.userPhotoImage)
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.borderWidth = 0.3
+        imageView.clipsToBounds = true
+        imageView.layer.borderColor = Constants.Colors.mainTextColor?.cgColor
+        
         return imageView
     }()
     
     private lazy var userInformationStackView = UIStackView()
     
     private lazy var logOutButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setBackgroundImage(UIImage(named: MyConstants.logOutButtonImage), for: .normal)
+        let button = UIButton(title: "Log Out",
+                              backgroundColor: Constants.Colors.backgroundColor,
+                              titleColor: Constants.Colors.active,
+                              font: Constants.Fonts.plusJacartaSansMedium(with: 16),
+                              hasBorder: true,
+                              cornerRadius: 32)
         button.addTarget(self, action: #selector(logOutButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -54,6 +61,7 @@ class SettingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        title = Constants.Titles.NavBar.setting
         navigationController?.tabBarItem.title = Constants.Titles.TabBar.title(for: .setting)
         tabBarController?.tabBar.isHidden = false
     }
@@ -66,12 +74,13 @@ class SettingViewController: UIViewController {
         tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: idCell)
         tableView.register(SettingHeaderTableViewCell.self, forHeaderFooterViewReuseIdentifier: idHeader)
         
-        view.backgroundColor = UIColor(named: "BgColor")
+        view.backgroundColor = Constants.Colors.backgroundColor
         setupViews()
         setConstraints()
     }
     
     private func setupViews() {
+        userPhotoImageView.layer.cornerRadius = 28
         
         userInformationStackView = UIStackView(arrangedSubviews: [
             userNameLabel,
@@ -109,7 +118,10 @@ class SettingViewController: UIViewController {
         logOutButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             logOutButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -95),
-            logOutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            logOutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logOutButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 18),
+            logOutButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -22),
+            logOutButton.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
 

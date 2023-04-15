@@ -9,7 +9,7 @@ import UIKit
 
 class SettingTableViewCell: UITableViewCell {
     let cellNameArray = [["Profile"],
-                     ["Change Password", "Change Password", "Dark Mode"]]
+                     ["Change Password", "Forgot Password", "Dark Mode"]]
     
     let cellSettingImageArray = [["person"],
                      ["lock", "unlock", "darkMode"]]
@@ -20,8 +20,8 @@ class SettingTableViewCell: UITableViewCell {
     
     private lazy var nameSetting: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor(named: "MainTextColor")
-        label.font = UIFont(name: "PlusJakartaSans-SemiBold", size: 16)
+        label.textColor = Constants.Colors.mainTextColor
+        label.font = Constants.Fonts.plusJacartaSansSemiBold(with: 16)
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -73,7 +73,8 @@ class SettingTableViewCell: UITableViewCell {
     
     func cellConfigure(indexPath: IndexPath) {
         nameSetting.text = cellNameArray[indexPath.section][indexPath.row]
-        settingImage.image = UIImage(named: cellSettingImageArray[indexPath.section][indexPath.row])
+        settingImage.image = UIImage(
+            named: cellSettingImageArray[indexPath.section][indexPath.row])?.withTintColor(Constants.Colors.iconThemeColor ?? UIColor())
         if indexPath == [2, 2] {
             
         }

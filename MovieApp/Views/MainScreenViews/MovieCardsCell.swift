@@ -13,7 +13,8 @@ class MovieCardsCell: UICollectionViewCell {
     
     lazy var picture: UIImageView = {
         let image = UIImageView()
-        image.contentMode = .scaleAspectFit
+        image.contentMode = .scaleAspectFill
+        image.layer.masksToBounds = true
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
@@ -24,7 +25,7 @@ class MovieCardsCell: UICollectionViewCell {
         label.font = Constants.Fonts.plusJacartaSansBold(with: 14)
         label.textColor = .white
         label.textAlignment = .left
-        label.numberOfLines = 0
+        label.numberOfLines = 2
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -46,6 +47,7 @@ class MovieCardsCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(picture)
+        picture.layer.cornerRadius = 16
         picture.addSubview(category)
         picture.addSubview(filmName)
   

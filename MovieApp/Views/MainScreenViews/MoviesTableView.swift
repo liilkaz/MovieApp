@@ -14,7 +14,6 @@ class MoviesTableView: UITableView {
         
         register(MoviesCellView.self,
                  forCellReuseIdentifier: MoviesCellView.identifier)
-        delegate = self
         backgroundColor = Constants.Colors.backgroundColor
         translatesAutoresizingMaskIntoConstraints = false
         separatorStyle = .none
@@ -25,12 +24,4 @@ class MoviesTableView: UITableView {
         fatalError("init(coder:) has not been implemented")
     }
     
-}
-
-// MARK: - UITableViewDelegate
-
-extension MoviesTableView: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 95
-    }
 }

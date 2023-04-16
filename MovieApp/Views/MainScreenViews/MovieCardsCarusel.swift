@@ -97,6 +97,17 @@ private extension MovieCardsCarusel {
         ])
         
     }
+
+    func getCurrentViewController() -> UIViewController? {
+        if let rootController = UIApplication.shared.keyWindow?.rootViewController {
+            var currentController: UIViewController! = rootController
+            while(currentController.presentedViewController != nil) {
+                currentController = currentController.presentedViewController
+            }
+            return currentController
+        }
+        return nil
+    }
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
@@ -120,6 +131,14 @@ extension MovieCardsCarusel: UICollectionViewDelegateFlowLayout {
         let cellPadding = (frame.width - 188) / 2
         
         return .init(top: 0, left: cellPadding, bottom: 0, right: cellPadding)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailScreen = MovieDetailViewController()
+        detailScreen.id = movieArray.popularMovies[indexPath.row].id
+        detailScreen.show(detailScreen, sender: self)
+        let currentController = self.getCurrentViewController()
+        currentController?.present(detailScreen, animated: false, completion: nil)
     }
 }
 

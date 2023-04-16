@@ -8,12 +8,10 @@
 import UIKit
 
 class CircularCheckmark: UIView {
-
-    private var isChecked = false
     
     let imageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(systemName: "checkmark.circle.fill") ?? UIImage(), contentMode: .scaleAspectFit)
-        imageView.tintColor = Constants.Colors.splashBackground
+        imageView.tintColor = UIColor(hexString: "#514EB6")
         imageView.isHidden = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -35,14 +33,6 @@ class CircularCheckmark: UIView {
         fatalError("init (coder:) has not been implemented")
     }
     
-    func toggle() {
-        self.isChecked = !isChecked
-        if self.isChecked {
-            imageView.isHidden = false
-        } else {
-            imageView.isHidden = true
-        }
-    }
 }
 
 private extension CircularCheckmark {

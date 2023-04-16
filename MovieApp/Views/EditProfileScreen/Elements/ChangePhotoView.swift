@@ -14,6 +14,7 @@ class ChangePhotoView: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
         view.layer.cornerRadius = 12
+        view.backgroundColor = UIColor(named: "BgColor")
         return view
     }()
     
@@ -27,7 +28,7 @@ class ChangePhotoView: UIView {
         let button = UIButton(type: .system)
         button.setTitle("Take a photo", for: .normal)
         button.setupImage(UIImage(systemName: "camera"))
-        button.backgroundColor = UIColor(hexString: "#F5F5F5")
+        button.backgroundColor = .systemBackground
         button.setTitleColor(.label, for: .normal)
         button.tintColor = .black
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -40,7 +41,7 @@ class ChangePhotoView: UIView {
         let button = UIButton(type: .system)
         button.setTitle("Choose from your file", for: .normal)
         button.setupImage(UIImage(systemName: "folder.fill"))
-        button.backgroundColor = UIColor(hexString: "#F5F5F5")
+        button.backgroundColor = .systemBackground
         button.setTitleColor(.label, for: .normal)
         button.tintColor = .black
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -52,7 +53,7 @@ class ChangePhotoView: UIView {
         let button = UIButton(type: .system)
         button.setTitle("Delete Photo", for: .normal)
         button.setupImage(UIImage(systemName: "trash.fill"))
-        button.backgroundColor = UIColor(hexString: "#F5F5F5")
+        button.backgroundColor = .systemBackground
         button.setTitleColor(.systemRed, for: .normal)
         button.tintColor = .systemRed
         button.translatesAutoresizingMaskIntoConstraints = false

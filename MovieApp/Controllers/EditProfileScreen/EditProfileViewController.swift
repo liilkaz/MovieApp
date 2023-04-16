@@ -34,13 +34,15 @@ private extension EditProfileViewController {
     
     func setupGestures() {
         let changePhotoGesture = UITapGestureRecognizer(target: self, action: #selector(dismissView))
-        let checkboxGesture = UITapGestureRecognizer(target: self, action: #selector(checkboxTapped))
+        let maleCheckboxGesture = UITapGestureRecognizer(target: self, action: #selector(maleCheckboxTapped))
+        let femaleCheckboxGesture = UITapGestureRecognizer(target: self, action: #selector(femaleCheckboxTapped))
         let avatarGesture = UITapGestureRecognizer(target: self, action: #selector(avatarTapped))
         
         changePhotoGesture.delegate = self
         
         profileView.changePhotoView.addGestureRecognizer(changePhotoGesture)
-        profileView.maleCheckbox.addGestureRecognizer(checkboxGesture)
+        profileView.maleCheckbox.addGestureRecognizer(maleCheckboxGesture)
+        profileView.femaleCheckbox.addGestureRecognizer(femaleCheckboxGesture)
         profileView.avatarView.addGestureRecognizer(avatarGesture)
     }
     
@@ -90,8 +92,14 @@ private extension EditProfileViewController {
         profileView.changePhotoView.isHidden = true
     }
     
-    @objc func checkboxTapped() {
-        profileView.maleCheckbox.checkmark.toggle()
+    @objc func maleCheckboxTapped() {
+        profileView.maleCheckbox.checkmark.imageView.isHidden = false
+        profileView.femaleCheckbox.checkmark.imageView.isHidden = true
+    }
+    
+    @objc func femaleCheckboxTapped() {
+        profileView.maleCheckbox.checkmark.imageView.isHidden = true
+        profileView.femaleCheckbox.checkmark.imageView.isHidden = false
     }
     
     @objc func avatarTapped() {

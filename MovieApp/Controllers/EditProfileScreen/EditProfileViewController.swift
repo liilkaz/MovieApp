@@ -19,8 +19,8 @@ class EditProfileViewController: UIViewController {
         setupImagePicker()
         setupGestures()
         setupChangePhotoButtons()
-        createDatePicker()
         setupTextField()
+        createDatePicker()
     }
 }
 

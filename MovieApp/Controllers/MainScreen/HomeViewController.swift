@@ -67,6 +67,15 @@ class HomeViewController: UIViewController {
         setupCategories()
         setupHorizontalStack()
         setupMoviesList()
+        categories.didTappedCell = {[weak self] id in
+            if id == 0 {
+                self?.moviesByGenre = self?.movieArray.allMovies ?? []
+            } else {
+                self?.moviesByGenre = self?.movieArray.allMovies.filter({ $0.genre_ids[0] == id
+                }) ?? []
+            }
+            self?.moviesList.reloadData()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

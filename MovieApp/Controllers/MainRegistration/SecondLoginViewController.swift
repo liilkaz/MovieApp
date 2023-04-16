@@ -132,6 +132,8 @@ final class SecondLoginViewController: UIViewController {
             switch result {
 
             case .success(let user):
+                let userUid = user.uid
+                
                 let homeVC = TabBarViewController()
                 homeVC.modalPresentationStyle = .fullScreen
                 self?.present(homeVC, animated: true)

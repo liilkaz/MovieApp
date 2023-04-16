@@ -44,8 +44,9 @@ class MovieDetailViewController: UIViewController, UICollectionViewDelegate, SFS
         }()
     
     private lazy var addBarButtonBack: UIBarButtonItem = {
-        return UIBarButtonItem(image: UIImage(named: "arrowBack")?.withRenderingMode(.alwaysOriginal),
+        return UIBarButtonItem(image: UIImage(named: "arrowBack")?.withRenderingMode(.alwaysOriginal).withTintColor(.label),
                                style: .plain,
+                        
                                target: self,
                                action: #selector(back))
     }()
@@ -74,7 +75,7 @@ class MovieDetailViewController: UIViewController, UICollectionViewDelegate, SFS
     
         bottomView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(bottomView)
-        bottomView.backgroundColor = .white
+        bottomView.backgroundColor = UIColor(named: "BgColor")
         bottomView.addSubview(bottomButton)
         bottomButton.addTarget(self, action: #selector(whachNowTapped), for: .touchUpInside)
     }

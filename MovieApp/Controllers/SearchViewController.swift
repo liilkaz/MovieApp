@@ -32,8 +32,7 @@ class SearchViewController: UIViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.setLeftIcon(UIImage(named: "searchField") ?? UIImage())
         textField.setRightIcon(UIImage(named: "searchDivider") ?? UIImage())
-        textField.setupRightButton(with: UIImage(named: "filter") ?? UIImage())
-        
+        textField.setupRightButton(with: UIImage(named: "filter")?.withTintColor(.yellow) ?? UIImage())
         return textField
     }()
 

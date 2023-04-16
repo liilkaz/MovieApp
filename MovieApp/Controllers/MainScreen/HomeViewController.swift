@@ -9,10 +9,11 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
-    //инициализатор для передачи данных о пользователе
+    // инициализатор для передачи данных о пользователе
 
-    let movieCards = MovieCardsCollectionView()
+    let movieCards = MovieCardsCarusel()
     let movieArray = AllMovies.shared
+    var moviesByGenre = [Movie]()
     lazy var categories = CategoryCollectionView()
     lazy var moviesList = MoviesTableView(frame: .zero)
     lazy var scrollView = UIScrollView()
@@ -59,14 +60,13 @@ class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "BgColor")
+        moviesByGenre = movieArray.allMovies
+        view.backgroundColor = Constants.Colors.backgroundColor
         setupMovieCards()
         setupNavigationTitle()
         setupCategories()
         setupHorizontalStack()
         setupMoviesList()
-        
-//        movieArray.popularMovies
     }
 
 }
@@ -96,7 +96,7 @@ extension HomeViewController {
             movieCards.leadingAnchor.constraint(equalTo: scrollView.layoutMarginsGuide.leadingAnchor),
             movieCards.trailingAnchor.constraint(equalTo: scrollView.layoutMarginsGuide.trailingAnchor),
             movieCards.topAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.topAnchor),
-            movieCards.heightAnchor.constraint(equalToConstant: 250),
+            movieCards.heightAnchor.constraint(equalToConstant: 300),
             
             categoryTitle.leadingAnchor.constraint(equalTo: scrollView.layoutMarginsGuide.leadingAnchor),
             categoryTitle.trailingAnchor.constraint(equalTo: scrollView.layoutMarginsGuide.trailingAnchor),
@@ -122,6 +122,7 @@ extension HomeViewController {
    
     private func setupMoviesList() {
         view.addSubview(moviesList)
+        moviesList.dataSource = self
         
         NSLayoutConstraint.activate([
             moviesList.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
@@ -161,12 +162,12 @@ extension HomeViewController {
     
     private func setupMovieCards() {
         view.addSubview(movieCards)
-        
+        movieCards.carouselCollectionView.dataSource = self
         NSLayoutConstraint.activate([
             movieCards.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
             movieCards.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-            movieCards.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            movieCards.heightAnchor.constraint(equalToConstant: 250)
+            movieCards.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            movieCards.heightAnchor.constraint(equalToConstant: 300)
         ])
     }
     
@@ -231,6 +232,61 @@ extension HomeViewController {
     
     @objc private func seeAllTapped() {
         
+    }
+    
+}
+
+// MARK: - MovieCardDataSourse
+
+extension HomeViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        movieArray.popularMovies.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCardsCell.identifier,
+                                             for: indexPath) as? MovieCardsCell
+        else {
+            return UICollectionViewCell()
+        }
+        cell.picture.sd_setImage(with: movieArray.popularMovies[indexPath.row].urlImage)
+        cell.filmName.text = movieArray.popularMovies[indexPath.row].title
+//        cell.category.text = movieArray.popularMovies[indexPath.row].genre_ids
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailScreen = MovieDetailViewController()
+        detailScreen.id = movieArray.popularMovies[indexPath.row].id
+        navigationController?.pushViewController(detailScreen, animated: true)
+    }
+}
+
+//MARK: - MovieListDataSourse
+
+extension HomeViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        movieArray.allMovies.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MoviesCellView.identifier,
+                                             for: indexPath) as? MoviesCellView else {
+            return UITableViewCell()
+        }
+        cell.image.sd_setImage(with: moviesByGenre[indexPath.row].urlImage)
+        cell.filmName.text = moviesByGenre[indexPath.row].title
+        cell.reviewRaitingLabel.text = "\(moviesByGenre[indexPath.row].vote_average)"
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let detailScreen = MovieDetailViewController()
+        detailScreen.id = moviesByGenre[indexPath.row].id
+        navigationController?.pushViewController(detailScreen, animated: true)
     }
     
 }

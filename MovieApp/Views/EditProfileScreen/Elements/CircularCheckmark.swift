@@ -49,7 +49,7 @@ private extension CircularCheckmark {
     
     func setupView() {
         addSubview(imageView)
-        backgroundColor = .systemBackground
+        backgroundColor = .clear
     }
     
     func setConstraints() {

@@ -9,7 +9,7 @@ import UIKit
 
 class ChangePhotoView: UIView {
     
-    let view: UIView = {
+    private let view: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
@@ -17,14 +17,14 @@ class ChangePhotoView: UIView {
         return view
     }()
     
-    let label: UILabel = {
+    private let label: UILabel = {
         let label = UILabel(name: "Change your picture", font: Constants.Fonts.plusJacartaSansBold(with: 20))
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     let takePhotoButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setTitle("Take a photo", for: .normal)
         button.setupImage(UIImage(systemName: "camera"))
         button.backgroundColor = UIColor(hexString: "#F5F5F5")
@@ -37,7 +37,7 @@ class ChangePhotoView: UIView {
     }()
     
     let choosePhotoButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setTitle("Choose from your file", for: .normal)
         button.setupImage(UIImage(systemName: "folder.fill"))
         button.backgroundColor = UIColor(hexString: "#F5F5F5")
@@ -49,7 +49,7 @@ class ChangePhotoView: UIView {
     }()
     
     let deletePhotoButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setTitle("Delete Photo", for: .normal)
         button.setupImage(UIImage(systemName: "trash.fill"))
         button.backgroundColor = UIColor(hexString: "#F5F5F5")

@@ -116,7 +116,7 @@ class APICaller {
                 
             } catch {
                 completion(.failure(error))
-                print("error in getTrailer")
+                print("error in getMoviesByGenre")
             }
         }
         task.resume()
@@ -140,6 +140,23 @@ class APICaller {
         task.resume()
     }
     
+    func getGenres(completion: @escaping (Result<[Genre], Error>) -> Void) {
+        guard let url = URL(
+            string: "\(NetworkConstants.baseUrl)/genre/movie/list?api_key=\(NetworkConstants.apiKey)&language=en-US")
+        else {return}
+        print(url)
+        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
+            guard let data = data, error == nil else {return}
+            do {
+                let results = try JSONDecoder().decode([Genre].self, from: data)
+                completion(.success(results))
+            } catch {
+                completion(.failure(error))
+                print("error in getGenres")
+            }
+        }
+        task.resume()
+    }
     // MARK: - Поиск по ключевому слову
     
     func searchMovie(keyWord: String, completion: @escaping (Result<[Movie], Error>) -> Void) {

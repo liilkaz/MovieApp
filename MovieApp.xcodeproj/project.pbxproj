@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00331B1729EB01E800687079 /* UIImage + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00331B1629EB01E800687079 /* UIImage + Extension.swift */; };
 		00D9A1D529E69B9F00EE9A24 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D9A1D429E69B9F00EE9A24 /* EditProfileView.swift */; };
 		00D9A1D829E69C2600EE9A24 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D9A1D729E69C2600EE9A24 /* AvatarView.swift */; };
 		00D9A1DA29E69C8000EE9A24 /* CheckboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D9A1D929E69C8000EE9A24 /* CheckboxView.swift */; };
@@ -62,6 +63,7 @@
 		752F18F529E5A8EF00B020E2 /* APIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752F18F429E5A8EF00B020E2 /* APIModel.swift */; };
 		752F18F729E5A91100B020E2 /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752F18F629E5A91100B020E2 /* NetworkConstants.swift */; };
 		752F18F929E5AC8B00B020E2 /* ExpandableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752F18F829E5AC8B00B020E2 /* ExpandableLabel.swift */; };
+		7533B0EB29EB30170064FEF3 /* MovieCardsCarusel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7533B0EA29EB30170064FEF3 /* MovieCardsCarusel.swift */; };
 		757D2ED729E6B43B00761289 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 757D2ED629E6B43B00761289 /* SDWebImage */; };
 		757D2ED929E6B43B00761289 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 757D2ED829E6B43B00761289 /* SDWebImageMapKit */; };
 		757D2EE929E9DAA500761289 /* AllMovies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757D2EE829E9DAA500761289 /* AllMovies.swift */; };
@@ -89,6 +91,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		00331B1629EB01E800687079 /* UIImage + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + Extension.swift"; sourceTree = "<group>"; };
 		00D9A1D429E69B9F00EE9A24 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		00D9A1D729E69C2600EE9A24 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		00D9A1D929E69C8000EE9A24 /* CheckboxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxView.swift; sourceTree = "<group>"; };
@@ -141,6 +144,7 @@
 		752F18F429E5A8EF00B020E2 /* APIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModel.swift; sourceTree = "<group>"; };
 		752F18F629E5A91100B020E2 /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
 		752F18F829E5AC8B00B020E2 /* ExpandableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableLabel.swift; sourceTree = "<group>"; };
+		7533B0EA29EB30170064FEF3 /* MovieCardsCarusel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCardsCarusel.swift; sourceTree = "<group>"; };
 		757D2EE829E9DAA500761289 /* AllMovies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllMovies.swift; sourceTree = "<group>"; };
 		75986DCB29D8B8CC00BDECB0 /* MovieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75986DCE29D8B8CC00BDECB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -451,6 +455,7 @@
 				0C83C11C29DAD6EC00C4592E /* UIView + Extension.swift */,
 				0C83C12A29DAEEB900C4592E /* UITextField + Extension.swift */,
 				0C83C13629DB3EED00C4592E /* UIViewController + Extension.swift */,
+				00331B1629EB01E800687079 /* UIImage + Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -472,6 +477,7 @@
 				D056719E29E01629002C2449 /* CategoriesCell.swift */,
 				D0965C4829E1AB9D00CFDA35 /* MoviesTableView.swift */,
 				D0965C4A29E1AC8800CFDA35 /* MoviesCellView.swift */,
+				7533B0EA29EB30170064FEF3 /* MovieCardsCarusel.swift */,
 			);
 			path = MainScreenViews;
 			sourceTree = "<group>";
@@ -655,6 +661,7 @@
 				752F18F329E5A8B300B020E2 /* APICaller.swift in Sources */,
 				75986DF829D8D13100BDECB0 /* FavorivesViewController.swift in Sources */,
 				0C83C13729DB3EED00C4592E /* UIViewController + Extension.swift in Sources */,
+				00331B1729EB01E800687079 /* UIImage + Extension.swift in Sources */,
 				75986DCF29D8B8CC00BDECB0 /* AppDelegate.swift in Sources */,
 				0C83C11D29DAD6EC00C4592E /* UIView + Extension.swift in Sources */,
 				0C83C12B29DAEEB900C4592E /* UITextField + Extension.swift in Sources */,
@@ -674,6 +681,7 @@
 				751715BE29E0A2B400D95475 /* MainInfo.swift in Sources */,
 				75986DD929D8B8CC00BDECB0 /* MovieApp.xcdatamodeld in Sources */,
 				752F18F729E5A91100B020E2 /* NetworkConstants.swift in Sources */,
+				7533B0EB29EB30170064FEF3 /* MovieCardsCarusel.swift in Sources */,
 				0CE1681029EBC0660021D593 /* UserModel.swift in Sources */,
 				0C83C15F29E9B37C00C4592E /* Theme.swift in Sources */,
 				D000C84229DEC928009486B7 /* MovieCardsCell.swift in Sources */,
@@ -833,7 +841,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W856DM7S8L;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MovieApp/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -865,7 +873,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W856DM7S8L;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MovieApp/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

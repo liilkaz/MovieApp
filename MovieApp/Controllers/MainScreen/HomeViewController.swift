@@ -57,7 +57,7 @@ class HomeViewController: UIViewController {
         
         return st
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         moviesByGenre = movieArray.allMovies
@@ -68,7 +68,11 @@ class HomeViewController: UIViewController {
         setupHorizontalStack()
         setupMoviesList()
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = false
+    }
 }
 
 // MARK: - ADDING METHODS
@@ -164,6 +168,7 @@ extension HomeViewController {
     private func setupMovieCards() {
         view.addSubview(movieCards)
         movieCards.carouselCollectionView.dataSource = self
+//        movieCards.delegate = self
         NSLayoutConstraint.activate([
             movieCards.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
             movieCards.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
@@ -256,11 +261,6 @@ extension HomeViewController: UICollectionViewDataSource {
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailScreen = MovieDetailViewController()
-        detailScreen.id = movieArray.popularMovies[indexPath.row].id
-        navigationController?.pushViewController(detailScreen, animated: true)
-    }
 }
 
 // MARK: - MovieListDataSourse

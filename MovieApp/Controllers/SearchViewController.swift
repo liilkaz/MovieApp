@@ -75,6 +75,7 @@ class SearchViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(RecentTableViewCell.self, forCellReuseIdentifier: RecentTableViewCell.identifier)
         searchTextField.delegate = self
+        hideKeyboardWhenTappedAround()
     }
     
     func fetchSearchedMovies(with searchText: String) {
@@ -86,7 +87,9 @@ class SearchViewController: UIViewController {
                     self?.moviesByGenre = movies
                     DispatchQueue.main.async {
                         self?.tableView.reloadData()
-                        print(self?.moviesByGenre ?? "where are movies?")
+//                        print(self?.moviesByGenre ?? "where are movies?")
+                        self?.searchTextField.text = ""
+                        self?.searchTextField.resignFirstResponder()
                     }
                 case .failure(let error):
                     print(error)

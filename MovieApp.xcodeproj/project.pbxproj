@@ -42,6 +42,10 @@
 		0C83C15429E1B44600C4592E /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0C83C15329E1B44600C4592E /* GoogleSignInSwift */; };
 		0C83C15F29E9B37C00C4592E /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C83C15E29E9B37C00C4592E /* Theme.swift */; };
 		0C83C16129E9B38A00C4592E /* Persist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C83C16029E9B38A00C4592E /* Persist.swift */; };
+		0C83C16329EB2C8100C4592E /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C83C16229EB2C8100C4592E /* CoreDataService.swift */; };
+		0CE1681029EBC0660021D593 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE1680F29EBC0660021D593 /* UserModel.swift */; };
+		0CE1681229EBC2420021D593 /* UserDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE1681129EBC2420021D593 /* UserDataSource.swift */; };
+		0CE1681429EBC3000021D593 /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE1681329EBC3000021D593 /* MovieModel.swift */; };
 		2C92CEA629DF563300B3B9A7 /* RecentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C92CEA529DF563300B3B9A7 /* RecentTableViewCell.swift */; };
 		2CD7DD4A29E81F3D00E80514 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7DD4929E81F3D00E80514 /* Enums.swift */; };
 		3BB5FF675333053995E9BCFA /* Pods_MovieApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B886FE607F858AAD9AD5C1B /* Pods_MovieApp.framework */; };
@@ -117,6 +121,10 @@
 		0C83C14E29E1A6E300C4592E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0C83C15E29E9B37C00C4592E /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		0C83C16029E9B38A00C4592E /* Persist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persist.swift; sourceTree = "<group>"; };
+		0C83C16229EB2C8100C4592E /* CoreDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
+		0CE1680F29EBC0660021D593 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		0CE1681129EBC2420021D593 /* UserDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataSource.swift; sourceTree = "<group>"; };
+		0CE1681329EBC3000021D593 /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
 		2C92CEA529DF563300B3B9A7 /* RecentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentTableViewCell.swift; sourceTree = "<group>"; };
 		2CD7DD4929E81F3D00E80514 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		65789FE37171535124E2449F /* Pods-MovieApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp.release.xcconfig"; path = "Target Support Files/Pods-MovieApp/Pods-MovieApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -244,7 +252,9 @@
 		0C83C14329E19BEF00C4592E /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				0C83C16229EB2C8100C4592E /* CoreDataService.swift */,
 				0C83C14429E19C2000C4592E /* AuthService.swift */,
+				0CE1681129EBC2420021D593 /* UserDataSource.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -394,6 +404,8 @@
 				75986DE729D8B9F300BDECB0 /* DataModel */,
 				2CD7DD4929E81F3D00E80514 /* Enums.swift */,
 				757D2EE829E9DAA500761289 /* AllMovies.swift */,
+				0CE1680F29EBC0660021D593 /* UserModel.swift */,
+				0CE1681329EBC3000021D593 /* MovieModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -635,6 +647,7 @@
 				75986DF029D8CBD900BDECB0 /* NavigationBarController.swift in Sources */,
 				2C92CEA629DF563300B3B9A7 /* RecentTableViewCell.swift in Sources */,
 				D056719D29E015AB002C2449 /* CategoryCollectionView.swift in Sources */,
+				0C83C16329EB2C8100C4592E /* CoreDataService.swift in Sources */,
 				75986DFD29D8DB2D00BDECB0 /* UIColor + ext.swift in Sources */,
 				751715B629E09BAF00D95475 /* MainInfoCollectionViewCell.swift in Sources */,
 				751715C329E0A53000D95475 /* MovieDetailViewController.swift in Sources */,
@@ -648,17 +661,20 @@
 				751715B929E09BE000D95475 /* CastAndCrewCollectionViewCell.swift in Sources */,
 				D056719F29E01629002C2449 /* CategoriesCell.swift in Sources */,
 				751715B929E09BE000D95475 /* CastAndCrewCollectionViewCell.swift in Sources */,
+				0CE1681429EBC3000021D593 /* MovieModel.swift in Sources */,
 				0C83C11929DAC09300C4592E /* UIButton + Extension.swift in Sources */,
 				0C83C14529E19C2000C4592E /* AuthService.swift in Sources */,
 				0C83C11329DABAF600C4592E /* SplashViewController.swift in Sources */,
 				EE73434D29E479ED006B6B3D /* SettingTableViewCell.swift in Sources */,
 				00D9A1E129E6CB8400EE9A24 /* EditProfileViewController.swift in Sources */,
+				0CE1681229EBC2420021D593 /* UserDataSource.swift in Sources */,
 				757D2EE929E9DAA500761289 /* AllMovies.swift in Sources */,
 				751715BE29E0A2B400D95475 /* MainInfo.swift in Sources */,
 				D000C84029DEC8FB009486B7 /* MovieCardsCollectionView.swift in Sources */,
 				751715BE29E0A2B400D95475 /* MainInfo.swift in Sources */,
 				75986DD929D8B8CC00BDECB0 /* MovieApp.xcdatamodeld in Sources */,
 				752F18F729E5A91100B020E2 /* NetworkConstants.swift in Sources */,
+				0CE1681029EBC0660021D593 /* UserModel.swift in Sources */,
 				0C83C15F29E9B37C00C4592E /* Theme.swift in Sources */,
 				D000C84229DEC928009486B7 /* MovieCardsCell.swift in Sources */,
 				D0965C4B29E1AC8800CFDA35 /* MoviesCellView.swift in Sources */,

@@ -123,6 +123,7 @@ extension HomeViewController {
     private func setupMoviesList() {
         view.addSubview(moviesList)
         moviesList.dataSource = self
+        moviesList.delegate = self
         
         NSLayoutConstraint.activate([
             moviesList.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
@@ -262,9 +263,9 @@ extension HomeViewController: UICollectionViewDataSource {
     }
 }
 
-//MARK: - MovieListDataSourse
+// MARK: - MovieListDataSourse
 
-extension HomeViewController: UITableViewDataSource {
+extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         movieArray.allMovies.count
@@ -278,6 +279,7 @@ extension HomeViewController: UITableViewDataSource {
         cell.image.sd_setImage(with: moviesByGenre[indexPath.row].urlImage)
         cell.filmName.text = moviesByGenre[indexPath.row].title
         cell.reviewRaitingLabel.text = "\(moviesByGenre[indexPath.row].vote_average)"
+        cell.reviewCountLabel.text = "(\(moviesByGenre[indexPath.row].vote_count))"
         
         return cell
     }
@@ -285,8 +287,12 @@ extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let detailScreen = MovieDetailViewController()
+        print(moviesByGenre[indexPath.row].id)
         detailScreen.id = moviesByGenre[indexPath.row].id
         navigationController?.pushViewController(detailScreen, animated: true)
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 95
+    }
 }

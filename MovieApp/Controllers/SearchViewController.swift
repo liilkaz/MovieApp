@@ -36,6 +36,8 @@ class SearchViewController: UIViewController {
         return textField
     }()
 
+    private let userDataSource = UserDataSource()
+
     private lazy var tableView: UITableView = {
         let table = UITableView()
         table.backgroundColor = UIColor(named: "BgColor")
@@ -135,6 +137,15 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         cell.filmNameLabel.text = moviesByGenre[indexPath.row].title
         cell.movieImage.sd_setImage(with: moviesByGenre[indexPath.row].urlImage)
         cell.dateLabel.text = moviesByGenre[indexPath.row].textDate
+        cell.didTapedFavoriteButton = { [weak self] in
+            guard let self else { return }
+            if cell.isFavorite {
+                self.userDataSource.saveFavorite(with: self.moviesByGenre[indexPath.row].id, in: AllMovies.shared.userId)
+            } else {
+                self.userDataSource.deleteFavorite(for: AllMovies.shared.userId, movieId: self.moviesByGenre[indexPath.row].id)
+            }
+
+        }
         
 //        cell.timeLabel.text = "\(runtimes[indexPath.row]) minutes"
         
@@ -144,7 +155,9 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let detailScreen = MovieDetailViewController()
-        detailScreen.id = moviesByGenre[indexPath.row].id
+        let movie = moviesByGenre[indexPath.row]
+        userDataSource.saveRecent(with: movie.id, in: AllMovies.shared.userId)
+        detailScreen.id = movie.id
         navigationController?.pushViewController(detailScreen, animated: true)
     }
 }

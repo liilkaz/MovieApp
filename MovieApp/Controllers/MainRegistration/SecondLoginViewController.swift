@@ -10,6 +10,8 @@ import UIKit
 final class SecondLoginViewController: UIViewController {
     
     // MARK: - Private properties
+
+    private let userDataService = UserDataSource()
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel(name: "Login", font:
@@ -132,8 +134,18 @@ final class SecondLoginViewController: UIViewController {
             switch result {
 
             case .success(let user):
-                let userUid = user.uid
-                
+                if self?.userDataService.getUser(for: user.uid) == nil {
+                    let userModel = UserModel(
+                        email: user.email ?? "no",
+                        firstName: user.displayName ?? "no",
+                        lastName: "no",
+                        uuid: user.uid)
+                    self?.userDataService.saveUserModel(with: userModel)
+                    AllMovies.shared.userId = userModel.uuid
+                } else {
+                    AllMovies.shared.userId = user.uid
+                }
+
                 let homeVC = TabBarViewController()
                 homeVC.modalPresentationStyle = .fullScreen
                 self?.present(homeVC, animated: true)

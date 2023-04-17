@@ -14,13 +14,15 @@ class SettingViewController: UIViewController {
 
     enum MyConstants {
         static let logOutButtonImage: String = "logOutButton"
-        static let userNameText: String = "Andy Lexsian"
-        static let userNicknameText: String = "@Andy1999"
+//        static let userNameText: String = "Andy Lexsian"
+//        static let userNicknameText: String = "@Andy1999"
     }
+
+    private var userModel: UserModel?
     
     private lazy var userNameLabel: UILabel = {
         let label = UILabel()
-        label.text = MyConstants.userNameText
+//        label.text = MyConstants.userNameText
         label.font = Constants.Fonts.plusJacartaSansSemiBold(with: 18)
         label.textColor = Constants.Colors.mainTextColor
         label.textAlignment = .left
@@ -29,7 +31,7 @@ class SettingViewController: UIViewController {
     
     private lazy var userNicknameLabel: UILabel = {
         let label = UILabel()
-        label.text = MyConstants.userNicknameText
+//        label.text = MyConstants.userNicknameText
         label.font = Constants.Fonts.plusJacartaSansSemiBold(with: 14)
         label.textColor = Constants.Colors.mainTextColor
         label.textAlignment = .left
@@ -76,7 +78,8 @@ class SettingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        getUserModel()
+        setUserInfo()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: idCell)
@@ -85,6 +88,15 @@ class SettingViewController: UIViewController {
         view.backgroundColor = Constants.Colors.backgroundColor
         setupViews()
         setConstraints()
+    }
+
+    private func getUserModel() {
+        userModel = UserDataSource().getUser(for: AllMovies.shared.userId)
+    }
+
+    private func setUserInfo() {
+        userNameLabel.text = "\(userModel?.firstName ?? "no") \(userModel?.lastName ?? "no")"
+        userNicknameLabel.text = "\(userModel?.email ?? "no")"
     }
     
     private func setupViews() {

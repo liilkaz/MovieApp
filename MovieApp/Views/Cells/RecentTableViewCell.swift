@@ -8,14 +8,17 @@
 import UIKit
 
 class RecentTableViewCell: UITableViewCell {
+
+    var didTapedFavoriteButton: (() -> Void)?
     
-    private var isFavorite: Bool = false {
-            didSet {
-                favoriteButton.imageView?.image = nil
-                let image = UIImage(named: isFavorite ? "favorite_fill" : "favorite")
-                favoriteButton.setImage(image, for: .normal)
-            }
+    var isFavorite: Bool = false {
+        didSet {
+            favoriteButton.imageView?.image = nil
+            let image = UIImage(named: isFavorite ? "favorite_fill" : "favorite")
+            favoriteButton.setImage(image, for: .normal)
+
         }
+    }
     
     static let identifier = "\(RecentTableViewCell.self)"
    
@@ -109,7 +112,6 @@ class RecentTableViewCell: UITableViewCell {
         button.translatesAutoresizingMaskIntoConstraints = false
         let image = UIImage(named: isFavorite ? "favorite_fill" : "favorite")
         button.setImage(image, for: .normal)
-
         return button
     }()
 
@@ -145,6 +147,7 @@ class RecentTableViewCell: UITableViewCell {
     
     @objc func didTapLike() {
         isFavorite = !isFavorite
+        didTapedFavoriteButton?()
     }
     
     func setConstraints() {

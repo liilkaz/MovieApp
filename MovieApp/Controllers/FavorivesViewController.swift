@@ -10,6 +10,9 @@ import UIKit
 class FavorivesViewController: UIViewController {
     
     let movieArray = AllMovies.shared
+    private var favorites = [Movie]()
+
+    private let userDataSource = UserDataSource()
 
     private lazy var tableView: UITableView = {
         let table = UITableView()
@@ -22,12 +25,14 @@ class FavorivesViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        getFavorites()
         navigationController?.tabBarItem.title = Constants.Titles.TabBar.title(for: .favorites)
         tabBarController?.tabBar.isHidden = false
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getFavorites()
         view.backgroundColor = UIColor(named: "BgColor")
         title = Constants.Titles.NavBar.favorites
         view.addSubview(tableView)
@@ -47,6 +52,21 @@ class FavorivesViewController: UIViewController {
             
         ])
     }
+
+    private func getFavorites() {
+        let favoritesID = userDataSource.getFavorites(for: AllMovies.shared.userId)
+        favorites.removeAll()
+        AllMovies.shared.allMovies.forEach { movie in
+            if favoritesID.contains(where: { movieModel in
+                movieModel.movieId == movie.id
+            }) {
+                favorites.append(movie)
+            }
+        }
+        let nonDubleFavorite = Set(favorites)
+        favorites = Array(nonDubleFavorite)
+        tableView.reloadData()
+    }
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSourse
@@ -55,7 +75,7 @@ extension FavorivesViewController: UITableViewDelegate, UITableViewDataSource {
  
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return movieArray.allMovies.count
+        return favorites.count
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
             return 180
@@ -64,9 +84,9 @@ extension FavorivesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RecentTableViewCell.identifier,
                                                        for: indexPath) as? RecentTableViewCell else { return UITableViewCell() }
-        cell.filmNameLabel.text = movieArray.allMovies[indexPath.row].title
-        cell.movieImage.sd_setImage(with: movieArray.allMovies[indexPath.row].urlImage)
-        cell.dateLabel.text = movieArray.allMovies[indexPath.row].textDate
+        cell.filmNameLabel.text = favorites[indexPath.row].title
+        cell.movieImage.sd_setImage(with: favorites[indexPath.row].urlImage)
+        cell.dateLabel.text = favorites[indexPath.row].textDate
        
         return cell
     }

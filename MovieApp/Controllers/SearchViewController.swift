@@ -36,6 +36,8 @@ class SearchViewController: UIViewController {
         return textField
     }()
 
+    private let userDataSource = UserDataSource()
+
     private lazy var tableView: UITableView = {
         let table = UITableView()
         table.backgroundColor = UIColor(named: "BgColor")
@@ -144,7 +146,9 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let detailScreen = MovieDetailViewController()
-        detailScreen.id = moviesByGenre[indexPath.row].id
+        let movie = moviesByGenre[indexPath.row]
+        userDataSource.saveRecent(with: movie.id, in: AllMovies.shared.userId)
+        detailScreen.id = movie.id
         navigationController?.pushViewController(detailScreen, animated: true)
     }
 }

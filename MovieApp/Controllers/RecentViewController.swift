@@ -12,7 +12,10 @@ class RecentViewController: UIViewController {
     let categories = CategoryCollectionView()
     let movieCategories = FilmCategories.allCases
     var moviesByGenre = [Movie]()
-    let movieArray = AllMovies.shared
+    var allMovieArray = AllMovies.shared
+    var recentsMovieArray = [Movie]()
+
+    private let userDataSource = UserDataSource()
 
     private lazy var tableView: UITableView = {
         let table = UITableView()
@@ -25,13 +28,15 @@ class RecentViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        getRecentsMovies()
         navigationController?.tabBarItem.title = Constants.Titles.TabBar.title(for: .recent)
         tabBarController?.tabBar.isHidden = false
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        moviesByGenre = movieArray.allMovies
+        getRecentsMovies()
+
         view.backgroundColor = UIColor(named: "BgColor")
         title = Constants.Titles.NavBar.recent
         view.addSubview(categories)
@@ -43,13 +48,29 @@ class RecentViewController: UIViewController {
         
         categories.didTappedCell = {[weak self] id in
             if id == 0 {
-                self?.moviesByGenre = self?.movieArray.allMovies ?? []
+                self?.moviesByGenre = self?.recentsMovieArray ?? []
             } else {
-                self?.moviesByGenre = self?.movieArray.allMovies.filter({ $0.genre_ids[0] == id
+                self?.moviesByGenre = self?.recentsMovieArray.filter({ $0.genre_ids[0] == id
                 }) ?? []
             }
             self?.tableView.reloadData()
         }
+    }
+
+    private func getRecentsMovies() {
+        let recentsID = userDataSource.getRecents(for: AllMovies.shared.userId)
+        recentsMovieArray.removeAll()
+        allMovieArray.allMovies.forEach { movie in
+            if recentsID.contains(where: { movieModel in
+                movieModel.movieId == movie.id
+            }) {
+                recentsMovieArray.append(movie)
+            }
+        }
+        let nonDubleRecent = Set(recentsMovieArray)
+        recentsMovieArray = Array(nonDubleRecent)
+        moviesByGenre = recentsMovieArray
+        tableView.reloadData()
     }
 
     private func setConstraints() {
@@ -81,8 +102,12 @@ extension RecentViewController: UITableViewDelegate, UITableViewDataSource {
         }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: RecentTableViewCell.identifier,
-                                                       for: indexPath) as? RecentTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: RecentTableViewCell.identifier,
+            for: indexPath) as? RecentTableViewCell
+        else {
+            return UITableViewCell()
+        }
         cell.filmNameLabel.text = moviesByGenre[indexPath.row].title
         cell.movieImage.sd_setImage(with: moviesByGenre[indexPath.row].urlImage)
         cell.dateLabel.text = moviesByGenre[indexPath.row].textDate

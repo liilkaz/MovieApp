@@ -11,7 +11,7 @@ protocol UserDataSourceProtocol {
 
     func saveUserModel(with userModel: UserModel)
     func saveFavorite(with movie: MovieModel, in userId: String)
-    func saveRecent(with movie: MovieModel, in userId: String)
+    func saveRecent(with movieId: Int, in userId: String)
 
     func getFavorites(for userId: String) -> [MovieModel]
     func getRecents(for userId: String) -> [MovieModel]
@@ -64,7 +64,7 @@ extension UserDataSource: UserDataSourceProtocol {
         }
     }
 
-    func saveRecent(with movie: MovieModel, in userId: String) {
+    func saveRecent(with movieId: Int, in userId: String) {
         coreDataService.save { context in
             let fetchRequest = DBUser.fetchRequest()
             fetchRequest.predicate = NSPredicate(format: "uuid == %@", userId)
@@ -78,7 +78,7 @@ extension UserDataSource: UserDataSourceProtocol {
             }
 
             let dbMovies = DBMovie(context: context)
-            dbMovies.movieID = Int64(movie.movieId)
+            dbMovies.movieID = Int64(movieId)
 
             dbUser.addToRecentWatchMovies(dbMovies)
         }

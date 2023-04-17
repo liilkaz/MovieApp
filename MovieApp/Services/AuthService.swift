@@ -96,4 +96,19 @@ class AuthService {
     func getEmailUser() -> String? {
         auth.currentUser?.email
     }
+
+    func getUserInfo() -> UserModel {
+        guard
+            let email = auth.currentUser?.email,
+            let userId = auth.currentUser?.uid
+        else {
+            return UserModel(email: "unknown", firstName: "unknown", lastName: "unknown", uuid: "unknown")
+        }
+        let userFullName = auth.currentUser?.displayName?.components(separatedBy: " ")
+        let firstName = userFullName?[0] ?? "noName"
+        let lastName = userFullName?[1] ?? "noName"
+
+        let userModel = UserModel(email: email, firstName: firstName, lastName: lastName, uuid: userId)
+        return userModel
+    }
 }

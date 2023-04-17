@@ -10,6 +10,7 @@ import CoreData
 
 protocol CoreDataServiceProtocol: AnyObject {
 
+    func fetchUser(for userId: String) throws -> DBUser?
     func fetchFavorites(for userId: String) throws -> [DBMovie]
     func fetchRecents(for userId: String) throws -> [DBMovie]
     func save(block: @escaping (NSManagedObjectContext) throws -> Void)
@@ -38,9 +39,18 @@ class CoreDataService {
 
 extension CoreDataService: CoreDataServiceProtocol {
 
+    func fetchUser(for userId: String) throws -> DBUser? {
+        let fetchRequest = DBUser.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "uuid == %@", userId)
+
+        let dbUser = try viewContext.fetch(fetchRequest).first
+
+        return dbUser
+    }
+
     func fetchFavorites(for userId: String) throws -> [DBMovie] {
         let fetchRequest = DBUser.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "userId == %@", userId)
+        fetchRequest.predicate = NSPredicate(format: "uuid == %@", userId)
         let dbUser = try viewContext.fetch(fetchRequest).first
 
         guard
@@ -55,7 +65,7 @@ extension CoreDataService: CoreDataServiceProtocol {
 
     func fetchRecents(for userId: String) throws -> [DBMovie] {
         let fetchRequest = DBUser.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "userId == %@", userId)
+        fetchRequest.predicate = NSPredicate(format: "uuid == %@", userId)
         let dbUser = try viewContext.fetch(fetchRequest).first
 
         guard

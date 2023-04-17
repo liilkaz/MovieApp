@@ -19,6 +19,8 @@ class SignInViewController: UIViewController {
         case confirmPassword
     }
 
+    private let userDataSource = UserDataSource()
+
     private lazy var titleLabel: UILabel = {
         let label = UILabel(name: "Complet your account",
                             font: Constants.Fonts.plusJacartaSansBold(with: 24))
@@ -183,8 +185,15 @@ class SignInViewController: UIViewController {
                 switch result {
 
                 case .success(let user):
-                    let userUid = user.uid
-                    
+                    let userModel = UserModel(
+                        email: user.email ?? "no",
+                        firstName: self?.firstNameInput.inputTextField.text ?? "no",
+                        lastName: self?.lastNameInput.inputTextField.text ?? "no",
+                        uuid: user.uid)
+
+                    self?.userDataSource.saveUserModel(with: userModel)
+                    AllMovies.shared.userId = userModel.uuid
+
                     let homeVC = TabBarViewController()
                     homeVC.modalPresentationStyle = .fullScreen
                     self?.present(homeVC, animated: true)

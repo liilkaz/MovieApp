@@ -57,12 +57,15 @@ class HomeViewController: UIViewController {
         
         return st
     }()
+
+    private var userModel: UserModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         moviesByGenre = movieArray.allMovies
         view.backgroundColor = Constants.Colors.backgroundColor
         setupMovieCards()
+        getUserModel()
         setupNavigationTitle()
         setupCategories()
         setupHorizontalStack()
@@ -87,6 +90,10 @@ class HomeViewController: UIViewController {
 // MARK: - ADDING METHODS
 
 extension HomeViewController {
+
+    private func getUserModel() {
+        userModel = UserDataSource().getUser(for: AllMovies.shared.userId)
+    }
     
     private func setupScrollView() {
         view.addSubview(scrollView)
@@ -197,7 +204,8 @@ extension HomeViewController {
         
         let greeting: UILabel = {
             let label = UILabel()
-            label.text = "Hi, Andy"
+
+            label.text = "Hi, \(userModel?.firstName ?? "NO")"
             label.font = Constants.Fonts.plusJacartaSansBold(with: 18)
             label.textColor = Constants.Colors.mainTextColor
             

@@ -8,6 +8,7 @@
 import Foundation
 
 final class AllMovies {
+    var userId = ""
     var allMovies = [Movie]()
     var allTvShows = [TvShow]()
     var popularMovies = [Movie]()

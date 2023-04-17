@@ -15,6 +15,7 @@ protocol UserDataSourceProtocol {
 
     func getFavorites(for userId: String) -> [MovieModel]
     func getRecents(for userId: String) -> [MovieModel]
+    func getUser(for userId: String) -> UserModel
 //
 //    func deleteFavorites(in userId: String)
 //    func deleteRecent(in userId: String)
@@ -111,12 +112,31 @@ extension UserDataSource: UserDataSourceProtocol {
             }
     }
 
+    func getUser(for userId: String) -> UserModel {
+        do {
+            let dbUser = try coreDataService.fetchUser(for: userId)
+
+            let email = dbUser?.email ?? "no"
+            let name = dbUser?.firstName ?? "no"
+            let secondName = dbUser?.lastName ?? "no"
+            let uuid = dbUser?.uuid ?? "no"
+//            let avatar = dbUser?.avatar
+//            let sex = dbUser?.isMale
+
+            return UserModel(email: email, firstName: name, lastName: secondName, uuid: uuid)
+
+        } catch {
+            print("error fetchUser \(error.localizedDescription)")
+        }
+        return UserModel(email: "email", firstName: "name", lastName: "secondName", uuid: "uuid")
+    }
+
     func deleteFavorite(for userId: String, movieId: Int) {
         coreDataService.save { context in
             let fetchRequest = DBUser.fetchRequest()
             fetchRequest.predicate = NSPredicate(format: "uuid == %@", userId)
             let dbUser = try context.fetch(fetchRequest).first
-            let favorites = dbUser?.favoriteMovies
+//            let favorites = dbUser?.favoriteMovies
             guard
                 let dbUser
             else {

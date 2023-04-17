@@ -1,4 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22D49" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="DBMovie" representedClassName="DBMovie" syncable="YES" codeGenerationType="class">
+        <attribute name="movieID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="favorite" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DBUser" inverseName="favoriteMovies" inverseEntity="DBUser"/>
+        <relationship name="recent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DBUser" inverseName="recentWatchMovies" inverseEntity="DBUser"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="movieID"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="DBUser" representedClassName="DBUser" syncable="YES" codeGenerationType="class">
+        <attribute name="avatar" optional="YES" attributeType="Binary"/>
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="firstName" optional="YES" attributeType="String"/>
+        <attribute name="isMale" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String"/>
+        <attribute name="uuid" optional="YES" attributeType="String"/>
+        <relationship name="favoriteMovies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DBMovie" inverseName="favorite" inverseEntity="DBMovie"/>
+        <relationship name="recentWatchMovies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DBMovie" inverseName="recent" inverseEntity="DBMovie"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="uuid"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
 </model>

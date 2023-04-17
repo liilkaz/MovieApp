@@ -7,14 +7,19 @@
 
 import UIKit
 
-enum K{
-    enum Colors{
+enum Constants {
+    enum Colors {
+        static var backgroundColor = UIColor(named: "BgColor")
         static var active = UIColor(hexString: "#514EB6")
         static var inactive = UIColor(hexString: "#BFC6CC")
+        static var splashBackground = UIColor(named: "Onboarding")
+        static var mainTextColor = UIColor(named: "MainTextColor")
+        static var otherTextColor = UIColor(hexString: "#78828A")
+        static var iconThemeColor = UIColor(named: "IconThemeColor")
     }
     
-    enum Titles{
-        enum TabBar{
+    enum Titles {
+        enum TabBar {
             static func title(for tab: Tabs) -> String? {
                 switch tab {
                 case .search: return ""
@@ -26,7 +31,7 @@ enum K{
             }
         }
         
-        enum NavBar{
+        enum NavBar {
             static var search = "Search"
             static var recent = "Recent Watch"
             static var home = ""
@@ -34,29 +39,29 @@ enum K{
             static var setting = "Setting"
         }
         
-        enum Search{
+        enum Search {
             
         }
         
-        enum Recent{
+        enum Recent {
            
         }
         
-        enum Home{
+        enum Home {
             
         }
         
-        enum Favorites{
+        enum Favorites {
             
         }
         
-        enum Setting{
+        enum Setting {
             
         }
     }
     
-    enum Icons{
-        enum TabBar{
+    enum Icons {
+        enum TabBar {
             static func inactiveIcon(for tab: Tabs) -> UIImage? {
                 switch tab {
                 case .search: return UIImage(named: "searchTab")
@@ -71,7 +76,7 @@ enum K{
                 case .search: return UIImage(named: "activeSearch")
                 case .recent: return UIImage(named: "activeRecent")
                 case .home: return UIImage(named: "home")
-                case .favorites: return UIImage(named: "activeFavorite")
+                case .favorites: return UIImage(named: "favorite_fill")
                 case .setting: return UIImage(named: "activeSetting")
                 }
             }
@@ -79,7 +84,27 @@ enum K{
         }
     }
     
-    enum Fonts{
-       
+    enum Fonts {
+        static func plusJacartaSansItalic(with size: CGFloat) -> UIFont {
+            UIFont(name: "PlusJakartaSans-Italic", size: size) ?? UIFont()
+        }
+        static func plusJacartaSansLight(with size: CGFloat) -> UIFont {
+            UIFont(name: "PlusJakartaSans-Light", size: size) ?? UIFont()
+        }
+        static func plusJacartaSansMedium(with size: CGFloat) -> UIFont {
+            UIFont(name: "PlusJakartaSans-Medium", size: size) ?? UIFont()
+        }
+        static func plusJacartaSansRegular(with size: CGFloat) -> UIFont {
+            UIFont(name: "PlusJakartaSans-Regular", size: size) ?? UIFont()
+        }
+        static func plusJacartaSansBold(with size: CGFloat) -> UIFont {
+            UIFont(name: "PlusJakartaSans-Bold", size: size) ?? UIFont()
+        }
+        static func plusJacartaSansSemiBold(with size: CGFloat) -> UIFont {
+            UIFont(name: "PlusJakartaSans-SemiBold", size: size) ?? UIFont()
+        }
+        static func montserratMedium(with size: CGFloat) -> UIFont {
+            UIFont(name: "Montserrat-Medium", size: size) ?? UIFont()
+        }
     }
 }

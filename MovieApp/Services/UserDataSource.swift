@@ -10,7 +10,7 @@ import Foundation
 protocol UserDataSourceProtocol {
 
     func saveUserModel(with userModel: UserModel)
-    func saveFavorite(with movie: MovieModel, in userId: String)
+    func saveFavorite(with movieId: Int, in userId: String)
     func saveRecent(with movieId: Int, in userId: String)
 
     func getFavorites(for userId: String) -> [MovieModel]
@@ -44,7 +44,7 @@ extension UserDataSource: UserDataSourceProtocol {
         }
     }
 
-    func saveFavorite(with movie: MovieModel, in userId: String) {
+    func saveFavorite(with movieId: Int, in userId: String) {
         coreDataService.save { context in
             let fetchRequest = DBUser.fetchRequest()
             fetchRequest.predicate = NSPredicate(format: "uuid == %@", userId)
@@ -58,7 +58,7 @@ extension UserDataSource: UserDataSourceProtocol {
             }
 
             let dbMovies = DBMovie(context: context)
-            dbMovies.movieID = Int64(movie.movieId)
+            dbMovies.movieID = Int64(movieId)
 
             dbUser.addToFavoriteMovies(dbMovies)
         }
@@ -136,14 +136,13 @@ extension UserDataSource: UserDataSourceProtocol {
             let fetchRequest = DBUser.fetchRequest()
             fetchRequest.predicate = NSPredicate(format: "uuid == %@", userId)
             let dbUser = try context.fetch(fetchRequest).first
+            let dbFavoritesArray = dbUser?.favoriteMovies?.allObjects as? [DBMovie]
+            let dbMovie = DBMovie()
+            dbMovie.movieID = Int64(movieId)
+            dbUser?.removeFromFavoriteMovies(dbMovie)
 //            let favorites = dbUser?.favoriteMovies
-            guard
-                let dbUser
-            else {
-                return
-            }
-            context.delete(dbUser)
 
+            try context.save()
         }
 
     }

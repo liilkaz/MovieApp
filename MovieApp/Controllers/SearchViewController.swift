@@ -137,6 +137,15 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         cell.filmNameLabel.text = moviesByGenre[indexPath.row].title
         cell.movieImage.sd_setImage(with: moviesByGenre[indexPath.row].urlImage)
         cell.dateLabel.text = moviesByGenre[indexPath.row].textDate
+        cell.didTapedFavoriteButton = { [weak self] in
+            guard let self else { return }
+            if cell.isFavorite {
+                self.userDataSource.saveFavorite(with: self.moviesByGenre[indexPath.row].id, in: AllMovies.shared.userId)
+            } else {
+                self.userDataSource.deleteFavorite(for: AllMovies.shared.userId, movieId: self.moviesByGenre[indexPath.row].id)
+            }
+
+        }
         
 //        cell.timeLabel.text = "\(runtimes[indexPath.row]) minutes"
         

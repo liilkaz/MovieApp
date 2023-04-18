@@ -131,15 +131,30 @@ extension UserDataSource: UserDataSourceProtocol {
         return UserModel(email: "email", firstName: "name", lastName: "secondName", uuid: "uuid")
     }
 
-    func deleteFavorite(for userId: String, movieId: Int) {
+    func deleteFavorite(for userId: String, movieId: Int64) {
         coreDataService.save { context in
-            let fetchRequest = DBUser.fetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "uuid == %@", userId)
-            let dbUser = try context.fetch(fetchRequest).first
-            let dbFavoritesArray = dbUser?.favoriteMovies?.allObjects as? [DBMovie]
-            let dbMovie = DBMovie()
-            dbMovie.movieID = Int64(movieId)
-            dbUser?.removeFromFavoriteMovies(dbMovie)
+            let fetchRequestUser = DBUser.fetchRequest()
+            fetchRequestUser.predicate = NSPredicate(format: "uuid == %@", userId)
+//            let fetchRequestMovie = DBMovie.fetchRequest()
+//            fetchRequestMovie.predicate = NSPredicate(format: "movieID == %@", movieId)
+
+            let dbUser = try context.fetch(fetchRequestUser).first
+
+            let favorites = dbUser?.favoriteMovies?.allObjects as? [DBMovie]
+
+            favorites?.forEach({ dbMovie in
+                if dbMovie.movieID == movieId {
+                    dbMovie.favorite = nil
+                    return
+                }
+            })
+           // let dbMovie = try context.fetch(fetchRequestMovie).first
+//
+//            if let movie = dbMovie, let movies = dbUser?.favoriteMovies?.allObjects as? [DBMovie], let movieIndex = movies.firstIndex(of: movie) {
+//                dbUser?.removeFromFavoriteMovies(movie)
+//            }
+//            dbMovie.movieID = Int64(movieId)
+//            dbUser?.removeFromFavoriteMovies(dbMovie)
 //            let favorites = dbUser?.favoriteMovies
 
             try context.save()

@@ -142,9 +142,8 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             if cell.isFavorite {
                 self.userDataSource.saveFavorite(with: self.moviesByGenre[indexPath.row].id, in: AllMovies.shared.userId)
             } else {
-                self.userDataSource.deleteFavorite(for: AllMovies.shared.userId, movieId: self.moviesByGenre[indexPath.row].id)
+                self.userDataSource.deleteFavorite(for: AllMovies.shared.userId, movieId: Int64(self.moviesByGenre[indexPath.row].id))
             }
-
         }
         
 //        cell.timeLabel.text = "\(runtimes[indexPath.row]) minutes"

@@ -48,27 +48,27 @@ class CastAndCrewCollectionViewCell: UICollectionViewCell {
     }
     
     func setupViews() {
-        addSubview(avatar)
-        addSubview(name)
-        addSubview(role)
+        contentView.addSubview(avatar)
+        contentView.addSubview(name)
+        contentView.addSubview(role)
     }
     
     func setConstraints() {
         NSLayoutConstraint.activate([
             avatar.heightAnchor.constraint(equalToConstant: 40),
             avatar.widthAnchor.constraint(equalToConstant: 40),
-            avatar.topAnchor.constraint(equalTo: topAnchor),
-            avatar.bottomAnchor.constraint(equalTo: bottomAnchor),
-            avatar.leadingAnchor.constraint(equalTo: leadingAnchor),
+            avatar.topAnchor.constraint(equalTo: contentView.topAnchor),
+            avatar.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            avatar.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             
-            name.topAnchor.constraint(equalTo: topAnchor, constant: 2),
+            name.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 2),
             name.leadingAnchor.constraint(equalTo: avatar.trailingAnchor, constant: 8),
-            name.trailingAnchor.constraint(equalTo: trailingAnchor),
+            name.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             
             role.topAnchor.constraint(equalTo: name.bottomAnchor),
-            role.bottomAnchor.constraint(equalTo: bottomAnchor),
+            role.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             role.leadingAnchor.constraint(equalTo: avatar.trailingAnchor, constant: 8),
-            role.trailingAnchor.constraint(equalTo: trailingAnchor)
+            role.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
     }
 }

@@ -11,10 +11,7 @@ import SafariServices
 
 class MovieDetailViewController: UIViewController, UICollectionViewDelegate, SFSafariViewControllerDelegate {
     
-    var dataS: UICollectionViewDiffableDataSource<Section, Int>! = nil
     var collectionView: UICollectionView! = nil
-    private lazy var mainRange: ClosedRange<Int> = 1...1
-    private lazy var scrollRange: ClosedRange<Int> = (mainRange.upperBound + 1)...(mainRange.upperBound + (castAndCrew?.cast.count ?? 10))
     
     var id: Int?
     var ratingStars = [UIImageView](repeating: UIImageView(), count: 5)
@@ -57,14 +54,11 @@ class MovieDetailViewController: UIViewController, UICollectionViewDelegate, SFS
     override func viewDidLoad() {
         super.viewDidLoad()
         getDetail()
-//        getCredits()
         getTrailerMovie()
         setupView()
+        setupCollectionView()
         setConstraints()
         setupNavBar()
-        configureHierarchy()
-        configureDataSource()
-        collectionView.delegate = self
     }
     
     func setupView() {
@@ -77,6 +71,32 @@ class MovieDetailViewController: UIViewController, UICollectionViewDelegate, SFS
         bottomView.addSubview(bottomButton)
         bottomButton.addTarget(self, action: #selector(whachNowTapped), for: .touchUpInside)
     }
+    
+    func setupCollectionView() {
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
+       collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.backgroundColor = .clear
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(MainInfoCollectionViewCell.self, forCellWithReuseIdentifier: MainInfoCollectionViewCell.reuseId)
+        collectionView.register(OverviewCollectionViewCell.self, forCellWithReuseIdentifier: OverviewCollectionViewCell.reuseId)
+        collectionView.register(CastAndCrewCollectionViewCell.self, forCellWithReuseIdentifier: CastAndCrewCollectionViewCell.reuseId)
+        view.addSubview(collectionView)
+        
+        collectionView.register(SectionHeader.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: SectionHeader.identifier)
+        setupConstrains()
+    }
+    
+    private func setupConstrains() {
+        NSLayoutConstraint.activate([
+            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100)])
+       }
     
     @objc func whachNowTapped() {
         if trailers != nil {showSafariVC(for: trailers?[0].youtubeURL ?? "")}
@@ -111,17 +131,96 @@ class MovieDetailViewController: UIViewController, UICollectionViewDelegate, SFS
     }
 }
 
-extension MovieDetailViewController {
+extension MovieDetailViewController: UICollectionViewDataSource {
     
-    enum Section: Int, CaseIterable {
-        case main
-        case scroll
-        
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        3
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        switch section {
+        case 0:
+            return 1
+        case 1:
+            return 1
+        default:
+            return castAndCrew?.cast.count ?? 10
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        switch indexPath.section {
+        case 0:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainInfoCollectionViewCell.reuseId,
+                                                                for: indexPath) as? MainInfoCollectionViewCell else { fatalError("Cannot create the cell") }
+            cell.stack.poster.sd_setImage(with: movie?.urlImage)
+            cell.stack.movieName.text = movie?.title
+            cell.stack.dateStack.label.text = movie?.textDate
+            cell.stack.timeStack.label.text = "\(movie?.runtime ?? 0) minutes"
+            cell.stack.genreStack.label.text = movie?.genres[0].name
+            let vote_average = movie?.vote_average
+            if vote_average ?? 0 > 0 {
+                rating = getRating(percent: Int((vote_average ?? 2) * 10))
+                ratingStars = getArrayStars(rating: self.rating ?? .one)
+                ratingStars.forEach( cell.stack.self.hStackReating.addArrangedSubview)
+            }
+            return cell
+        case 1:
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: OverviewCollectionViewCell.reuseId,
+                for: indexPath) as? OverviewCollectionViewCell else {fatalError("Cannot create the cell")}
+            cell.overview.text = movie?.overview
+            return cell
+            
+        default:
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: CastAndCrewCollectionViewCell.reuseId,
+                for: indexPath) as? CastAndCrewCollectionViewCell else {fatalError("Cannot create the cell")}
+            cell.avatar.sd_setImage(with: castAndCrew?.cast[indexPath.row].urlImage)
+            cell.name.text = castAndCrew?.cast[indexPath.row].name
+            cell.role.text = castAndCrew?.cast[indexPath.row].character
+            return cell
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind kind: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView {
+            switch indexPath.section {
+            case 0:
+                return UICollectionReusableView()
+            case 1:
+                guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: UICollectionView.elementKindSectionHeader,
+                    withReuseIdentifier: SectionHeader.identifier,
+                    for: indexPath) as? SectionHeader else {return UICollectionReusableView()}
+                sectionHeader.title.text = "Story Line"
+                return sectionHeader
+            default:
+                guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: UICollectionView.elementKindSectionHeader,
+                    withReuseIdentifier: SectionHeader.identifier,
+                    for: indexPath) as? SectionHeader else {return UICollectionReusableView()}
+                sectionHeader.title.text = "Cast and Crew"
+                return sectionHeader
+            }
+        }
+}
+
+extension MovieDetailViewController: UICollectionViewDelegateFlowLayout {
+    
+    enum SectionDetail: Int, CaseIterable {
+        case mainInfo
+        case overview
+        case cast
+
         var columnCount: Int {
             switch self {
-            case .main:
+            case .mainInfo:
+                return 0
+            case .overview:
                 return 1
-            case .scroll:
+            case .cast:
                 return 2
             }
         }
@@ -129,115 +228,85 @@ extension MovieDetailViewController {
     
     func createLayout() -> UICollectionViewLayout {
         let sectionProvider: UICollectionViewCompositionalLayoutSectionProvider = { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
-            guard let sectionKind = Section(rawValue: sectionIndex) else { return nil }
+            guard let sectionKind = SectionDetail(rawValue: sectionIndex) else { return nil }
             let section = self.layoutSection(for: sectionKind, layoutEnvironment: layoutEnvironment)
             return section
         }
         let config = UICollectionViewCompositionalLayoutConfiguration()
-        config.interSectionSpacing = 16.0
+        config.interSectionSpacing = 24.0
         let layout = UICollectionViewCompositionalLayout(sectionProvider: sectionProvider, configuration: config)
         return layout
     }
     
-    func layoutSection(for section: Section, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+    func layoutSection(for section: SectionDetail, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         switch section {
-        case .main:
-            return mainSection()
-        case .scroll:
-            return scrollSection()
+        case .mainInfo:
+            return mainInfo()
+        case .overview:
+            return overview()
+        case .cast:
+            return cast()
         }
     }
-    
-    private func mainSection() -> NSCollectionLayoutSection {
-       let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(630))
-       let item = NSCollectionLayoutItem(layoutSize: itemSize)
-       
-       let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(630))
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: 1)
-       
-       let section = NSCollectionLayoutSection(group: group)
-//        section.orthogonalScrollingBehavior = .groupPaging
-       return section
-   }
-   
-    private func scrollSection() -> NSCollectionLayoutSection {
-       let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(150), heightDimension: .absolute(40))
-       let item = NSCollectionLayoutItem(layoutSize: itemSize)
-       
-       let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(40))
-       let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-       
-       let rootGroupSize = NSCollectionLayoutSize(widthDimension: .absolute(150), heightDimension: .absolute(40))
-       let rootGroup = NSCollectionLayoutGroup.horizontal(layoutSize: rootGroupSize, subitems: [group])
-       let section = NSCollectionLayoutSection(group: rootGroup)
-       section.interGroupSpacing = 21
-       section.orthogonalScrollingBehavior = .continuous
-       return section
-   }
-   
-    func configureHierarchy() {
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
-       collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.backgroundColor = .clear
-       let castAndCrewCell = CastAndCrewCollectionViewCell.self
-       collectionView.register(castAndCrewCell, forCellWithReuseIdentifier: castAndCrewCell.reuseId)
-       let mainInfoCell = MainInfoCollectionViewCell.self
-       collectionView.register(mainInfoCell, forCellWithReuseIdentifier: mainInfoCell.reuseId)
-       
-        view.addSubview(collectionView)
-        NSLayoutConstraint.activate([
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: bottomView.topAnchor)
-        ])
-   }
 
-    func configureDataSource() {
-       dataS = UICollectionViewDiffableDataSource<Section, Int>(
-        collectionView: collectionView) { [self](collectionView: UICollectionView, indexPath: IndexPath, identifier: Int) -> UICollectionViewCell? in
-           if self.mainRange ~= identifier {
-               guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainInfoCollectionViewCell.reuseId,
-                                                                   for: indexPath) as? MainInfoCollectionViewCell else { fatalError("Cannot create the cell") }
-               cell.stack.poster.sd_setImage(with: movie?.urlImage)
-               cell.stack.movieName.text = movie?.title
-               cell.stack.overview.text = movie?.overview
-               cell.stack.dateStack.label.text = movie?.textDate
-               cell.stack.timeStack.label.text = "\(movie?.runtime ?? 0) minutes"
-               cell.stack.genreStack.label.text = movie?.genres[0].name
-               let vote_average = movie?.vote_average
-               if vote_average ?? 0 > 0 {
-                   rating = getRating(percent: Int((vote_average ?? 2) * 10))
-                   ratingStars = getArrayStars(rating: self.rating ?? .one)
-                   ratingStars.forEach( cell.stack.self.hStackReating.addArrangedSubview)
-               }
-               return cell
-           }
-           
-           if self.scrollRange ~= identifier {
-               guard let cell = collectionView.dequeueReusableCell(
-                   withReuseIdentifier: CastAndCrewCollectionViewCell.reuseId,
-                   for: indexPath) as? CastAndCrewCollectionViewCell else {fatalError("Cannot create the cell")}
-               cell.avatar.sd_setImage(with: castAndCrew?.cast[indexPath.row].urlImage)
-               cell.name.text = castAndCrew?.cast[indexPath.row].name
-               cell.role.text = castAndCrew?.cast[indexPath.row].character
-               return cell
-           }
-           fatalError("Cannot create the cell")
-           
-       }
-       
-       var snapshot = NSDiffableDataSourceSnapshot<Section, Int>()
-       let sections: [Section] = [.main, .scroll]
-       snapshot.appendSections([sections[0]])
-       snapshot.appendItems(Array(mainRange))
-       snapshot.appendSections([sections[1]])
-       snapshot.appendItems(Array(scrollRange))
+    private func mainInfo() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(440))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(440))
+         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: 1)
+        
+        let section = NSCollectionLayoutSection(group: group)
 
-       dataS.apply(snapshot, animatingDifferences: false)
-       
-       }
+//        section.orthogonalScrollingBehavior = .continuous
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 42, bottom: 24, trailing: 41)
+        
+        return section
+    }
     
+    private func overview() -> NSCollectionLayoutSection {
+        let size = NSCollectionLayoutSize(
+                    widthDimension: NSCollectionLayoutDimension.fractionalWidth(1),
+                    heightDimension: NSCollectionLayoutDimension.estimated(80)
+                )
+        let item = NSCollectionLayoutItem(layoutSize: size)
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: size, subitem: item, count: 1)
+
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 10
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0,
+                                                        leading: 24,
+                                                        bottom: 0,
+                                                        trailing: 24)
+        
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                                heightDimension: .absolute(40))
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
+                                                                        elementKind: UICollectionView.elementKindSectionHeader,
+                                                                        alignment: .top)
+        section.boundarySupplementaryItems = [sectionHeader]
+        return section
+    }
+    
+    private func cast() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(150), heightDimension: .absolute(40))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: itemSize, subitems: [item])
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 21
+        section.orthogonalScrollingBehavior = .continuous
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 23, bottom: 0, trailing: 0)
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                                heightDimension: .absolute(40))
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
+                                                                        elementKind: UICollectionView.elementKindSectionHeader,
+                                                                        alignment: .top)
+        section.boundarySupplementaryItems = [sectionHeader]
+        return section
+    }
+}
+
+extension MovieDetailViewController {
     func getDetail() {
         APICaller.shared.getDetailedMovie(with: id ?? 585511) { [weak self] result in
             switch result {
@@ -334,3 +403,5 @@ extension MovieDetailViewController {
         }
     }
 }
+
+

@@ -188,10 +188,10 @@ extension HomePageViewController: UICollectionViewDataSource {
             if genre == 0 {
                 moviesByGenre = movieArray.allMovies
                 } else {
-                    moviesByGenre = movieArray.allMovies.filter({ $0.genre_ids[0] == categories.hashValue
+                    moviesByGenre = movieArray.allMovies.filter({ $0.genre_ids[0] == genre
                     })
                 }
-//            collectionView.reloadData()
+            collectionView.reloadSections(IndexSet(integer: 2))
         default:
             let detailScreen = MovieDetailViewController()
             let movie = moviesByGenre[indexPath.row]

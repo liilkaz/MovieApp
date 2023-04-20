@@ -48,6 +48,10 @@ class HomePageViewController: UIViewController, UICollectionViewDelegate {
         collectionView.register(CategoriesCell.self, forCellWithReuseIdentifier: CategoriesCell.identifier)
         collectionView.register(AllMoviesViewCell.self, forCellWithReuseIdentifier: AllMoviesViewCell.identifier)
         view.addSubview(collectionView)
+        
+        collectionView.register(SectionHeader.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: SectionHeader.identifier)
         setupConstrains()
     }
     
@@ -175,6 +179,29 @@ extension HomePageViewController: UICollectionViewDataSource {
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind kind: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView {
+            switch indexPath.section {
+            case 0:
+                return UICollectionReusableView()
+            case 1:
+                guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: UICollectionView.elementKindSectionHeader,
+                    withReuseIdentifier: SectionHeader.identifier,
+                    for: indexPath) as? SectionHeader else {return UICollectionReusableView()}
+                sectionHeader.title.text = "Categories"
+                return sectionHeader
+            default:
+                guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: UICollectionView.elementKindSectionHeader,
+                    withReuseIdentifier: SectionHeader.identifier,
+                    for: indexPath) as? SectionHeader else {return UICollectionReusableView()}
+                sectionHeader.title.text = "Box Office"
+                return sectionHeader
+            }
+        }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
@@ -261,16 +288,29 @@ extension HomePageViewController: UICollectionViewDelegateFlowLayout {
     }
     
     private func categoriesSection() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(88), heightDimension: .fractionalHeight(1.0))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(88),
+                                              heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(34))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                               heightDimension: .absolute(34))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
+                                                       subitems: [item])
         group.interItemSpacing = .fixed(12)
         let section = NSCollectionLayoutSection(group: group)
 
         section.orthogonalScrollingBehavior = .paging
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 23, bottom: 0, trailing: 0)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0,
+                                                        leading: 23,
+                                                        bottom: 0,
+                                                        trailing: 0)
+        
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                                heightDimension: .absolute(40))
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
+                                                                        elementKind: UICollectionView.elementKindSectionHeader,
+                                                                        alignment: .top)
+        section.boundarySupplementaryItems = [sectionHeader]
         return section
     }
     
@@ -283,6 +323,13 @@ extension HomePageViewController: UICollectionViewDelegateFlowLayout {
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 10
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 23, bottom: 0, trailing: 24)
+        
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                                heightDimension: .absolute(40))
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
+                                                                        elementKind: UICollectionView.elementKindSectionHeader,
+                                                                        alignment: .top)
+        section.boundarySupplementaryItems = [sectionHeader]
         return section
     }
     

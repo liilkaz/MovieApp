@@ -143,9 +143,7 @@ extension HomePageViewController: UICollectionViewDataSource {
         case 0:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCardsCell.identifier,
                                                                 for: indexPath) as? MovieCardsCell
-            else {
-                return UICollectionViewCell()
-            }
+            else {fatalError("Cannot create the cell")}
             cell.picture.sd_setImage(with: movieArray.popularMovies[indexPath.row].urlImage)
             cell.filmName.text = movieArray.popularMovies[indexPath.row].title
 //                    cell.category.text = movieArray.popularMovies[indexPath.row].genre_ids
@@ -153,9 +151,7 @@ extension HomePageViewController: UICollectionViewDataSource {
         case 1:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoriesCell.identifier,
                                                                 for: indexPath) as? CategoriesCell
-            else {
-                return UICollectionViewCell()
-            }
+            else {fatalError("Cannot create the cell")}
             cell.categoryButton.setTitle(categories[indexPath.row].movieCategories, for: .normal)
             if indexPath.row == 0 {
                 DispatchQueue.main.async {
@@ -166,9 +162,7 @@ extension HomePageViewController: UICollectionViewDataSource {
             
         default:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AllMoviesViewCell.identifier,
-                                                             for: indexPath) as? AllMoviesViewCell else {
-                            return UICollectionViewCell()
-                        }
+                                                                for: indexPath) as? AllMoviesViewCell else {fatalError("Cannot create the cell")}
                         cell.image.sd_setImage(with: moviesByGenre[indexPath.row].urlImage)
                         cell.filmName.text = moviesByGenre[indexPath.row].title
                         cell.reviewRaitingLabel.text = "\(moviesByGenre[indexPath.row].vote_average)"

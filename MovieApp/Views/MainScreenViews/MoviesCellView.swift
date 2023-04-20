@@ -183,8 +183,7 @@ extension MoviesCellView {
             mainStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             mainStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             mainStack.topAnchor.constraint(equalTo: contentView.topAnchor),
-            mainStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            
+            mainStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
     

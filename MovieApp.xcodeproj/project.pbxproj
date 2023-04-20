@@ -82,6 +82,7 @@
 		75FAEDE629F03A7F002089FC /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FAEDE529F03A7F002089FC /* HomePageViewController.swift */; };
 		75FAEDE829F05AFD002089FC /* AllMoviesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FAEDE729F05AFD002089FC /* AllMoviesViewCell.swift */; };
 		75FAEDEB29F18E07002089FC /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FAEDEA29F18E07002089FC /* SectionHeader.swift */; };
+		75FAEDED29F1B9BD002089FC /* OverviewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FAEDEC29F1B9BD002089FC /* OverviewCollectionViewCell.swift */; };
 		D000C84029DEC8FB009486B7 /* MovieCardsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D000C83F29DEC8FB009486B7 /* MovieCardsCollectionView.swift */; };
 		D000C84229DEC928009486B7 /* MovieCardsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D000C84129DEC928009486B7 /* MovieCardsCell.swift */; };
 		D056719D29E015AB002C2449 /* CategoryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D056719C29E015AB002C2449 /* CategoryCollectionView.swift */; };
@@ -167,6 +168,7 @@
 		75FAEDE529F03A7F002089FC /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		75FAEDE729F05AFD002089FC /* AllMoviesViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllMoviesViewCell.swift; sourceTree = "<group>"; };
 		75FAEDEA29F18E07002089FC /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
+		75FAEDEC29F1B9BD002089FC /* OverviewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewCollectionViewCell.swift; sourceTree = "<group>"; };
 		C5877A02D5A44F2AB13CB714 /* Pods-MovieApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp.debug.xcconfig"; path = "Target Support Files/Pods-MovieApp/Pods-MovieApp.debug.xcconfig"; sourceTree = "<group>"; };
 		D000C83F29DEC8FB009486B7 /* MovieCardsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCardsCollectionView.swift; sourceTree = "<group>"; };
 		D000C84129DEC928009486B7 /* MovieCardsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCardsCell.swift; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 			children = (
 				751715B529E09BAF00D95475 /* MainInfoCollectionViewCell.swift */,
 				751715B829E09BE000D95475 /* CastAndCrewCollectionViewCell.swift */,
+				75FAEDEC29F1B9BD002089FC /* OverviewCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -656,6 +659,7 @@
 				752F18F529E5A8EF00B020E2 /* APIModel.swift in Sources */,
 				0C83C11729DABFAD00C4592E /* UIFont + Extension.swift in Sources */,
 				00D9A1E429E6F51400EE9A24 /* ChangePhotoView.swift in Sources */,
+				75FAEDED29F1B9BD002089FC /* OverviewCollectionViewCell.swift in Sources */,
 				00D9A1DC29E69CF500EE9A24 /* CircularCheckmark.swift in Sources */,
 				0C83C11B29DAC1CE00C4592E /* UIImageView + Extension.swift in Sources */,
 				00D9A1DA29E69C8000EE9A24 /* CheckboxView.swift in Sources */,

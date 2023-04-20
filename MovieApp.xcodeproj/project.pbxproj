@@ -79,6 +79,8 @@
 		75986DF829D8D13100BDECB0 /* FavorivesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75986DF729D8D13100BDECB0 /* FavorivesViewController.swift */; };
 		75986DFA29D8D15B00BDECB0 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75986DF929D8D15B00BDECB0 /* SettingViewController.swift */; };
 		75986DFD29D8DB2D00BDECB0 /* UIColor + ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75986DFC29D8DB2D00BDECB0 /* UIColor + ext.swift */; };
+		75FAEDE629F03A7F002089FC /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FAEDE529F03A7F002089FC /* HomePageViewController.swift */; };
+		75FAEDE829F05AFD002089FC /* AllMoviesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FAEDE729F05AFD002089FC /* AllMoviesViewCell.swift */; };
 		D000C84029DEC8FB009486B7 /* MovieCardsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D000C83F29DEC8FB009486B7 /* MovieCardsCollectionView.swift */; };
 		D000C84229DEC928009486B7 /* MovieCardsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D000C84129DEC928009486B7 /* MovieCardsCell.swift */; };
 		D056719D29E015AB002C2449 /* CategoryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D056719C29E015AB002C2449 /* CategoryCollectionView.swift */; };
@@ -161,6 +163,8 @@
 		75986DF929D8D15B00BDECB0 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		75986DFC29D8DB2D00BDECB0 /* UIColor + ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + ext.swift"; sourceTree = "<group>"; };
 		75986DFE29D8E07B00BDECB0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		75FAEDE529F03A7F002089FC /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
+		75FAEDE729F05AFD002089FC /* AllMoviesViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllMoviesViewCell.swift; sourceTree = "<group>"; };
 		C5877A02D5A44F2AB13CB714 /* Pods-MovieApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp.debug.xcconfig"; path = "Target Support Files/Pods-MovieApp/Pods-MovieApp.debug.xcconfig"; sourceTree = "<group>"; };
 		D000C83F29DEC8FB009486B7 /* MovieCardsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCardsCollectionView.swift; sourceTree = "<group>"; };
 		D000C84129DEC928009486B7 /* MovieCardsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCardsCell.swift; sourceTree = "<group>"; };
@@ -462,6 +466,7 @@
 			isa = PBXGroup;
 			children = (
 				75986DF529D8D0F900BDECB0 /* HomeViewController.swift */,
+				75FAEDE529F03A7F002089FC /* HomePageViewController.swift */,
 			);
 			path = MainScreen;
 			sourceTree = "<group>";
@@ -476,6 +481,7 @@
 				D0965C4829E1AB9D00CFDA35 /* MoviesTableView.swift */,
 				D0965C4A29E1AC8800CFDA35 /* MoviesCellView.swift */,
 				7533B0EA29EB30170064FEF3 /* MovieCardsCarusel.swift */,
+				75FAEDE729F05AFD002089FC /* AllMoviesViewCell.swift */,
 			);
 			path = MainScreenViews;
 			sourceTree = "<group>";
@@ -643,6 +649,7 @@
 				0C83C11B29DAC1CE00C4592E /* UIImageView + Extension.swift in Sources */,
 				00D9A1DA29E69C8000EE9A24 /* CheckboxView.swift in Sources */,
 				75986DD329D8B8CC00BDECB0 /* SearchViewController.swift in Sources */,
+				75FAEDE829F05AFD002089FC /* AllMoviesViewCell.swift in Sources */,
 				752F18F929E5AC8B00B020E2 /* ExpandableLabel.swift in Sources */,
 				751715C029E0A2E900D95475 /* CastAndCrewInfo.swift in Sources */,
 				75986DFA29D8D15B00BDECB0 /* SettingViewController.swift in Sources */,
@@ -652,6 +659,7 @@
 				D056719D29E015AB002C2449 /* CategoryCollectionView.swift in Sources */,
 				0C83C16329EB2C8100C4592E /* CoreDataService.swift in Sources */,
 				75986DFD29D8DB2D00BDECB0 /* UIColor + ext.swift in Sources */,
+				75FAEDE629F03A7F002089FC /* HomePageViewController.swift in Sources */,
 				751715B629E09BAF00D95475 /* MainInfoCollectionViewCell.swift in Sources */,
 				751715C329E0A53000D95475 /* MovieDetailViewController.swift in Sources */,
 				0C83C13B29DC6B1500C4592E /* SecondLoginViewController.swift in Sources */,

@@ -11,7 +11,13 @@ import SafariServices
 
 class MovieDetailViewController: UIViewController, UICollectionViewDelegate, SFSafariViewControllerDelegate {
     
+    var didTapedFavoriteButton: (() -> Void)?
+    
     var collectionView: UICollectionView! = nil
+    private var movieId: Int?
+    
+    private let userDataSource = UserDataSource()
+    private var userModel: UserModel?
     
     var id: Int?
     var ratingStars = [UIImageView](repeating: UIImageView(), count: 5)
@@ -22,6 +28,14 @@ class MovieDetailViewController: UIViewController, UICollectionViewDelegate, SFS
     private var castAndCrew: Credits?
     
     let bottomView = UIView()
+    
+    var isFavorite: Bool = false {
+        didSet {
+            let image = UIImage(named: isFavorite ? "favorite_fill" : "favorite")
+            addBarButtonItem.image = image
+            addBarButtonItem.tintColor = Constants.Colors.active
+        }
+    }
     
     let bottomButton: UIButton = {
         let button = UIButton(title: "Whatch now", backgroundColor: Constants.Colors.active, titleColor: .white, hasBorder: false)
@@ -34,7 +48,7 @@ class MovieDetailViewController: UIViewController, UICollectionViewDelegate, SFS
         return UIBarButtonItem(image: UIImage(systemName: "heart"),
                                style: .plain,
                                target: self,
-                               action: #selector(addToFavorites))
+                               action: #selector(didTapLike))
         }()
     
     private lazy var addBarButtonBack: UIBarButtonItem = {
@@ -45,7 +59,17 @@ class MovieDetailViewController: UIViewController, UICollectionViewDelegate, SFS
                                action: #selector(back))
     }()
     
-    @objc func addToFavorites() {}
+    @objc func didTapLike() {
+        isFavorite.toggle()
+        didTapedFavoriteButton?()
+        
+        guard let movie = movieId else { return }
+        if isFavorite {
+            userDataSource.saveFavorite(with: movie, in: AllMovies.shared.userId)
+        } else {
+            userDataSource.deleteFavorite(for: AllMovies.shared.userId, movieId: Int64(movie))
+        }
+    }
 
     @objc func back() {
         navigationController?.popViewController(animated: true)
@@ -113,6 +137,7 @@ class MovieDetailViewController: UIViewController, UICollectionViewDelegate, SFS
     func setupNavBar() {
         navigationItem.rightBarButtonItem = addBarButtonItem
         navigationItem.leftBarButtonItem = addBarButtonBack
+        
         tabBarController?.tabBar.isHidden = true
     }
     

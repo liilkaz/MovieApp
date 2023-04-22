@@ -59,7 +59,7 @@ class RecentViewController: UIViewController {
 
     private func getRecentsMovies() {
         let recentsID = userDataSource.getRecents(for: AllMovies.shared.userId)
-        recentsMovieArray.removeAll()
+        recentsMovieArray.removeAll() //?
         allMovieArray.allMovies.forEach { movie in
             if recentsID.contains(where: { movieModel in
                 movieModel.movieId == movie.id
@@ -108,9 +108,10 @@ extension RecentViewController: UITableViewDelegate, UITableViewDataSource {
         else {
             return UITableViewCell()
         }
-        cell.filmNameLabel.text = moviesByGenre[indexPath.row].title
-        cell.movieImage.sd_setImage(with: moviesByGenre[indexPath.row].urlImage)
-        cell.dateLabel.text = moviesByGenre[indexPath.row].textDate
+        let isFavorite = userDataSource.isFavorites(for: AllMovies.shared.userId, with: moviesByGenre[indexPath.row].id)
+        cell.configure(url: moviesByGenre[indexPath.row].urlImage,
+                       movieName: moviesByGenre[indexPath.row].title, date: moviesByGenre[indexPath.row].textDate, movieId: moviesByGenre[indexPath.row].id,
+                       isFavorite: isFavorite)
        
         return cell
     }
@@ -118,6 +119,8 @@ extension RecentViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let detailScreen = MovieDetailViewController()
+        let isFavorite = userDataSource.isFavorites(for: AllMovies.shared.userId, with: moviesByGenre[indexPath.row].id)
+        detailScreen.isFavorite = isFavorite
         detailScreen.id = moviesByGenre[indexPath.row].id
         navigationController?.pushViewController(detailScreen, animated: true)
     }

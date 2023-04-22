@@ -134,19 +134,10 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RecentTableViewCell.identifier,
                                                        for: indexPath) as? RecentTableViewCell else { return UITableViewCell() }
-        cell.filmNameLabel.text = moviesByGenre[indexPath.row].title
-        cell.movieImage.sd_setImage(with: moviesByGenre[indexPath.row].urlImage)
-        cell.dateLabel.text = moviesByGenre[indexPath.row].textDate
-        cell.didTapedFavoriteButton = { [weak self] in
-            guard let self else { return }
-            if cell.isFavorite {
-                self.userDataSource.saveFavorite(with: self.moviesByGenre[indexPath.row].id, in: AllMovies.shared.userId)
-            } else {
-                self.userDataSource.deleteFavorite(for: AllMovies.shared.userId, movieId: Int64(self.moviesByGenre[indexPath.row].id))
-            }
-        }
-        
-//        cell.timeLabel.text = "\(runtimes[indexPath.row]) minutes"
+        let isFavorite = userDataSource.isFavorites(for: AllMovies.shared.userId, with: moviesByGenre[indexPath.row].id)
+        cell.configure(url: moviesByGenre[indexPath.row].urlImage,
+                       movieName: moviesByGenre[indexPath.row].title, date: moviesByGenre[indexPath.row].textDate, movieId: moviesByGenre[indexPath.row].id,
+                       isFavorite: isFavorite)
         
         return cell
     }
@@ -155,8 +146,10 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         let detailScreen = MovieDetailViewController()
         let movie = moviesByGenre[indexPath.row]
-        userDataSource.saveRecent(with: movie.id, in: AllMovies.shared.userId)
+//        userDataSource.saveRecent(with: movie.id, in: AllMovies.shared.userId) //? bug
+        let isFavorite = userDataSource.isFavorites(for: AllMovies.shared.userId, with: moviesByGenre[indexPath.row].id)
         detailScreen.id = movie.id
+        detailScreen.isFavorite = isFavorite
         navigationController?.pushViewController(detailScreen, animated: true)
     }
 }

@@ -11,12 +11,15 @@ class RecentTableViewCell: UITableViewCell {
 
     var didTapedFavoriteButton: (() -> Void)?
     
+    private var movieId: Int?
+    private let userDataSource = UserDataSource()
+    private var userModel: UserModel?
+    
     var isFavorite: Bool = false {
         didSet {
             favoriteButton.imageView?.image = nil
             let image = UIImage(named: isFavorite ? "favorite_fill" : "favorite")
             favoriteButton.setImage(image, for: .normal)
-
         }
     }
     
@@ -145,10 +148,38 @@ class RecentTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+//    @objc func didTapLike() {
+//        isFavorite.toggle()
+//        didTapedFavoriteButton?()
+//    }
+    
     @objc func didTapLike() {
-        isFavorite = !isFavorite
+        isFavorite.toggle()
         didTapedFavoriteButton?()
+        
+        guard let movie = movieId else { return }
+        if isFavorite {
+            userDataSource.saveFavorite(with: movie, in: AllMovies.shared.userId)
+        } else {
+            userDataSource.deleteFavorite(for: AllMovies.shared.userId, movieId: Int64(movie))
+        }
     }
+    
+    func configure (url: URL?, movieName: String, date: String, movieId: Int, isFavorite: Bool) {
+        movieImage.sd_setImage(with: url)
+        filmNameLabel.text = movieName
+        dateLabel.text = date
+        self.isFavorite = isFavorite
+//        timeLabel.text = runtime
+        self.movieId = movieId
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        movieImage.image = nil
+        filmNameLabel.text = nil
+        dateLabel.text = nil
+        }
     
     func setConstraints() {
         contentView.addSubview(movieImage)

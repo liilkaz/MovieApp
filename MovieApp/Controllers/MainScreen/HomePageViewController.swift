@@ -163,12 +163,22 @@ extension HomePageViewController: UICollectionViewDataSource {
         default:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AllMoviesViewCell.identifier,
                                                                 for: indexPath) as? AllMoviesViewCell else {fatalError("Cannot create the cell")}
-                        cell.image.sd_setImage(with: moviesByGenre[indexPath.row].urlImage)
-                        cell.filmName.text = moviesByGenre[indexPath.row].title
-                        cell.reviewRaitingLabel.text = "\(moviesByGenre[indexPath.row].vote_average)"
-                        cell.reviewCountLabel.text = "(\(moviesByGenre[indexPath.row].vote_count))"
-
-                        return cell
+            let isFavorite = userDataSource.isFavorites(for: AllMovies.shared.userId, with: moviesByGenre[indexPath.row].id)
+            cell.configure(url: moviesByGenre[indexPath.row].urlImage,
+                           movieName: moviesByGenre[indexPath.row].title,
+//                           duration: moviesByGenre[indexPath.row].,
+                           rating: "\(moviesByGenre[indexPath.row].vote_average)",
+                           vote_count: "(\(moviesByGenre[indexPath.row].vote_count))", movieId: self.moviesByGenre[indexPath.row].id, isFavorite: isFavorite)
+            
+//            cell.didTapedFavoriteButton = { [weak self] in
+//                guard let self else { return }
+//                if cell.isFavorite {
+//                    self.userDataSource.saveFavorite(with: self.moviesByGenre[indexPath.row].id, in: AllMovies.shared.userId)
+//                } else {
+//                    self.userDataSource.deleteFavorite(for: AllMovies.shared.userId, movieId: Int64(self.moviesByGenre[indexPath.row].id))
+//                }
+//            }
+            return cell
             
         }
     }

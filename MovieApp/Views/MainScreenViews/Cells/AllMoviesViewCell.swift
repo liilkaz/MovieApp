@@ -11,6 +11,20 @@ class AllMoviesViewCell: UICollectionViewCell {
     
     static let identifier = "MoviesCollectionView"
     
+    var didTapedFavoriteButton: (() -> Void)?
+    
+    private var movieId: Int?
+    private let userDataSource = UserDataSource()
+    private var userModel: UserModel?
+    
+    var isFavorite: Bool = false {
+        didSet {
+            favoriteButton.imageView?.image = nil
+            let image = UIImage(named: isFavorite ? "favorite_fill" : "favorite")
+            favoriteButton.setImage(image, for: .normal)
+        }
+    }
+    
     lazy var image: UIImageView = {
         let img = UIImageView()
         img.image = UIImage(named: "secondMovie")
@@ -107,9 +121,10 @@ class AllMoviesViewCell: UICollectionViewCell {
     }()
     
     lazy var favoriteButton: UIButton = {
-        let button = UIButton()
-        button.setBackgroundImage(UIImage(named: "favorite"), for: .normal)
-        
+        let button = UIButton(type: .custom)
+        button.addTarget(self, action: #selector(didTapLike), for: .touchUpInside)
+        let image = UIImage(named: isFavorite ? "favorite_fill" : "favorite")
+        button.setImage(image, for: .normal)
         return button
     }()
     
@@ -161,6 +176,28 @@ class AllMoviesViewCell: UICollectionViewCell {
             setupConstraints()
         }
     
+    @objc func didTapLike() {
+        isFavorite.toggle()
+        didTapedFavoriteButton?()
+        
+        guard let movie = movieId else { return }
+        if isFavorite {
+            userDataSource.saveFavorite(with: movie, in: AllMovies.shared.userId)
+        } else {
+            userDataSource.deleteFavorite(for: AllMovies.shared.userId, movieId: Int64(movie))
+        }
+    }
+    
+    func configure (url: URL?, movieName: String, rating: String, vote_count: String, movieId: Int, isFavorite: Bool) {
+        image.sd_setImage(with: url)
+        filmName.text = movieName
+//        durationLabel.text = runtime
+        reviewRaitingLabel.text = rating
+        reviewCountLabel.text = vote_count
+        self.movieId = movieId
+        self.isFavorite = isFavorite
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -175,7 +212,7 @@ class AllMoviesViewCell: UICollectionViewCell {
             mainStack.topAnchor.constraint(equalTo: contentView.topAnchor),
             mainStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
-//            filmName.trailingAnchor.constraint(equalTo: mainStack.trailingAnchor, constant: -20)
+            filmName.trailingAnchor.constraint(equalTo: verticalStack.trailingAnchor, constant: -20)
             
         ])
     }

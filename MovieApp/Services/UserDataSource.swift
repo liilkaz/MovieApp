@@ -43,6 +43,16 @@ extension UserDataSource: UserDataSourceProtocol {
             dbUser.favoriteMovies = NSSet()
         }
     }
+    
+    func isFavorites(for userId: String, with movieId: Int) -> Bool {
+        let movies = self.getFavorites(for: userId)
+            for movie in movies {
+                if movie.movieId == movieId {
+                    return true
+                }
+            }
+            return false
+        }
 
     func saveFavorite(with movieId: Int, in userId: String) {
         coreDataService.save { context in

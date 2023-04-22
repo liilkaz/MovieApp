@@ -25,6 +25,7 @@ class FavorivesViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tableView.reloadData()
         getFavorites()
         navigationController?.tabBarItem.title = Constants.Titles.TabBar.title(for: .favorites)
         tabBarController?.tabBar.isHidden = false
@@ -84,9 +85,10 @@ extension FavorivesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RecentTableViewCell.identifier,
                                                        for: indexPath) as? RecentTableViewCell else { return UITableViewCell() }
-        cell.filmNameLabel.text = favorites[indexPath.row].title
-        cell.movieImage.sd_setImage(with: favorites[indexPath.row].urlImage)
-        cell.dateLabel.text = favorites[indexPath.row].textDate
+        let isFavorite = userDataSource.isFavorites(for: AllMovies.shared.userId, with: favorites[indexPath.row].id)
+        cell.configure(url: favorites[indexPath.row].urlImage,
+                       movieName: favorites[indexPath.row].title, date: favorites[indexPath.row].textDate, movieId: favorites[indexPath.row].id,
+                       isFavorite: isFavorite)
        
         return cell
     }
@@ -94,6 +96,11 @@ extension FavorivesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let detailScreen = MovieDetailViewController()
+        let movie = favorites[indexPath.row]
+//        userDataSource.saveRecent(with: movie.id, in: AllMovies.shared.userId)
+        let isFavorite = userDataSource.isFavorites(for: AllMovies.shared.userId, with: favorites[indexPath.row].id)
+        detailScreen.id = movie.id
+        detailScreen.isFavorite = isFavorite
         navigationController?.pushViewController(detailScreen, animated: true)
     }
     

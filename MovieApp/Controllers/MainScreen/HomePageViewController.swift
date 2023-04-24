@@ -11,7 +11,6 @@ class HomePageViewController: UIViewController, UICollectionViewDelegate {
     
     let movieArray = AllMovies.shared
     var moviesByGenre = [Movie]()
-    let movieCarousel = MovieCardsCarusel()
     
     private let userDataSource = UserDataSource()
     private var userModel: UserModel?
@@ -20,8 +19,10 @@ class HomePageViewController: UIViewController, UICollectionViewDelegate {
     }
     
     var categories: [FilmCategories] = [.all, .action, .adventure, .mystery, .fantasy, .comedy, .crime]
-    
+
     var collectionView: UICollectionView! = nil
+    
+    var caruselDelagete = CollectionViewDelegate()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -39,12 +40,12 @@ class HomePageViewController: UIViewController, UICollectionViewDelegate {
     
     func setupCollectionView() {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
-       collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.showsVerticalScrollIndicator = false
         collectionView.backgroundColor = .clear
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(MovieCardsCell.self, forCellWithReuseIdentifier: MovieCardsCell.identifier)
+        collectionView.register(TopCell.self, forCellWithReuseIdentifier: TopCell.identifier)
         collectionView.register(CategoriesCell.self, forCellWithReuseIdentifier: CategoriesCell.identifier)
         collectionView.register(AllMoviesViewCell.self, forCellWithReuseIdentifier: AllMoviesViewCell.identifier)
         view.addSubview(collectionView)
@@ -57,6 +58,7 @@ class HomePageViewController: UIViewController, UICollectionViewDelegate {
     
     private func setupConstrains() {
         NSLayoutConstraint.activate([
+            
             collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
@@ -130,7 +132,7 @@ extension HomePageViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return movieArray.popularMovies.count
+            return 1
         case 1:
             return categories.count
         default:
@@ -138,15 +140,25 @@ extension HomePageViewController: UICollectionViewDataSource {
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let cell = cell as? TopCell {
+            caruselDelagete.scrollViewDidScroll(cell.geminiCollectionView)
+            cell.setCollectionViewDataSourceDelegate(dataSourceDelegate: caruselDelagete)
+            caruselDelagete.movies = movieArray.popularMovies
+            let detailScreen = MovieDetailViewController()
+            caruselDelagete.didTappedCell = {[weak self] id in
+                detailScreen.id = id
+                self?.navigationController?.pushViewController(detailScreen, animated: true)
+            }
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
         case 0:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCardsCell.identifier,
-                                                                for: indexPath) as? MovieCardsCell
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TopCell.identifier,
+                                                                for: indexPath) as? TopCell
             else {fatalError("Cannot create the cell")}
-            cell.picture.sd_setImage(with: movieArray.popularMovies[indexPath.row].urlImage)
-            cell.filmName.text = movieArray.popularMovies[indexPath.row].title
-//                    cell.category.text = movieArray.popularMovies[indexPath.row].genre_ids
             return cell
         case 1:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoriesCell.identifier,
@@ -169,15 +181,6 @@ extension HomePageViewController: UICollectionViewDataSource {
 //                           duration: moviesByGenre[indexPath.row].,
                            rating: "\(moviesByGenre[indexPath.row].vote_average)",
                            vote_count: "(\(moviesByGenre[indexPath.row].vote_count))", movieId: self.moviesByGenre[indexPath.row].id, isFavorite: isFavorite)
-            
-//            cell.didTapedFavoriteButton = { [weak self] in
-//                guard let self else { return }
-//                if cell.isFavorite {
-//                    self.userDataSource.saveFavorite(with: self.moviesByGenre[indexPath.row].id, in: AllMovies.shared.userId)
-//                } else {
-//                    self.userDataSource.deleteFavorite(for: AllMovies.shared.userId, movieId: Int64(self.moviesByGenre[indexPath.row].id))
-//                }
-//            }
             return cell
             
         }
@@ -186,34 +189,29 @@ extension HomePageViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         viewForSupplementaryElementOfKind kind: String,
                         at indexPath: IndexPath) -> UICollectionReusableView {
-            switch indexPath.section {
-            case 0:
-                return UICollectionReusableView()
-            case 1:
-                guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(
-                    ofKind: UICollectionView.elementKindSectionHeader,
-                    withReuseIdentifier: SectionHeader.identifier,
-                    for: indexPath) as? SectionHeader else {return UICollectionReusableView()}
-                sectionHeader.title.text = "Categories"
-                return sectionHeader
-            default:
-                guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(
-                    ofKind: UICollectionView.elementKindSectionHeader,
-                    withReuseIdentifier: SectionHeader.identifier,
-                    for: indexPath) as? SectionHeader else {return UICollectionReusableView()}
-                sectionHeader.title.text = "Box Office"
-                return sectionHeader
-            }
+        switch indexPath.section {
+        case 0:
+            return UICollectionReusableView()
+        case 1:
+            guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(
+                ofKind: UICollectionView.elementKindSectionHeader,
+                withReuseIdentifier: SectionHeader.identifier,
+                for: indexPath) as? SectionHeader else {return UICollectionReusableView()}
+            sectionHeader.title.text = "Categories"
+            return sectionHeader
+        default:
+            guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(
+                ofKind: UICollectionView.elementKindSectionHeader,
+                withReuseIdentifier: SectionHeader.identifier,
+                for: indexPath) as? SectionHeader else {return UICollectionReusableView()}
+            sectionHeader.title.text = "Box Office"
+            return sectionHeader
         }
+    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.section {
-        case 0:
-            let detailScreen = MovieDetailViewController()
-            let movie = movieArray.popularMovies[indexPath.row]
-            userDataSource.saveRecent(with: movie.id, in: AllMovies.shared.userId)
-            detailScreen.id = movie.id
-            navigationController?.pushViewController(detailScreen, animated: true)
+        case 0: break
         case 1:
             let genre = categories[indexPath.row].rawValue
             if genre == 0 {
@@ -276,18 +274,14 @@ extension HomePageViewController: UICollectionViewDelegateFlowLayout {
     }
 
     private func mainCaruselSection() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(180), heightDimension: .fractionalHeight(1.0))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(250))
-         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 3)
-        
-        group.interItemSpacing = .fixed(20)
-        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(310))
+         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: 1)
         let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = 20
-        section.orthogonalScrollingBehavior = .continuous
-        section.contentInsets = NSDirectionalEdgeInsets(top: 30, leading: 0, bottom: 30, trailing: 0)
+        section.orthogonalScrollingBehavior = .none
+        section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 30, trailing: 0)
         return section
     }
     

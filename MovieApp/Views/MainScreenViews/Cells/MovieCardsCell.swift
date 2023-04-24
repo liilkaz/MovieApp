@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import Gemini
 
-class MovieCardsCell: UICollectionViewCell {
+class MovieCardsCell: GeminiCell {
     
     static let identifier = "MoviesCell"
     
@@ -56,6 +57,11 @@ class MovieCardsCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configure (movie: Movie) {
+        picture.sd_setImage(with: movie.urlImage)
+        filmName.text = movie.title
     }
     
     private func setupConstraints() {

@@ -7,4 +7,5 @@ target 'MovieApp' do
 
   # Pods for MovieApp
   pod 'SwiftLint'
+  pod "Gemini"
 end

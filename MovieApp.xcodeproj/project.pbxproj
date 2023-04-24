@@ -75,10 +75,11 @@
 		75986DF029D8CBD900BDECB0 /* NavigationBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75986DEF29D8CBD900BDECB0 /* NavigationBarController.swift */; };
 		75986DF229D8CC2700BDECB0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75986DF129D8CC2700BDECB0 /* Constants.swift */; };
 		75986DF429D8D0E400BDECB0 /* RecentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75986DF329D8D0E400BDECB0 /* RecentViewController.swift */; };
-		75986DF629D8D0F900BDECB0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75986DF529D8D0F900BDECB0 /* HomeViewController.swift */; };
 		75986DF829D8D13100BDECB0 /* FavorivesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75986DF729D8D13100BDECB0 /* FavorivesViewController.swift */; };
 		75986DFA29D8D15B00BDECB0 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75986DF929D8D15B00BDECB0 /* SettingViewController.swift */; };
 		75986DFD29D8DB2D00BDECB0 /* UIColor + ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75986DFC29D8DB2D00BDECB0 /* UIColor + ext.swift */; };
+		75C2246D29F57EE60043B36C /* TopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C2246C29F57EE60043B36C /* TopCell.swift */; };
+		75C2246F29F683F60043B36C /* CollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C2246E29F683F60043B36C /* CollectionViewDelegate.swift */; };
 		75FAEDE629F03A7F002089FC /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FAEDE529F03A7F002089FC /* HomePageViewController.swift */; };
 		75FAEDE829F05AFD002089FC /* AllMoviesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FAEDE729F05AFD002089FC /* AllMoviesViewCell.swift */; };
 		75FAEDEB29F18E07002089FC /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FAEDEA29F18E07002089FC /* SectionHeader.swift */; };
@@ -160,11 +161,12 @@
 		75986DEF29D8CBD900BDECB0 /* NavigationBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarController.swift; sourceTree = "<group>"; };
 		75986DF129D8CC2700BDECB0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		75986DF329D8D0E400BDECB0 /* RecentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentViewController.swift; sourceTree = "<group>"; };
-		75986DF529D8D0F900BDECB0 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		75986DF729D8D13100BDECB0 /* FavorivesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavorivesViewController.swift; sourceTree = "<group>"; };
 		75986DF929D8D15B00BDECB0 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		75986DFC29D8DB2D00BDECB0 /* UIColor + ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + ext.swift"; sourceTree = "<group>"; };
 		75986DFE29D8E07B00BDECB0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		75C2246C29F57EE60043B36C /* TopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCell.swift; sourceTree = "<group>"; };
+		75C2246E29F683F60043B36C /* CollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDelegate.swift; sourceTree = "<group>"; };
 		75FAEDE529F03A7F002089FC /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		75FAEDE729F05AFD002089FC /* AllMoviesViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllMoviesViewCell.swift; sourceTree = "<group>"; };
 		75FAEDEA29F18E07002089FC /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
@@ -473,6 +475,7 @@
 				D000C84129DEC928009486B7 /* MovieCardsCell.swift */,
 				D056719E29E01629002C2449 /* CategoriesCell.swift */,
 				75FAEDE729F05AFD002089FC /* AllMoviesViewCell.swift */,
+				75C2246C29F57EE60043B36C /* TopCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -480,7 +483,6 @@
 		D000C83D29DEC751009486B7 /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
-				75986DF529D8D0F900BDECB0 /* HomeViewController.swift */,
 				75FAEDE529F03A7F002089FC /* HomePageViewController.swift */,
 			);
 			path = MainScreen;
@@ -496,6 +498,7 @@
 				D0965C4829E1AB9D00CFDA35 /* MoviesTableView.swift */,
 				D0965C4A29E1AC8800CFDA35 /* MoviesCellView.swift */,
 				75FAEDEA29F18E07002089FC /* SectionHeader.swift */,
+				75C2246E29F683F60043B36C /* CollectionViewDelegate.swift */,
 			);
 			path = MainScreenViews;
 			sourceTree = "<group>";
@@ -530,6 +533,7 @@
 				75986DC729D8B8CC00BDECB0 /* Sources */,
 				75986DC829D8B8CC00BDECB0 /* Frameworks */,
 				75986DC929D8B8CC00BDECB0 /* Resources */,
+				5DB6901F8250454279B558AA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -645,6 +649,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		5DB6901F8250454279B558AA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MovieApp/Pods-MovieApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MovieApp/Pods-MovieApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MovieApp/Pods-MovieApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -670,6 +691,7 @@
 				75986DFA29D8D15B00BDECB0 /* SettingViewController.swift in Sources */,
 				751715BB29E09C5C00D95475 /* MainInfoStackView.swift in Sources */,
 				75986DF029D8CBD900BDECB0 /* NavigationBarController.swift in Sources */,
+				75C2246D29F57EE60043B36C /* TopCell.swift in Sources */,
 				2C92CEA629DF563300B3B9A7 /* RecentTableViewCell.swift in Sources */,
 				D056719D29E015AB002C2449 /* CategoryCollectionView.swift in Sources */,
 				0C83C16329EB2C8100C4592E /* CoreDataService.swift in Sources */,
@@ -692,6 +714,7 @@
 				0C83C11929DAC09300C4592E /* UIButton + Extension.swift in Sources */,
 				0C83C14529E19C2000C4592E /* AuthService.swift in Sources */,
 				0C83C11329DABAF600C4592E /* SplashViewController.swift in Sources */,
+				75C2246F29F683F60043B36C /* CollectionViewDelegate.swift in Sources */,
 				EE73434D29E479ED006B6B3D /* SettingTableViewCell.swift in Sources */,
 				00D9A1E129E6CB8400EE9A24 /* EditProfileViewController.swift in Sources */,
 				0CE1681229EBC2420021D593 /* UserDataSource.swift in Sources */,
@@ -711,7 +734,6 @@
 				0C83C14829E19C7600C4592E /* Validators.swift in Sources */,
 				00D9A1D529E69B9F00EE9A24 /* EditProfileView.swift in Sources */,
 				2CD7DD4A29E81F3D00E80514 /* Enums.swift in Sources */,
-				75986DF629D8D0F900BDECB0 /* HomeViewController.swift in Sources */,
 				D0965C4929E1AB9D00CFDA35 /* MoviesTableView.swift in Sources */,
 				0C83C16129E9B38A00C4592E /* Persist.swift in Sources */,
 				0C83C11529DABF4400C4592E /* UILabel + Extension.swift in Sources */,

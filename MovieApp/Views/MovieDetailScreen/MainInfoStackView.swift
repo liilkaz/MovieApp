@@ -55,42 +55,6 @@ class MainInfoStackView: UIStackView {
         return stack
     }()
     
-//    let label: UILabel = {
-//        let label = UILabel()
-//        label.text = "Story Line"
-//        label.font = Constants.Fonts.plusJacartaSansSemiBold(with: 16)
-//        label.textColor = Constants.Colors.mainTextColor
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        return label
-//    }()
-    
-//    let overview: ExpandableLabel = {
-//        let label = ExpandableLabel()
-//        label.numberOfLines = 0
-//        label.textAlignment = .left
-//        label.font = Constants.Fonts.plusJacartaSansMedium(with: 14)
-//        label.textColor = Constants.Colors.otherTextColor
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        return label
-//    }()
-    
-//    let actorLabel: UILabel = {
-//        let label = UILabel()
-//        label.text = "Cast and Crew"
-//        label.font = Constants.Fonts.plusJacartaSansSemiBold(with: 16)
-//        label.textColor = Constants.Colors.mainTextColor
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        return label
-//    }()
-    
-//    let scroll: UIScrollView = {
-//        let scroll = UIScrollView()
-//        scroll.frame = scroll.bounds
-//        scroll.showsHorizontalScrollIndicator = false
-//        scroll.translatesAutoresizingMaskIntoConstraints = false
-//        return scroll
-//    }()
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -138,7 +102,7 @@ class MainInfoStackView: UIStackView {
             hStack.centerXAnchor.constraint(equalTo: centerXAnchor),
             
             hStackReating.topAnchor.constraint(equalTo: hStack.bottomAnchor, constant: 16),
-            hStackReating.centerXAnchor.constraint(equalTo: centerXAnchor),
+            hStackReating.centerXAnchor.constraint(equalTo: centerXAnchor)
             
 //            label.topAnchor.constraint(equalTo: hStackReating.bottomAnchor, constant: 32),
 //

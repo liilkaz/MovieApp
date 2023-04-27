@@ -6,29 +6,15 @@
 //
 
 import UIKit
+import Gemini
 
 class MovieCardsCarusel: UIView {
     
     let movieArray = AllMovies.shared
-
-    // MARK: - Subviews
     
-    lazy var carouselCollectionView: UICollectionView = {
-
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-
-        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collection.translatesAutoresizingMaskIntoConstraints = false
-        collection.showsHorizontalScrollIndicator = false
-        collection.isPagingEnabled = true
-        collection.delegate = self
-        collection.register(MovieCardsCell.self, forCellWithReuseIdentifier: MovieCardsCell.identifier)
-        collection.backgroundColor = .clear
-        return collection
-    }()
+    var geminiCollectionView: GeminiCollectionView! = nil
     
-    private lazy var pageControl: UIPageControl = {
+    lazy var pageControl: UIPageControl = {
         let pageControl = UIPageControl()
         pageControl.numberOfPages = pages
         pageControl.pageIndicatorTintColor = #colorLiteral(red: 0.3925074935, green: 0.3996650577, blue: 0.7650645971, alpha: 1)
@@ -37,21 +23,50 @@ class MovieCardsCarusel: UIView {
         return pageControl
     }()
     
-    // MARK: - Properties
-    
-    private var pages = 3
-    private var currentPage = 0 {
+    var pages = 3
+    var currentPage = 0 {
         didSet {
             pageControl.currentPage = currentPage
         }
     }
     
-// MARK: - Initializers
+    func createGeminiLayout() -> UICollectionViewFlowLayout {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        return layout
+    }
+    
+    func setupGemniCollectionView() {
+        geminiCollectionView = GeminiCollectionView(frame: .zero, collectionViewLayout: createGeminiLayout())
+        geminiCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        geminiCollectionView.showsHorizontalScrollIndicator = false
+        geminiCollectionView.backgroundColor = .clear
+        geminiCollectionView.delegate = self
+        geminiCollectionView.dataSource = self
+        geminiCollectionView.register(MovieCardsCell.self, forCellWithReuseIdentifier: MovieCardsCell.identifier)
+        geminiCollectionView.gemini
+                        .circleRotationAnimation()
+                        .radius(1100)
+                        .rotateDirection(.anticlockwise)
+                        .itemRotationEnabled(true)
+        setupGeminiConstrains()
+    }
+    
+    private func setupGeminiConstrains() {
+        addSubview(geminiCollectionView)
+        NSLayoutConstraint.activate([
+            geminiCollectionView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            geminiCollectionView.topAnchor.constraint(equalTo: topAnchor),
+            geminiCollectionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            geminiCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+    }
     
     override init(frame: CGRect) {
-        super.init(frame: .zero)
-        
-        setupUI()
+        super.init(frame: frame)
+        addSubview(pageControl)
+        setupGemniCollectionView()
+        setupPageControl()
         translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -60,91 +75,91 @@ class MovieCardsCarusel: UIView {
     }
 }
 
-// MARK: - Setups
+// MARK: - UICollectionViewDataSource, UICollectionViewDelegate
 
-private extension MovieCardsCarusel {
-    func setupUI() {
-        backgroundColor = .clear
-        setupCollectionView()
-        setupPageControl()
+extension MovieCardsCarusel: UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        movieArray.popularMovies.count
     }
     
-    func setupCollectionView() {
-
-        let carouselLayout = UICollectionViewFlowLayout()
-        carouselLayout.scrollDirection = .horizontal
-
-        carouselCollectionView.collectionViewLayout = carouselLayout
-        
-        addSubview(carouselCollectionView)
-        NSLayoutConstraint.activate([
-            carouselCollectionView.topAnchor.constraint(equalTo: topAnchor),
-            carouselCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            carouselCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            carouselCollectionView.heightAnchor.constraint(equalToConstant: 250)
-        ])
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCardsCell.identifier,
+                                                            for: indexPath) as? MovieCardsCell
+        else {fatalError("Cannot create the cell")}
+        cell.configure(movie: movieArray.popularMovies[indexPath.row])
+        self.geminiCollectionView.animateCell(cell)
+        return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+            if let cell = cell as? GeminiCell {
+                self.geminiCollectionView.animateCell(cell)
+            }
+    }
+}
+
+extension MovieCardsCarusel: UICollectionViewDelegateFlowLayout {
+    private enum Const {
+        static let collectionViewSize = CGSize(width: 180, height: 250)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return Const.collectionViewSize
+    }
+
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        guard let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
+            return UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50)
+        }
+        switch layout.scrollDirection {
+        case .horizontal:
+            let verticalMargin: CGFloat = (collectionView.bounds.height - Const.collectionViewSize.height) / 2
+            print("carusel: \(collectionView.bounds.height)")
+            return UIEdgeInsets(top: 50 + verticalMargin,
+                                left: 50,
+                                bottom: 50 + verticalMargin,
+                                right: 50)
+
+        case .vertical:
+            let horizontalMargin: CGFloat = (collectionView.bounds.width - Const.collectionViewSize.width) / 2
+            return UIEdgeInsets(top: 50,
+                                left: 50 + horizontalMargin,
+                                bottom: 50,
+                                right: 50 + horizontalMargin)
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+}
+
+// MARK: - Setup Page Control
+
+extension MovieCardsCarusel {
+
     func setupPageControl() {
+        backgroundColor = .clear
         addSubview(pageControl)
-        
+
         NSLayoutConstraint.activate([
-            pageControl.topAnchor.constraint(equalTo: carouselCollectionView.bottomAnchor, constant: 10),
+            pageControl.topAnchor.constraint(equalTo: geminiCollectionView.bottomAnchor),
+            pageControl.centerYAnchor.constraint(equalTo: centerYAnchor),
             pageControl.centerXAnchor.constraint(equalTo: centerXAnchor),
             pageControl.widthAnchor.constraint(equalToConstant: 150),
             pageControl.heightAnchor.constraint(equalToConstant: 50)
 
         ])
-        
+
     }
 
-    func getCurrentViewController() -> UIViewController? {
-        if let rootController = UIApplication.shared.keyWindow?.rootViewController {
-            var currentController: UIViewController! = rootController
-            while(currentController.presentedViewController != nil) {
-                currentController = currentController.presentedViewController
-            }
-            return currentController
-        }
-        return nil
-    }
-}
-
-// MARK: - UICollectionViewDelegateFlowLayout
-
-extension MovieCardsCarusel: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 188, height: collectionView.frame.height)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        let cellPadding = (frame.width - 188) / 2
-        
-        return cellPadding * 2
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        insetForSectionAt section: Int) -> UIEdgeInsets {
-        let cellPadding = (frame.width - 188) / 2
-        
-        return .init(top: 0, left: cellPadding, bottom: 0, right: cellPadding)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailScreen = MovieDetailViewController()
-        detailScreen.id = movieArray.popularMovies[indexPath.row].id
-        detailScreen.show(detailScreen, sender: self)
-        let currentController = self.getCurrentViewController()
-        currentController?.present(detailScreen, animated: false, completion: nil)
-    }
-}
-
-// MARK: - UICollectionViewDelegate
-
-extension MovieCardsCarusel: UICollectionViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         currentPage = getCurrentPage()
     }
@@ -154,9 +169,10 @@ extension MovieCardsCarusel: UICollectionViewDelegate {
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.geminiCollectionView.animateVisibleCells()
         currentPage = getCurrentPage()
     }
-    
+
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
         currentPage = getCurrentPage()
     }
@@ -167,9 +183,9 @@ extension MovieCardsCarusel: UICollectionViewDelegate {
 private extension MovieCardsCarusel {
     func getCurrentPage() -> Int {
 
-        let visibleRect = CGRect(origin: carouselCollectionView.contentOffset, size: carouselCollectionView.bounds.size)
+        let visibleRect = CGRect(origin: geminiCollectionView.contentOffset, size: geminiCollectionView.bounds.size)
         let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
-        if let visibleIndexPath = carouselCollectionView.indexPathForItem(at: visiblePoint) {
+        if let visibleIndexPath = geminiCollectionView.indexPathForItem(at: visiblePoint) {
             return visibleIndexPath.row
         }
         return currentPage

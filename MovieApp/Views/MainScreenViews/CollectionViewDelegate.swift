@@ -37,30 +37,8 @@ class CollectionViewDelegate: NSObject, UICollectionViewDataSource, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailScreen = MovieDetailViewController()
         let movie = movies[indexPath.row]
-        
-        print(movie.title)
-//        detailScreen.id = movie.id
-//        detailScreen.show(detailScreen, sender: self)
-//        let currentController = self.getCurrentViewController()
-//        currentController?.navigationController?.pushViewController(detailScreen, animated: true)
-//        currentController?.present(detailScreen, animated: true, completion: nil)
-        
         didTappedCell?(movie.id)
-        
-    }
-    
-    func getCurrentViewController() -> UIViewController? {
-        let currentViewController = HomePageViewController()
-//        currentViewController.navigationController?.pushViewController(<#T##viewController: UIViewController##UIViewController#>, animated: <#T##Bool#>)
-//        if let rootController = UIApplication.shared.UIApplication.shared.keyWindow?.rootViewController {
-//            var currentController: UIViewController! = rootController.navigationController
-//            while(currentController.presentedViewController != nil) {
-//                currentController = currentController.presentedViewController
-//            }
-            return currentViewController
-//        }
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -69,6 +47,8 @@ class CollectionViewDelegate: NSObject, UICollectionViewDataSource, UICollection
         else {fatalError("Cannot create the cell")}
         topCell.geminiCollectionView.animateCell(cell)
         topCell.geminiCollectionView.reloadData()
+        
+        topCell.customPageControl.scrollPageControl(indexPath: indexPath.item)
     }
     
     private enum Const {
@@ -82,7 +62,6 @@ class CollectionViewDelegate: NSObject, UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         let verticalMargin: CGFloat = (collectionView.bounds.height - Const.collectionViewSize.height) / 2
-//        print(collectionView.bounds.height)
         return UIEdgeInsets(top: 50 + verticalMargin,
                             left: 50,
                             bottom: 50 + verticalMargin,

@@ -11,7 +11,8 @@ class HomePageViewController: UIViewController, UICollectionViewDelegate {
     
     let movieArray = AllMovies.shared
     var moviesByGenre = [Movie]()
-    
+
+    private var indexCell = 0
     private let userDataSource = UserDataSource()
     private var userModel: UserModel?
     private func getUserModel() {
@@ -36,6 +37,7 @@ class HomePageViewController: UIViewController, UICollectionViewDelegate {
         getUserModel()
         setupNavigationTitle()
         setupCollectionView()
+        caruselDelagete.delegate = self
     }
     
     func setupCollectionView() {
@@ -46,6 +48,7 @@ class HomePageViewController: UIViewController, UICollectionViewDelegate {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(TopCell.self, forCellWithReuseIdentifier: TopCell.identifier)
+        collectionView.register(IndicatorCell.self, forCellWithReuseIdentifier: IndicatorCell.identifier)
         collectionView.register(CategoriesCell.self, forCellWithReuseIdentifier: CategoriesCell.identifier)
         collectionView.register(AllMoviesViewCell.self, forCellWithReuseIdentifier: AllMoviesViewCell.identifier)
         view.addSubview(collectionView)
@@ -126,7 +129,7 @@ extension HomePageViewController {
 extension HomePageViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        3
+        4
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -134,6 +137,8 @@ extension HomePageViewController: UICollectionViewDataSource {
         case 0:
             return 1
         case 1:
+            return 1
+        case 2:
             return categories.count
         default:
             return moviesByGenre.count
@@ -161,6 +166,14 @@ extension HomePageViewController: UICollectionViewDataSource {
             else {fatalError("Cannot create the cell")}
             return cell
         case 1:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IndicatorCell.identifier,
+                                                                for: indexPath) as? IndicatorCell
+            else {fatalError("Cannot create the cell")}
+            print("reload indicator cell")
+            cell.scrollPageControl(indexPath: indexCell)
+
+            return cell
+        case 2:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoriesCell.identifier,
                                                                 for: indexPath) as? CategoriesCell
             else {fatalError("Cannot create the cell")}
@@ -193,6 +206,8 @@ extension HomePageViewController: UICollectionViewDataSource {
         case 0:
             return UICollectionReusableView()
         case 1:
+            return UICollectionReusableView()
+        case 2:
             guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(
                 ofKind: UICollectionView.elementKindSectionHeader,
                 withReuseIdentifier: SectionHeader.identifier,
@@ -213,6 +228,8 @@ extension HomePageViewController: UICollectionViewDataSource {
         switch indexPath.section {
         case 0: break
         case 1:
+            collectionView.reloadSections(IndexSet(integer: 1))
+        case 2:
             let genre = categories[indexPath.row].rawValue
             if genre == 0 {
                 moviesByGenre = movieArray.allMovies
@@ -220,7 +237,7 @@ extension HomePageViewController: UICollectionViewDataSource {
                     moviesByGenre = movieArray.allMovies.filter({ $0.genre_ids[0] == genre
                     })
                 }
-            collectionView.reloadSections(IndexSet(integer: 2))
+            collectionView.reloadSections(IndexSet(integer: 3))
         default:
             let detailScreen = MovieDetailViewController()
             let movie = moviesByGenre[indexPath.row]
@@ -235,6 +252,7 @@ extension HomePageViewController: UICollectionViewDelegateFlowLayout {
     
     enum Section: Int, CaseIterable {
         case mainCarusel
+        case indicator
         case categories
         case table
 
@@ -242,6 +260,8 @@ extension HomePageViewController: UICollectionViewDelegateFlowLayout {
             switch self {
             case .mainCarusel:
                 return 0
+            case .indicator:
+                return 1
             case .categories:
                 return 1
             case .table:
@@ -270,15 +290,30 @@ extension HomePageViewController: UICollectionViewDelegateFlowLayout {
             return categoriesSection()
         case .table:
             return self.tableSection()
+        case .indicator:
+            return self.indicatorSection()
         }
     }
 
     private func mainCaruselSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
+
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(310))
          let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: 1)
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .none
+        section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 30, trailing: 0)
+        return section
+    }
+
+    private func indicatorSection() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(60))
+         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: 1)
+
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .none
         section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 30, trailing: 0)
@@ -331,4 +366,13 @@ extension HomePageViewController: UICollectionViewDelegateFlowLayout {
         return section
     }
     
+}
+
+// MARK: - CollectionViewSubDelegate
+
+extension HomePageViewController: CollectionViewSubDelegate {
+    func updateIndicator(with index: Int) {
+        indexCell = index
+        collectionView.reloadSections(IndexSet(integer: 1))
+    }
 }

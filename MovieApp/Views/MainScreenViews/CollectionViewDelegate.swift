@@ -8,11 +8,15 @@
 import UIKit
 import Gemini
 
+protocol CollectionViewSubDelegate: AnyObject {
+    func updateIndicator(with index: Int)
+}
+
 class CollectionViewDelegate: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     var movies = [Movie]()
     let topCell = TopCell()
-    
+    weak var delegate: CollectionViewSubDelegate?
     var didTappedCell: ((_ id: Int) -> Void)?
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -47,8 +51,9 @@ class CollectionViewDelegate: NSObject, UICollectionViewDataSource, UICollection
         else {fatalError("Cannot create the cell")}
         topCell.geminiCollectionView.animateCell(cell)
         topCell.geminiCollectionView.reloadData()
-        
+        delegate?.updateIndicator(with: indexPath.item)
         topCell.customPageControl.scrollPageControl(indexPath: indexPath.item)
+
     }
     
     private enum Const {

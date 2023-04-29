@@ -52,7 +52,7 @@ class CollectionViewDelegate: NSObject, UICollectionViewDataSource, UICollection
         topCell.geminiCollectionView.animateCell(cell)
         topCell.geminiCollectionView.reloadData()
         delegate?.updateIndicator(with: indexPath.item)
-        topCell.customPageControl.scrollPageControl(indexPath: indexPath.item)
+//        topCell.customPageControl.scrollPageControl(indexPath: indexPath.item)
 
     }
     

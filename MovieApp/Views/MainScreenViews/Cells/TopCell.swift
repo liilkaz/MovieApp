@@ -15,7 +15,7 @@ class TopCell: UICollectionViewCell {
     
     let newView = UIView()
     
-    let customPageControl = CustomPageControl(pages: 3)
+//    let customPageControl = CustomPageControl(pages: 3)
     
     let geminiCollectionView: GeminiCollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -34,7 +34,7 @@ class TopCell: UICollectionViewCell {
         super.init(frame: frame)
         contentView.addSubview(newView)
         newView.addSubview(geminiCollectionView)
-        newView.addSubview(customPageControl)
+//        newView.addSubview(customPageControl)
         
         setupConstraints()
         setupAnimation()
@@ -77,7 +77,7 @@ class TopCell: UICollectionViewCell {
     
     private func setupConstraints() {
         newView.translatesAutoresizingMaskIntoConstraints = false
-        customPageControl.translatesAutoresizingMaskIntoConstraints = false
+//        customPageControl.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             newView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             newView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
@@ -89,12 +89,12 @@ class TopCell: UICollectionViewCell {
             geminiCollectionView.trailingAnchor.constraint(equalTo: newView.trailingAnchor),
             geminiCollectionView.topAnchor.constraint(equalTo: newView.topAnchor),
 //            geminiCollectionView.bottomAnchor.constraint(equalTo: newView.bottomAnchor)
-            geminiCollectionView.heightAnchor.constraint(equalToConstant: 320),
+            geminiCollectionView.heightAnchor.constraint(equalToConstant: 300)
             
-            customPageControl.topAnchor.constraint(equalTo: geminiCollectionView.bottomAnchor, constant: 10),
-            customPageControl.centerXAnchor.constraint(equalTo: newView.centerXAnchor),
-            customPageControl.heightAnchor.constraint(equalToConstant: 35),
-            customPageControl.widthAnchor.constraint(equalTo: newView.widthAnchor, multiplier: 0.5, constant: 0)
+//            customPageControl.topAnchor.constraint(equalTo: geminiCollectionView.bottomAnchor, constant: 10),
+//            customPageControl.centerXAnchor.constraint(equalTo: newView.centerXAnchor),
+//            customPageControl.heightAnchor.constraint(equalToConstant: 35),
+//            customPageControl.widthAnchor.constraint(equalTo: newView.widthAnchor, multiplier: 0.5, constant: 0)
         ])
     }
 }
